@@ -11,19 +11,19 @@
 # -------------------------------------------------------------------------------------
 
 # website title
-title = ""
+title = "Cheems Blog"
 # Hostname (and path) to the root
 baseURL = "http://localhost:1313"
 # theme list
  theme = ["FixIt"] # enable in your site config file
 # determines default content language ["en", "zh-cn", "fr", "pl", ...]
-defaultContentLanguage = "en"
+defaultContentLanguage = "zh-cn"
 # language code ["en", "zh-CN", "fr", "pl", ...]
-languageCode = "en"
+languageCode = "zh-CN"
 # language name ["English", "简体中文", "Français", "Polski", ...]
-languageName = "English"
+languageName = "简体中文"
 # whether to include Chinese/Japanese/Korean
-hasCJKLanguage = false
+hasCJKLanguage = true
 # copyright description used only for seo schema
 copyright = ""
 # whether to use robots.txt
@@ -74,7 +74,7 @@ parent = ""
 pre = ""
 # you can add extra information after the name (HTML format is supported), such as icons
 post = ""
-name = "Archives"
+name = "时间轴"
 url = "/archives/"
 # title will be shown when you hover on this menu link
 title = ""
@@ -98,7 +98,7 @@ identifier = "categories"
 parent = ""
 pre = ""
 post = ""
-name = "Categories"
+name = "分类"
 url = "/categories/"
 title = ""
 weight = 2
@@ -111,13 +111,28 @@ identifier = "tags"
 parent = ""
 pre = ""
 post = ""
-name = "Tags"
+name = "标签"
 url = "/tags/"
 title = ""
 weight = 3
 
 [menus.main.params]
 icon = "fa-solid fa-tags"
+
+
+[[menus.main]]
+identifier = "collections"
+parent = ""
+pre = ""
+post = ""
+name = "合集"
+url = "/collections/"
+title = ""
+weight = 3
+
+[menus.main.params]
+icon = "fa-solid fa-bars"
+
 
 # -------------------------------------------------------------------------------------
 # Related content Configuration
@@ -281,6 +296,7 @@ priority = 0.5
 # -------------------------------------------------------------------------------------
 
 [permalinks]
+  posts = "/:section/:slug/"        # 设置生成的url
 
 [permalinks.page]
 # posts = "/p/:slugorcontentbasename"
