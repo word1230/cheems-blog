@@ -1,13 +1,5 @@
----
-date: 2026-02-18T11:31:20+08:00
-draft: false
-slug: bad4bf01
-type: posts
-title: 重装系统后的步骤
-collection: 重装系统
-categories:
-  - 系统
----
+# 重装系统后的步骤
+
 重装系统后的软件安装
 <!--more-->
 首先安装之前要先准备好无线网卡的驱动，避免连不上网
@@ -57,4 +49,11 @@ flash：[chen08209/FlClash: A multi-platform proxy client based on ClashMeta,sim
 火绒：[个人产品-火绒安全](https://www.huorong.cn/person)
 
 office tools plus ： [[新手必读] Office Tool Plus 入门教程 - Yerong の小窝](https://blog.yerong.org/archives/42)
+
+
+
+---
+
+> 作者:   
+> URL: http://localhost:1313/%E7%B3%BB%E7%BB%9F/bad4bf01/  
 
