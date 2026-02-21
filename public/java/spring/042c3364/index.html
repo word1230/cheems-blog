@@ -5,30 +5,30 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
     <title>Spring Ioc容器 - Cheems Blog</title><meta name="author" content="">
-<meta name="description" content="IOC，DI，bean作用域，bean生命周期，循环依赖问题
+<meta name="description" content="IOC，DI，bean作用域。
 ">
   <meta itemprop="name" content="Spring Ioc容器">
-  <meta itemprop="description" content="IOC，DI，bean作用域，bean生命周期，循环依赖问题">
+  <meta itemprop="description" content="IOC，DI，bean作用域。">
   <meta itemprop="datePublished" content="2026-02-21T12:11:02+08:00">
-  <meta itemprop="dateModified" content="2026-02-21T14:07:45+08:00">
-  <meta itemprop="wordCount" content="3095">
-  <meta itemprop="keywords" content="编程,Spring"><meta property="og:url" content="http://localhost:1313/java/spring/042c3364/">
+  <meta itemprop="dateModified" content="2026-02-21T14:41:28+08:00">
+  <meta itemprop="wordCount" content="3059">
+  <meta itemprop="keywords" content="Java,Spring"><meta property="og:url" content="http://localhost:1313/java/spring/042c3364/">
   <meta property="og:site_name" content="Cheems Blog">
   <meta property="og:title" content="Spring Ioc容器">
-  <meta property="og:description" content="IOC，DI，bean作用域，bean生命周期，循环依赖问题">
+  <meta property="og:description" content="IOC，DI，bean作用域。">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="java">
     <meta property="article:published_time" content="2026-02-21T12:11:02+08:00">
-    <meta property="article:modified_time" content="2026-02-21T14:07:45+08:00">
+    <meta property="article:modified_time" content="2026-02-21T14:41:28+08:00">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Spring Ioc容器">
-  <meta name="twitter:description" content="IOC，DI，bean作用域，bean生命周期，循环依赖问题">
+  <meta name="twitter:description" content="IOC，DI，bean作用域。">
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
-    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/java/spring/042c3364/" title="Spring Ioc容器 - Cheems Blog" /><link rel="prev" type="text/html" href="http://localhost:1313/%E7%B3%BB%E7%BB%9F/bad4bf01/" title="重装系统后的步骤" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/java/spring/042c3364/index.md" title="Spring Ioc容器 - Cheems Blog"><link rel="stylesheet" href="/css/config.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"><link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"><link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5"><link rel="canonical" type="text/html" href="http://localhost:1313/java/spring/042c3364/" title="Spring Ioc容器 - Cheems Blog" /><link rel="prev" type="text/html" href="http://localhost:1313/%E7%B3%BB%E7%BB%9F/bad4bf01/" title="重装系统后的步骤" /><link rel="next" type="text/html" href="http://localhost:1313/java/spring/5970346a/" title="Bean生命周期" /><link rel="alternate" type="text/markdown" href="http://localhost:1313/java/spring/042c3364/index.md" title="Spring Ioc容器 - Cheems Blog"><link rel="stylesheet" href="/css/config.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
     <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
   {
@@ -39,8 +39,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "http:\/\/localhost:1313\/java\/spring\/042c3364\/"
-    },"genre": "posts","wordcount":  3095 ,
-    "url": "http:\/\/localhost:1313\/java\/spring\/042c3364\/","datePublished": "2026-02-21T12:11:02+08:00","dateModified": "2026-02-21T14:07:45+08:00","publisher": {
+    },"genre": "posts","wordcount":  3059 ,
+    "url": "http:\/\/localhost:1313\/java\/spring\/042c3364\/","datePublished": "2026-02-21T12:11:02+08:00","dateModified": "2026-02-21T14:41:28+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -81,7 +81,7 @@
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>Spring Ioc容器</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/%E7%BC%96%E7%A8%8B/" class="post-category" title="分类 - 编程"><i class="fa-regular fa-folder" aria-hidden="true"></i> 编程</a> 和 <a href="/collections/spring/" class="post-collection" title="合集 - Spring"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Spring</a></span></div><div class="post-meta-line"><span title="发布于 2026-02-21 12:11:02"><i class="fa-solid fa-calendar-days me-1" aria-hidden="true"></i><time datetime="2026-02-21">2026-02-21</time></span>&nbsp;<span title="更新于 2026-02-21 14:07:45"><i class="fa-regular fa-calendar-check me-1" aria-hidden="true"></i><time datetime="2026-02-21">2026-02-21</time></span>&nbsp;<span title="3095 字"><i class="fa-solid fa-pencil-alt me-1" aria-hidden="true"></i>约 3100 字</span>&nbsp;<span><i class="fa-regular fa-clock me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;</div>
+      Anonymous</span></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a> 和 <a href="/collections/spring/" class="post-collection" title="合集 - Spring"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Spring</a></span></div><div class="post-meta-line"><span title="发布于 2026-02-21 12:11:02"><i class="fa-solid fa-calendar-days me-1" aria-hidden="true"></i><time datetime="2026-02-21">2026-02-21</time></span>&nbsp;<span title="更新于 2026-02-21 14:41:28"><i class="fa-regular fa-calendar-check me-1" aria-hidden="true"></i><time datetime="2026-02-21">2026-02-21</time></span>&nbsp;<span title="3059 字"><i class="fa-solid fa-pencil-alt me-1" aria-hidden="true"></i>约 3100 字</span>&nbsp;<span><i class="fa-regular fa-clock me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;</div>
     </div><div class="details toc" id="toc-static" data-kept="false">
         <div class="details-summary toc-title">
           <span>目录</span>
@@ -116,27 +116,25 @@
         <li><a href="#多例">多例</a></li>
       </ul>
     </li>
-    <li><a href="#bean的完整生命周期">Bean的完整生命周期</a></li>
-    <li><a href="#如何解决循环依赖问题">如何解决循环依赖问题</a></li>
   </ul>
 </nav></div>
-      </div><div class="content" id="content"><p>IOC，DI，bean作用域，bean生命周期，循环依赖问题</p>
+      </div><div class="content" id="content"><p>IOC，DI，bean作用域。</p>
 <h2 class="heading-element" id="ioc-是什么"><span>IOC 是什么</span>
   <a href="#ioc-%e6%98%af%e4%bb%80%e4%b9%88" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h2><p>IOC是控制反转，那什么是控制反转呢？</p>
-<p>你想啊，有反转就一定有正转
-正转：程序中的对象由开发人员员自己进行new，自己进行管理
-反转： 由程序自己来管理程序中的对象，这个管理程序叫bean容器，也就是：由容器来管理对象</p>
+<p>你想啊，有反转就一定有正转</p>
+<p>正转：程序中的对象由开发人员员自己进行new，自己进行管理</p>
+<p>反转： 由程序自己来管理程序中的对象，这个管理程序叫bean容器，也就是：由容器来管理对象</p>
 <p>那控制反转就是这个意思：对于对象的控制权，由开发人员交给了容器</p>
 <h3 class="heading-element" id="为什么要控制反转呢"><span>为什么要控制反转呢</span>
   <a href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e8%a6%81%e6%8e%a7%e5%88%b6%e5%8f%8d%e8%bd%ac%e5%91%a2" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h3><p>让程序员自己来管理不行吗？为什么要让容器管理</p>
-<p>举个栗子：
-现在你要在代码里造一辆车：</p>
+<p>举个栗子：</p>
+<p>现在你要在代码里造一辆车：</p>
 <blockquote>
 <p>正常情况你会这样写： 写死一个v6发动机</p>
 </blockquote>
@@ -327,7 +325,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table></div><div class="code-expand-btn" aria-label="展开或折叠代码块" role="button"><i class="fa-solid fa-angles-down" aria-hidden="true"></i></div>
 </div>
 </div><p>那此时要换电车怎么换呢</p>
-<p>定义一个电动发动机,同样交给容器管理， <mark class="mark-default">去掉上面v6的那个@Component</mark> 不然会报错的。（要解决，可以提前看下面的<mark class="mark-default">问题1</mark>） 这样就可以了</p>
+<p>定义一个电动发动机,同样交给容器管理， <mark class="mark-default">去掉上面v6的那个@Component</mark> 不然会报错的。（不想去掉的话，可以提前看下面的<mark class="mark-default">问题1</mark>） 这样就可以了</p>
 <div class="code-block highlight" data-mode="classic" data-copyable="true"><div class="chroma">
 <div class="code-header language-java"><span class="code-title"><i class="arrow fa-solid fa-chevron-down" aria-hidden="true"></i></span><span class="ellipses-btn" aria-label="Show more options" role="button"><i class="fa-solid fa-ellipsis-h" aria-hidden="true"></i></span><span class="line-nos-btn" aria-label="切换行号" role="button" title="切换行号"><i class="fa-solid fa-list-ol" aria-hidden="true"></i></span><span class="line-wrap-btn" aria-label="切换自动换行" role="button" title="切换自动换行"><i class="fa-solid fa-right-left" aria-hidden="true"></i></span><span class="copy-btn" aria-label="复制到剪贴板" role="button" title="复制到剪贴板"><i class="fa-regular fa-clone" aria-hidden="true"></i></span></div><div class="code-wrapper" data-max="10" data-line-digit="2" style="--fi-max-shown-lines:10;--fi-line-digit:2;--fi-line-start:1;"><table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt">1
@@ -587,7 +585,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">();</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table></div>
 </div>
-</div><ol start="2">
+</div><ol>
 <li>定义两个实现类</li>
 </ol>
 <div class="code-block highlight" data-mode="classic" data-copyable="true"><div class="chroma">
@@ -638,7 +636,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table></div>
 </div>
-</div><ol start="3">
+</div><ol>
 <li>car</li>
 </ol>
 <div class="code-block highlight" data-mode="classic" data-copyable="true"><div class="chroma">
@@ -712,7 +710,7 @@
 </span></span></span><span class="line"><span class="cl"><span class="w">   </span><span class="kt">void</span><span class="w"> </span><span class="nf">run</span><span class="p">();</span><span class="w">
 </span></span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table></div>
 </div>
-</div><ol start="2">
+</div><ol>
 <li>定义两个实现类</li>
 </ol>
 <div class="code-block highlight" data-mode="classic" data-copyable="true"><div class="chroma">
@@ -933,22 +931,10 @@
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h3><p>容器中，一个类有多个对象。 每次注入都是一个全新的对象</p>
-<p>这种主要是为了解决： 你的类有一个变量是 状态值，它会随着业务变化，那张三拿到这个值，修改了， 李四再拿到这个值就不对了，它被张三修改了。 因此只能是每个人拿到的对象都是一个全新的对象。</p>
-<h2 class="heading-element" id="bean的完整生命周期"><span>Bean的完整生命周期</span>
-  <a href="#bean%e7%9a%84%e5%ae%8c%e6%95%b4%e7%94%9f%e5%91%bd%e5%91%a8%e6%9c%9f" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h2><ol>
-<li>实例化</li>
-</ol>
-<h2 class="heading-element" id="如何解决循环依赖问题"><span>如何解决循环依赖问题</span>
-  <a href="#%e5%a6%82%e4%bd%95%e8%a7%a3%e5%86%b3%e5%be%aa%e7%8e%af%e4%be%9d%e8%b5%96%e9%97%ae%e9%a2%98" class="heading-mark">
-    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
-  </a>
-</h2></div><div class="post-footer" id="post-footer">
+<p>这种主要是为了解决： 你的类有一个变量是 状态值，它会随着业务变化，那张三拿到这个值，修改了， 李四再拿到这个值就不对了，它被张三修改了。 因此只能是每个人拿到的对象都是一个全新的对象。</p></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
-      <div class="post-info-mod"><span title="更新于 2026-02-21 14:07:45">更新于 2026-02-21&nbsp;</span>
+      <div class="post-info-mod"><span title="更新于 2026-02-21 14:41:28">更新于 2026-02-21&nbsp;</span>
       </div><div class="post-info-license">
             <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
           </div></div><div class="post-info-line">
@@ -965,7 +951,7 @@
     <section class="post-tags"></section>
     <section><span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
     </section>
-  </div><div class="post-nav"><a href="/%E7%B3%BB%E7%BB%9F/bad4bf01/" class="post-nav-item" rel="prev" title="重装系统后的步骤"><i class="fa-solid fa-angle-left" aria-hidden="true"></i>重装系统后的步骤</a></div>
+  </div><div class="post-nav"><a href="/%E7%B3%BB%E7%BB%9F/bad4bf01/" class="post-nav-item" rel="prev" title="重装系统后的步骤"><i class="fa-solid fa-angle-left" aria-hidden="true"></i>重装系统后的步骤</a><a href="/java/spring/5970346a/" class="post-nav-item" rel="next" title="Bean生命周期">Bean生命周期<i class="fa-solid fa-angle-right" aria-hidden="true"></i></a></div>
 </div>
 </article>
 
@@ -1002,8 +988,6 @@
         <li><a href="#多例">多例</a></li>
       </ul>
     </li>
-    <li><a href="#bean的完整生命周期">Bean的完整生命周期</a></li>
-    <li><a href="#如何解决循环依赖问题">如何解决循环依赖问题</a></li>
   </ul>
 </nav></div>
       </div>
