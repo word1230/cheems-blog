@@ -475,7 +475,7 @@ disableThemeInject = false
 
 # Author Configuration
 [params.author]
-name = ""
+name = "cheems"
 email = ""
 link = ""
 avatar = ""

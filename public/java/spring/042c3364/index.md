@@ -538,6 +538,6 @@ public class ElectricMotor implements Engine {
 
 ---
 
-> 作者:   
+> 作者: cheems  
 > URL: http://localhost:1313/java/spring/042c3364/  
 
