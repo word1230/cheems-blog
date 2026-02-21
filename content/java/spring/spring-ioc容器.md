@@ -4,7 +4,7 @@ draft: false
 slug: 042c3364
 type: posts
 title: Spring Ioc容器
-collection: java
+collections: spring
 categories:
   - 编程
 ---
@@ -511,6 +511,12 @@ public class ElectricMotor implements Engine {
 
 
 ## Bean的完整生命周期
+
+1.  实例化
+
+
+
+
 
 
 
