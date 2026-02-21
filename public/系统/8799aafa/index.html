@@ -170,7 +170,7 @@
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h2><p>是windows 的一个命令行安装包管理器，使用命令行来安装软件，类似于linux的apt</p>
-<p>核心思路：
+<p>核心思路：<br>
 将对应软件的压缩包解压到 ~/scoop 目录 ，使用命令行快捷方式来将可执行文件暴露给PATH</p>
 <p>与传统的 setup.exe 的区别（scoop的特性）：</p>
 <ul>
@@ -190,16 +190,16 @@
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h2><p>官方文档：<a href="https://github.com/ScoopInstaller/Scoop" target="_blank" rel="external nofollow noopener noreferrer">ScoopInstaller/Scoop：一款适用于 Windows 的命令行安装程序。</a></p>
-<p>scoop会默认安装在 c盘用户目录下的scoop目录中，我们需要将其改到d盘再安装，节省c盘空间
+<p>scoop会默认安装在 c盘用户目录下的scoop目录中，我们需要将其改到d盘再安装，节省c盘空间<br>
 步骤：</p>
 <ol>
-<li>设置当前会话变量
+<li>设置当前会话变量<br>
 `$env:SCOOP = &lsquo;D:\Scoop&rsquo;</li>
-<li>允许命令行执行脚本（windows10 默认阻止命令行执行脚本，需要开启）
+<li>允许命令行执行脚本（windows10 默认阻止命令行执行脚本，需要开启）<br>
 打开终端执行：<code>Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope CurrentUser</code></li>
-<li>执行获取scoop的脚本，并执行
+<li>执行获取scoop的脚本，并执行<br>
 执行 <code>irm get.scoop.sh | iex</code></li>
-<li>验证是否安装成功
+<li>验证是否安装成功<br>
 <code>scoop --version</code></li>
 </ol>
 <p>安装完成后可以打开 D:\Scoop查看目录结构：	<a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218083841314.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218083841314.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218083841314.png' alt="image.png"></a></p>
@@ -210,33 +210,33 @@
 </h2><p>aria2是一个命令行下载工具，可以实现多连接下载</p>
 <p>如何使用scoop安装</p>
 <ol>
-<li>搜索安装包
-<code>scoop search aria2</code>
+<li>搜索安装包<br>
+<code>scoop search aria2</code><br>
 <a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218084311991.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218084311991.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218084311991.png' alt="image.png"></a></li>
-<li>安装软件
+<li>安装软件<br>
 <code>scoop install aria2</code></li>
 </ol>
 <h2 class="heading-element" id="常用命令"><span>常用命令</span>
   <a href="#%e5%b8%b8%e7%94%a8%e5%91%bd%e4%bb%a4" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p>搜索软件:
+</h2><p>搜索软件:<br>
 <code>scoop search &lt;name&gt;</code></p>
-<p>安装软件：
+<p>安装软件：<br>
 <code>scoop install &lt;name&gt;</code>        或者       <code>scoop i &lt;name&gt;</code></p>
-<p>卸载软件：
+<p>卸载软件：<br>
 <code>scoop uninstall &lt;name&gt;</code>       或者       <code>scoop rm &lt;name&gt;</code></p>
-<p>查看已安装的软件：
+<p>查看已安装的软件：<br>
 <code>scoop list</code>  或者 <code>scoop ls</code></p>
-<p>更新软件：
-<code>scoop update</code> 更新scoop自身                或者      <code>scoop u </code>
+<p>更新软件：<br>
+<code>scoop update</code> 更新scoop自身                或者      <code>scoop u </code><br>
 <code>scoop update *</code>  更新所有已安装软件         或者      <code>scoop u *</code></p>
 <h2 class="heading-element" id="软件仓库"><span>软件仓库</span>
   <a href="#%e8%bd%af%e4%bb%b6%e4%bb%93%e5%ba%93" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h2><p><a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218083841314.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218083841314.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218083841314.png' alt="image.png"></a>
-上图中的buckets就是软件仓库
+</h2><p><a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218083841314.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218083841314.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218083841314.png' alt="image.png"></a><br>
+上图中的buckets就是软件仓库<br>
 <a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218085034879.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218085034879.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218085034879.png' alt="image.png"></a></p>
 <p>你目前应该只有 main 一个仓库。extras 和java 都是需要额外添加的</p>
 <p>也就是说scoop官方只提供了main仓库，我们可以添加其他的软件仓库</p>
@@ -255,13 +255,13 @@
   <a href="#%e7%ae%a1%e7%90%86%e4%bb%93%e5%ba%93%e5%91%bd%e4%bb%a4" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
-</h3><p>添加仓库:
-<code>scoop bucket add &lt;name&gt;</code>
-列出已添加的
-<code>scoop bnucket list</code>
-查看官方支持的仓库
-<code>scoop bucket known</code>
-删除仓库
+</h3><p>添加仓库:<br>
+<code>scoop bucket add &lt;name&gt;</code><br>
+列出已添加的<br>
+<code>scoop bnucket list</code><br>
+查看官方支持的仓库<br>
+<code>scoop bucket known</code><br>
+删除仓库<br>
 <code>scoop bucket remove &lt;name&gt;</code></p>
 <p>安装仓库的方式： 就是使用git clone</p>
 <h2 class="heading-element" id="使用示例2安装java8"><span>使用示例2：安装java8</span>
@@ -269,32 +269,32 @@
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h2><ol>
-<li>添加java仓库
+<li>添加java仓库<br>
 <code>scoop bucket add java</code></li>
-<li>搜索
-<code>scoop search jdk</code>
-你会看到有  openjdk8-redhat，temurin8-jdk 等等一堆
-我们可以选择一个安装就好： 比如temurin8-jdk，Eclipse Adoptium 维护的版本，稳定性好且免费。
+<li>搜索<br>
+<code>scoop search jdk</code><br>
+你会看到有  openjdk8-redhat，temurin8-jdk 等等一堆<br>
+我们可以选择一个安装就好： 比如temurin8-jdk，Eclipse Adoptium 维护的版本，稳定性好且免费。<br>
 或者openjdk8-redhat 标准jdk</li>
-<li>安装
+<li>安装<br>
 <code>scoop install openjdk8-redhat</code></li>
-<li>验证是否安装成功
+<li>验证是否安装成功<br>
 <code>java -version</code></li>
 </ol>
-<p>不需要配置环境变量吗？
+<p>不需要配置环境变量吗？<br>
 不需要</p>
 <h3 class="heading-element" id="多版本java切换"><span>多版本java切换</span>
   <a href="#%e5%a4%9a%e7%89%88%e6%9c%acjava%e5%88%87%e6%8d%a2" class="heading-mark">
     <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
   </a>
 </h3><p>比如你又安装了一个openjdk21</p>
-<p>查看一下所有安装的jdk
-<code>scoop list | findstr jdk</code>
+<p>查看一下所有安装的jdk<br>
+<code>scoop list | findstr jdk</code><br>
 <a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218090940398.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218090940398.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218090940398.png' alt="image.png"></a></p>
-<p><code>java -version</code>
+<p><code>java -version</code><br>
 <a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218091129511.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218091129511.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218091129511.png' alt="image.png"></a></p>
 <p>此时你的java环境是 jdk21， 你想要切换到jdk8 如何切换</p>
-<p><code>scoop reset temurin8</code>       这个命令的意思是重置软件的链接（Shim），也就是path指向
+<p><code>scoop reset temurin8</code>       这个命令的意思是重置软件的链接（Shim），也就是path指向<br>
 <a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218091147429.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218091147429.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218091147429.png' alt="image.png"></a></p>
 <p>就切换到了jdk8</p></div><div class="post-footer" id="post-footer">
   <div class="post-info">

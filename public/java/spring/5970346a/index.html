@@ -5,21 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
     <meta name="robots" content="noodp" />
     <title>Bean生命周期 - Cheems Blog</title><meta name="author" content="">
-<meta name="description" content="">
+<meta name="description" content="bean生命周期，三级缓存解决循环依赖
+">
   <meta itemprop="name" content="Bean生命周期">
+  <meta itemprop="description" content="bean生命周期，三级缓存解决循环依赖">
   <meta itemprop="datePublished" content="2026-02-21T14:41:01+08:00">
-  <meta itemprop="dateModified" content="2026-02-21T14:42:06+08:00">
+  <meta itemprop="dateModified" content="2026-02-21T18:46:15+08:00">
+  <meta itemprop="wordCount" content="3139">
   <meta itemprop="keywords" content="Java,Spring"><meta property="og:url" content="http://localhost:1313/java/spring/5970346a/">
   <meta property="og:site_name" content="Cheems Blog">
   <meta property="og:title" content="Bean生命周期">
+  <meta property="og:description" content="bean生命周期，三级缓存解决循环依赖">
   <meta property="og:locale" content="zh_CN">
   <meta property="og:type" content="article">
     <meta property="article:section" content="java">
     <meta property="article:published_time" content="2026-02-21T14:41:01+08:00">
-    <meta property="article:modified_time" content="2026-02-21T14:42:06+08:00">
+    <meta property="article:modified_time" content="2026-02-21T18:46:15+08:00">
 
   <meta name="twitter:card" content="summary">
   <meta name="twitter:title" content="Bean生命周期">
+  <meta name="twitter:description" content="bean生命周期，三级缓存解决循环依赖">
 <meta name="application-name" content="FixIt">
 <meta name="apple-mobile-web-app-title" content="FixIt"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
@@ -34,8 +39,8 @@
     "mainEntityOfPage": {
       "@type": "WebPage",
       "@id": "http:\/\/localhost:1313\/java\/spring\/5970346a\/"
-    },"genre": "posts","wordcount":  0 ,
-    "url": "http:\/\/localhost:1313\/java\/spring\/5970346a\/","datePublished": "2026-02-21T14:41:01+08:00","dateModified": "2026-02-21T14:42:06+08:00","publisher": {
+    },"genre": "posts","wordcount":  3139 ,
+    "url": "http:\/\/localhost:1313\/java\/spring\/5970346a\/","datePublished": "2026-02-21T14:41:01+08:00","dateModified": "2026-02-21T18:46:15+08:00","publisher": {
       "@type": "Organization",
       "name": ""},"author": {
         "@type": "Person",
@@ -76,11 +81,309 @@
     <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>Bean生命周期</span>
       </h1></div><div class="post-meta">
       <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
-      Anonymous</span></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a> 和 <a href="/collections/spring/" class="post-collection" title="合集 - Spring"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Spring</a></span></div><div class="post-meta-line"><span title="发布于 2026-02-21 14:41:01"><i class="fa-solid fa-calendar-days me-1" aria-hidden="true"></i><time datetime="2026-02-21">2026-02-21</time></span>&nbsp;<span title="更新于 2026-02-21 14:42:06"><i class="fa-regular fa-calendar-check me-1" aria-hidden="true"></i><time datetime="2026-02-21">2026-02-21</time></span>&nbsp;<span title="0 字"><i class="fa-solid fa-pencil-alt me-1" aria-hidden="true"></i>约 100 字</span>&nbsp;<span><i class="fa-regular fa-clock me-1" aria-hidden="true"></i>预计阅读 0 分钟</span>&nbsp;</div>
-    </div><div class="content" id="content"></div><div class="post-footer" id="post-footer">
+      Anonymous</span></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a> 和 <a href="/collections/spring/" class="post-collection" title="合集 - Spring"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Spring</a></span></div><div class="post-meta-line"><span title="发布于 2026-02-21 14:41:01"><i class="fa-solid fa-calendar-days me-1" aria-hidden="true"></i><time datetime="2026-02-21">2026-02-21</time></span>&nbsp;<span title="更新于 2026-02-21 18:46:15"><i class="fa-regular fa-calendar-check me-1" aria-hidden="true"></i><time datetime="2026-02-21">2026-02-21</time></span>&nbsp;<span title="3139 字"><i class="fa-solid fa-pencil-alt me-1" aria-hidden="true"></i>约 3200 字</span>&nbsp;<span><i class="fa-regular fa-clock me-1" aria-hidden="true"></i>预计阅读 7 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#生命周期">生命周期</a>
+      <ul>
+        <li><a href="#实例化分为两个阶段容器启动阶段-和-bean实例化阶段">实例化（分为两个阶段：容器启动阶段 和 Bean实例化阶段）</a></li>
+        <li><a href="#bean属性填充">Bean属性填充</a></li>
+        <li><a href="#bean初始化阶段">Bean初始化阶段</a></li>
+        <li><a href="#就绪">就绪</a></li>
+        <li><a href="#销毁">销毁</a></li>
+      </ul>
+    </li>
+    <li><a href="#三级缓存解决循环依赖">三级缓存解决循环依赖</a>
+      <ul>
+        <li><a href="#什么是循环依赖">什么是循环依赖</a></li>
+        <li><a href="#三级缓存是如何解决这个问题的">三级缓存是如何解决这个问题的</a>
+          <ul>
+            <li><a href="#解决过程">解决过程</a></li>
+          </ul>
+        </li>
+        <li><a href="#为什么是三级">为什么是三级</a></li>
+        <li><a href="#三级缓存不能解决循环依赖的情况">三级缓存不能解决循环依赖的情况</a>
+          <ul>
+            <li><a href="#必须要使用构造器注入如何解决这个问题">必须要使用构造器注入，如何解决这个问题</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><p>bean生命周期，三级缓存解决循环依赖</p>
+<h2 class="heading-element" id="生命周期"><span>生命周期</span>
+  <a href="#%e7%94%9f%e5%91%bd%e5%91%a8%e6%9c%9f" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>总体上讲分个阶段： 实例化 -&gt; Bean属性填充 -&gt; Bean初始化 -&gt; 就绪 -&gt; 销毁</p>
+<h3 class="heading-element" id="实例化分为两个阶段容器启动阶段-和-bean实例化阶段"><span>实例化（分为两个阶段：容器启动阶段 和 Bean实例化阶段）</span>
+  <a href="#%e5%ae%9e%e4%be%8b%e5%8c%96%e5%88%86%e4%b8%ba%e4%b8%a4%e4%b8%aa%e9%98%b6%e6%ae%b5%e5%ae%b9%e5%99%a8%e5%90%af%e5%8a%a8%e9%98%b6%e6%ae%b5-%e5%92%8c-bean%e5%ae%9e%e4%be%8b%e5%8c%96%e9%98%b6%e6%ae%b5" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><blockquote>
+<p>容器启动阶段</p>
+</blockquote>
+<br/>
+<p>我们用各种方式来定义bean，这些定义就是元信息</p>
+<p>先处理元信息，元信息包括：xml里配置的元信息，注解里配置的元信息，properties文件里的元信息</p>
+<p>这些元信息是不同格式。 所以需要需要统一通过BeanDefinationReader将其读入内存</p>
+<br/>
+<p>BeanDefinationReader 包含多个实现，</p>
+<p>如 xml 使用XmlBeanDefinationReader，</p>
+<p>注解 ，使用AnnotatedBeanDefinitionReader</p>
+<br/>
+<p>通过这些 Reader， 将元信息读入内存，统一转换为BeanDefination。</p>
+<p>这样我们需要创建一个对象时，只需要找到对应的BeanDefination，然后创建对象就可以了</p>
+<br/>
+<p>那怎么找呢？ 就需要使用到 BeanDefinationRegister了。 BeanDefinationRegister是一个存储键值对的结构，它存储的是通过特定的<code>Bean</code>定义的<code>id</code>，映射到相应的<code>BeanDefination</code></p>
+<p>当BeandefinationReader 将元信息读入成BeanDefination后，会将其注册到BeanDefinationRegister中，</p>
+<p>这样我们通过BeanDefinationRegister 就能找到BeanDefination</p>
+<br/>
+<p>我们在配置元信息时，会用到占位符，保证一次修改，到处生效。那占位符最终是要替换为真实的数据的，那就需要BeanFactoryPostProcess，最后会对注册到BeanDefinationRegister 中的BeanDefination进行最后的修改</p>
+<br/>
+<p>这样容器初始化的过程就结束了。 总结一下： BeanDefinationReader 将 元信息读成BeanDefination，然后将其注册到BeanDefinationRegister， 最后由BeanFactoryPostProcess进行最后修改</p>
+<br/>
+<blockquote>
+<p>bean 实例化阶段</p>
+</blockquote>
+<p>借助我们前面的BeanDefinationRegister 和 BeanDefination， 使用反射来完成对象的创建</p>
+<br/>
+<h3 class="heading-element" id="bean属性填充"><span>Bean属性填充</span>
+  <a href="#bean%e5%b1%9e%e6%80%a7%e5%a1%ab%e5%85%85" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>对于基本类型； 如果元信息有配置，就按照元信息里的赋值。 如果没有，在jvm对象实例化时，也会被赋上默认的零值</p>
+<p>对于引用对象类型： spring会讲所有已经创建好的对象放入一个map中，spring会检测是否所依赖的对象在map中，如果在，直接注入，如果不在，就先去创建依赖的对象，并将其放入到map中，然后再注入（这里会触发如果依赖问题）</p>
+<h3 class="heading-element" id="bean初始化阶段"><span>Bean初始化阶段</span>
+  <a href="#bean%e5%88%9d%e5%a7%8b%e5%8c%96%e9%98%b6%e6%ae%b5" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>这个阶段 会进行四件事情：</p>
+<ol>
+<li>
+<p>调用实现Aware接口的方法</p>
+<p>如：	如果实现了 BeanNameAware,BeanClassLoaderAware， 那就会依次调用setBeanName(), setBeanClassLoader()</p>
+</li>
+<li>
+<p>BeanPostProcessor前置方法：有类实现了BeanPostProcessor，就会调用postProcessBeforeInitialization方法</p>
+</li>
+<li>
+<p>初始化</p>
+<p>按序执行： @PostConstruct注解方法，InitializingBean的afterPropertiesSet方法，@Bean指定的initMethod</p>
+</li>
+<li>
+<p>BeanPostProcess后置方法：有类实现了BeanPostProcessor，就会调用postProcessAfterInitialization方法</p>
+</li>
+</ol>
+<br/>
+<h3 class="heading-element" id="就绪"><span>就绪</span>
+  <a href="#%e5%b0%b1%e7%bb%aa" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>然后bean就可以使用了</p>
+<br/>
+<h3 class="heading-element" id="销毁"><span>销毁</span>
+  <a href="#%e9%94%80%e6%af%81" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>容器关闭时按顺序执行 @PreDestroy 注解方法、DisposableBean 的 destroy 方法、@Bean 指定的 destroyMethod</p>
+<br/>
+<h2 class="heading-element" id="三级缓存解决循环依赖"><span>三级缓存解决循环依赖</span>
+  <a href="#%e4%b8%89%e7%ba%a7%e7%bc%93%e5%ad%98%e8%a7%a3%e5%86%b3%e5%be%aa%e7%8e%af%e4%be%9d%e8%b5%96" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><h3 class="heading-element" id="什么是循环依赖"><span>什么是循环依赖</span>
+  <a href="#%e4%bb%80%e4%b9%88%e6%98%af%e5%be%aa%e7%8e%af%e4%be%9d%e8%b5%96" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>简单来讲就是 A类依赖了B， B也依赖了A，形成了一个环</p>
+<p>比如：</p>
+<div class="code-block highlight" data-mode="classic" data-copyable="true"><div class="chroma">
+<div class="code-header language-java"><span class="code-title"><i class="arrow fa-solid fa-chevron-down" aria-hidden="true"></i></span><span class="ellipses-btn" aria-label="Show more options" role="button"><i class="fa-solid fa-ellipsis-h" aria-hidden="true"></i></span><span class="line-nos-btn" aria-label="切换行号" role="button" title="切换行号"><i class="fa-solid fa-list-ol" aria-hidden="true"></i></span><span class="line-wrap-btn" aria-label="切换自动换行" role="button" title="切换自动换行"><i class="fa-solid fa-right-left" aria-hidden="true"></i></span><span class="copy-btn" aria-label="复制到剪贴板" role="button" title="复制到剪贴板"><i class="fa-regular fa-clone" aria-hidden="true"></i></span></div><div class="code-wrapper" data-max="10" data-line-digit="2" style="--fi-max-shown-lines:10;--fi-line-digit:2;--fi-line-start:1;"><table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Autowired</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w"> </span><span class="c1">// A 依赖 B</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">B</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="nd">@Autowired</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="n">A</span><span class="w"> </span><span class="n">a</span><span class="p">;</span><span class="w"> </span><span class="c1">// B 依赖 A</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table></div><div class="code-expand-btn" aria-label="展开或折叠代码块" role="button"><i class="fa-solid fa-angles-down" aria-hidden="true"></i></div>
+</div>
+</div><p>这样就会导致一个问题： 创建A类时，需要进行依赖注入，就需要B，发现B还没有被创建，就先创建B，发现B依赖A，A又没有被创建好，所以又创建A，形成了一个循环，导致无法实例化。</p>
+<h3 class="heading-element" id="三级缓存是如何解决这个问题的"><span>三级缓存是如何解决这个问题的</span>
+  <a href="#%e4%b8%89%e7%ba%a7%e7%bc%93%e5%ad%98%e6%98%af%e5%a6%82%e4%bd%95%e8%a7%a3%e5%86%b3%e8%bf%99%e4%b8%aa%e9%97%ae%e9%a2%98%e7%9a%84" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>spring 定义了三个map，也就是三级缓存：</p>
+<ol>
+<li>第一层：放完全初始化好的Bean</li>
+<li>第二层：存放通过反射创建但尚未进行属性注入和初始化的 Bean 实例。用于快速返回早期引用，避免重复从工厂生成。</li>
+<li>第三层：存放能生成早期 Bean 引用的工厂。最核心层：当检测到循环依赖时，从此处通过 getObject() 获取早期引用（也就是能存放在第二层的引用）（会触发 getEarlyBeanReference() 处理 AOP 代理等逻辑）。</li>
+</ol>
+<br/>
+<p>三级缓存中的工厂的所用： 如果需要 AOP，它负责创建 A 的代理对象；如果不需要，它返回 A 的原始对象。</p>
+<p>获取 Bean 时，按顺序检查： 一级缓存 → 二级缓存 → 三级缓存。</p>
+<h4 class="heading-element" id="解决过程"><span>解决过程</span>
+  <a href="#%e8%a7%a3%e5%86%b3%e8%bf%87%e7%a8%8b" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p>创建BeanA</p>
+<p>spring实例化A ，将A的工厂对象放入到三级缓存，但此时还没有属性注入</p>
+<p>进行属性注入时，发现需要B，去缓存找，没有找到，于是实例化B</p>
+<br/>
+<p>实例化B</p>
+<p>spring实例化B， 将B的工厂对象放入三级缓存</p>
+<p>进行属性注入时，发现需要A</p>
+<p>去一级缓存找，没有</p>
+<p>二级缓存找，还没有</p>
+<p>三级缓存找到A的工厂对象</p>
+<p>执行工厂方法：getObject。  这里如果A需要AOP，则生成代理对象，不需要，则原始对象</p>
+<p>将得到的对象放入二级缓存</p>
+<p>从三级缓存移除A的工厂（避免重复创建）</p>
+<p>将A的引用给B</p>
+<p>B的属性注入完成，初始化成功，将B放入一级缓存中</p>
+<br/>
+<p>回到A，完成B的属性注入，完成了A的初始化，将A放入一级缓存。</p>
+<h3 class="heading-element" id="为什么是三级"><span>为什么是三级</span>
+  <a href="#%e4%b8%ba%e4%bb%80%e4%b9%88%e6%98%af%e4%b8%89%e7%ba%a7" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>答案：为了保证AOP代理的一致性</p>
+<br/>
+<blockquote>
+<p>如果只有两级缓存</p>
+</blockquote>
+<p>当A实例化时，将A的原始对象放入到 二级缓存中。</p>
+<p>A进行依赖注入，发现需要B</p>
+<br/>
+<p>B进行实例化，将B的原始对象放入二级缓存</p>
+<p>B进行属性注入，发现需要A</p>
+<p>找到二级缓存中的<mark class="mark-default">原始对象</mark> 进行属性注入</p>
+<p>B初始化完成，将B放入一级缓存</p>
+<br/>
+<p>回到A，完成了属性注入。</p>
+<p>在初始化时，出发了AOP逻辑，spring创建了A的代理对象</p>
+<p>将A的代理对象放入了一级缓存</p>
+<br/>
+<p>此时 <mark class="mark-default">b的属性注入时A的原始对象，而spring容器最终放的是A的代理对象，两个不一致了</mark></p>
+<br/>
+<blockquote>
+<p>如果是三级缓存</p>
+</blockquote>
+<p>当A实例化时，将A的工厂对象放入到 三级缓存中。</p>
+<p>A进行依赖注入，发现需要B</p>
+<br/>
+<p>B进行实例化，将B的工厂对象放入三级缓存</p>
+<p>B进行属性注入，发现需要A</p>
+<p><mark class="mark-default">找到三级缓存中的A的工厂对象，发现需要AOP代理，于是生成了代理对象</mark>，</p>
+<p>将A的代理对象放入到B中</p>
+<br/>
+<p>这样就解决了问题。</p>
+<p><br/><br/></p>
+<h3 class="heading-element" id="三级缓存不能解决循环依赖的情况"><span>三级缓存不能解决循环依赖的情况</span>
+  <a href="#%e4%b8%89%e7%ba%a7%e7%bc%93%e5%ad%98%e4%b8%8d%e8%83%bd%e8%a7%a3%e5%86%b3%e5%be%aa%e7%8e%af%e4%be%9d%e8%b5%96%e7%9a%84%e6%83%85%e5%86%b5" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><ol>
+<li>
+<p><strong>单例 (Singleton) + 属性注入 (Setter/Field)：</strong> Spring <strong>可以</strong> 解决。</p>
+</li>
+<li>
+<p>单例 (Singleton) + 构造器注入 (Constructor)：Spring 无法 解决。</p>
+</li>
+</ol>
+<ul>
+<li>原因：创建 A 时需要先创建 B，创建 B 时需要先创建 A，双方都在等待对方实例化完成，导致死锁，抛出 <code>BeanCurrentlyInCreationException</code>。</li>
+</ul>
+<ol start="3">
+<li>原型 (Prototype)： Spring 无法 解决。</li>
+</ol>
+<ul>
+<li>原因：原型 Bean 每次请求都会创建新实例，缓存机制不适用。</li>
+</ul>
+<br/>
+<p>为什么构造器不行：</p>
+<p><strong>三级缓存的介入时机：</strong> Spring 是在 <strong>（实例化）完成之后</strong>，<strong>（属性填充）开始之前</strong>，将 Bean 的工厂对象放入三级缓存的。</p>
+<p>构造器的循环依赖都完不成实例化这一步</p>
+<br/>
+<ol>
+<li>Spring 尝试实例化 A
+<ul>
+<li>进入 <code>createBean</code> 流程。</li>
+<li>准备调用 A 的构造函数 <code>new A(b)</code>。</li>
+<li><strong>卡住了！</strong> 构造函数需要参数 <code>b</code>。Spring 必须先去创建 B。</li>
+</ul>
+</li>
+<li>Spring 尝试实例化 B
+<ul>
+<li>进入 <code>createBean</code> 流程。</li>
+<li>准备调用 B 的构造函数 <code>new B(a)</code>。</li>
+<li><strong>卡住了！</strong> 构造函数需要参数 <code>a</code>。Spring 必须先去创建 A。</li>
+</ul>
+</li>
+<li>死锁 (Deadlock)
+<ul>
+<li>A 等 B 创建好才能实例化。</li>
+<li>B 等 A 创建好才能实例化。</li>
+<li><strong>结果：</strong> 两个 Bean 连 <strong>实例化（new 对象）</strong> 这一步都没完成。</li>
+</ul>
+</li>
+</ol>
+<br/>
+<h4 class="heading-element" id="必须要使用构造器注入如何解决这个问题"><span>必须要使用构造器注入，如何解决这个问题</span>
+  <a href="#%e5%bf%85%e9%a1%bb%e8%a6%81%e4%bd%bf%e7%94%a8%e6%9e%84%e9%80%a0%e5%99%a8%e6%b3%a8%e5%85%a5%e5%a6%82%e4%bd%95%e8%a7%a3%e5%86%b3%e8%bf%99%e4%b8%aa%e9%97%ae%e9%a2%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><ol>
+<li>使用@lazy注解</li>
+</ol>
+<div class="code-block highlight" data-mode="classic" data-copyable="true"><div class="chroma">
+<div class="code-header language-java"><span class="code-title"><i class="arrow fa-solid fa-chevron-down" aria-hidden="true"></i></span><span class="ellipses-btn" aria-label="Show more options" role="button"><i class="fa-solid fa-ellipsis-h" aria-hidden="true"></i></span><span class="line-nos-btn" aria-label="切换行号" role="button" title="切换行号"><i class="fa-solid fa-list-ol" aria-hidden="true"></i></span><span class="line-wrap-btn" aria-label="切换自动换行" role="button" title="切换自动换行"><i class="fa-solid fa-right-left" aria-hidden="true"></i></span><span class="copy-btn" aria-label="复制到剪贴板" role="button" title="复制到剪贴板"><i class="fa-regular fa-clone" aria-hidden="true"></i></span></div><div class="code-wrapper" data-max="10" data-line-digit="1" style="--fi-max-shown-lines:10;--fi-line-digit:1;--fi-line-start:1;"><table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-java" data-lang="java"><span class="line"><span class="cl"><span class="nd">@Component</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="kd">public</span><span class="w"> </span><span class="kd">class</span> <span class="nc">A</span><span class="w"> </span><span class="p">{</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">private</span><span class="w"> </span><span class="kd">final</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="c1">// Spring 会注入一个 B 的代理对象，实际调用时才会去获取真正的 B</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="kd">public</span><span class="w"> </span><span class="nf">A</span><span class="p">(</span><span class="nd">@Lazy</span><span class="w"> </span><span class="n">B</span><span class="w"> </span><span class="n">b</span><span class="p">)</span><span class="w"> </span><span class="p">{</span><span class="w"> 
+</span></span></span><span class="line"><span class="cl"><span class="w">        </span><span class="k">this</span><span class="p">.</span><span class="na">b</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">b</span><span class="p">;</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="w">    </span><span class="p">}</span><span class="w">
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span></span></span></code></pre></td></tr></table></div>
+</div>
+</div><p><em>原理：</em> <code>@Lazy</code> 会让 Spring 注入一个代理对象，而不是直接创建 B。这样 A 的构造函数可以立即完成实例化，A 就能放入缓存，B 创建时就能从缓存拿到 A，从而打破死锁。</p></div><div class="post-footer" id="post-footer">
   <div class="post-info">
     <div class="post-info-line">
-      <div class="post-info-mod"><span title="更新于 2026-02-21 14:42:06">更新于 2026-02-21&nbsp;</span>
+      <div class="post-info-mod"><span title="更新于 2026-02-21 18:46:15">更新于 2026-02-21&nbsp;</span>
       </div><div class="post-info-license">
             <span><a rel="license external nofollow noopener noreferrer" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a></span>
           </div></div><div class="post-info-line">
@@ -101,12 +404,46 @@
 </div>
 </article>
 
-  <aside class="toc" id="toc-auto" aria-label="目录"></aside></main><footer class="footer">
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside><dialog id="toc-dialog" aria-labelledby="toc-dialog-title" role="dialog">
+      <div class="toc">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-drawer"><nav >
+  <ul>
+    <li><a href="#生命周期">生命周期</a>
+      <ul>
+        <li><a href="#实例化分为两个阶段容器启动阶段-和-bean实例化阶段">实例化（分为两个阶段：容器启动阶段 和 Bean实例化阶段）</a></li>
+        <li><a href="#bean属性填充">Bean属性填充</a></li>
+        <li><a href="#bean初始化阶段">Bean初始化阶段</a></li>
+        <li><a href="#就绪">就绪</a></li>
+        <li><a href="#销毁">销毁</a></li>
+      </ul>
+    </li>
+    <li><a href="#三级缓存解决循环依赖">三级缓存解决循环依赖</a>
+      <ul>
+        <li><a href="#什么是循环依赖">什么是循环依赖</a></li>
+        <li><a href="#三级缓存是如何解决这个问题的">三级缓存是如何解决这个问题的</a>
+          <ul>
+            <li><a href="#解决过程">解决过程</a></li>
+          </ul>
+        </li>
+        <li><a href="#为什么是三级">为什么是三级</a></li>
+        <li><a href="#三级缓存不能解决循环依赖的情况">三级缓存不能解决循环依赖的情况</a>
+          <ul>
+            <li><a href="#必须要使用构造器注入如何解决这个问题">必须要使用构造器注入，如何解决这个问题</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div>
+    </dialog></main><footer class="footer">
     <div class="footer-container"><div class="footer-line powered">由 <a href="https://gohugo.io/" target="_blank" rel="external nofollow noopener noreferrer" title="Hugo 0.156.0"><img class="hugo-icon" src="/images/hugo.min.svg" alt="Hugo logo" /> Hugo</a> 强力驱动 | 主题 - <a href="https://github.com/hugo-fixit/FixIt" target="_blank" rel="external" title="FixIt v0.4.3-20260130042349-e23a50d7"><img class="fixit-icon" src="/images/fixit.min.svg" alt="FixIt logo" /> FixIt</a>
         </div><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright" aria-hidden="true"></i>
             <span itemprop="copyrightYear">2026</span><span class="author" itemprop="copyrightHolder">
               <a href="/"></a></span></div></div>
-  </footer></div><div class="widgets"><div class="fixed-buttons"><div class="fixed-button back-to-top animate__faster d-none" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
+  </footer></div><div class="widgets"><div class="fixed-buttons"><div class="fixed-button back-to-top animate__faster d-none" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></div><div id="toc-drawer-button" class="fixed-button toc-drawer-button d-none" role="button" aria-label="目录"><i class="fa-solid fa-bars" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
     <div class="noscript-warning">该网站在启用 JavaScript 的情况下效果最佳。</div>
   </noscript>
 </div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/sharer/sharer.min.js" async defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="/js/config/4527cdf4ad5fc255a307a48cf4c76244.js" defer></script><script src="/js/theme.min.js" defer></script></body>
