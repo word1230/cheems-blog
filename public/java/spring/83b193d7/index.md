@@ -1,12 +1,5 @@
----
-date: '2026-02-22T08:12:56+08:00'
-draft: false
-slug: '83b193d7'
-type: posts
-title: 'AOP入门'
-collections: "spring"
-categories: [java]
----
+# AOP入门
+
 
  aop概念,使用
 
@@ -244,4 +237,11 @@ public class SmartDashcamAspect {
     }
 }
 ```
+
+
+
+---
+
+> 作者: cheems  
+> URL: http://localhost:1313/java/spring/83b193d7/  
 
