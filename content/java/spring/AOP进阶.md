@@ -256,7 +256,7 @@ public void transferMoney() {
 
  `@Transactional` 的底层是 **AOP 动态代理**
 
-那么ve'ge同类内部方法调用，事务会失效！
+那么这个问题：同类内部方法调用，事务会失效！
 
 ```java
 @Service
