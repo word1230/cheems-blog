@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "java/nginx/nginx入门.md",
+                "file": "观看视频总结/自慰影响身体的机制.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "nginx入门"
+              "title": "自慰影响身体的机制"
             }
           }
         ]
@@ -89,12 +89,37 @@
         "type": "tabs",
         "children": [
           {
+            "id": "d763a9526f12246a",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {
+                "file": "观看视频总结/自慰影响身体的机制.md",
+                "followCursor": false,
+                "showSearch": false,
+                "searchQuery": ""
+              },
+              "icon": "lucide-list",
+              "title": "自慰影响身体的机制 的大纲"
+            }
+          },
+          {
+            "id": "7d95ddd52674441c",
+            "type": "leaf",
+            "state": {
+              "type": "git-view",
+              "state": {},
+              "icon": "git-pull-request",
+              "title": "Source Control"
+            }
+          },
+          {
             "id": "28cd624bb0ace1ff",
             "type": "leaf",
             "state": {
               "type": "backlink",
               "state": {
-                "file": "java/spring/spring-ioc容器.md",
+                "file": "观看视频总结/自慰影响身体的机制.md",
                 "collapseAll": true,
                 "extraContext": false,
                 "sortOrder": "alphabetical",
@@ -104,22 +129,7 @@
                 "unlinkedCollapsed": true
               },
               "icon": "links-coming-in",
-              "title": "spring-ioc容器 的反向链接列表"
-            }
-          },
-          {
-            "id": "d763a9526f12246a",
-            "type": "leaf",
-            "state": {
-              "type": "outline",
-              "state": {
-                "file": "java/nginx/nginx入门.md",
-                "followCursor": false,
-                "showSearch": false,
-                "searchQuery": ""
-              },
-              "icon": "lucide-list",
-              "title": "nginx入门 的大纲"
+              "title": "自慰影响身体的机制 的反向链接列表"
             }
           },
           {
@@ -181,13 +191,15 @@
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
       "bases:新建数据库": false,
-      "iconic:打开规则书": false
+      "obsidian-git:Open Git source control": false
     }
   },
-  "active": "633482e0ad540a1e",
+  "active": "7d95ddd52674441c",
   "lastOpenFiles": [
-    "java/spring/bean生命周期.md",
     "java/nginx/nginx入门.md",
+    "观看视频总结/自慰影响身体的机制.md",
+    "观看视频总结",
+    "java/spring/bean生命周期.md",
     "java/spring/spring-ioc容器.md",
     "系统/重装系统后的步骤.md",
     "系统/scoop入门.md",
