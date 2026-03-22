@@ -10,9 +10,9 @@ categories:
 ---
 
 <!--more-->
-## xxl-job
+## 1 xxl-job
 
-### xxl-job 是什么
+### 1.1 xxl-job 是什么
 是分布式任务调度平台
 特点：
 - 支持分布式集群部署
@@ -20,7 +20,7 @@ categories:
 - 故障转移
 - 日志
 - 支持分片执行
-### 为什么需要xxl-job
+### 1.2 为什么需要xxl-job
 springboot任务调用
 - springboot的定时任务是单机部署的，在微服务场景，每个服务都会执行定时任务，造成重复执行
 - 无日志
@@ -30,7 +30,7 @@ springboot任务调用
 
 xxl-job解决了这些问题
 
-### 核心架构
+### 1.3 核心架构
 
 两个角色：
 - xxl-job-admin(调度中心) ， 负责：提供web界面，触发任务，记录日志，告警等
@@ -54,15 +54,15 @@ xxl-job解决了这些问题
 ```
 
 
-### 快速开始
+### 1.4 快速开始
 
-#### 1.docker 部署xxl-job-admin
+#### 1.4.1 1.docker 部署xxl-job-admin
 
 ```java
 docker run -e PARAMS=" --spring.datasource.url=jdbc:mysql://host.docker.internal:3306/xxl_job?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai --spring.datasource.username=root --spring.datasource.password=123456 --xxl.job.accessToken=root " -p 8080:8080 --name xxl-job-admin xuxueli/xxl-job-admin:2.4.2
 ```
 
-#### 2.引入依赖
+#### 1.4.2 2.引入依赖
 ```xml
 <dependency>  
     <groupId>com.xuxueli</groupId>  
@@ -70,7 +70,7 @@ docker run -e PARAMS=" --spring.datasource.url=jdbc:mysql://host.docker.internal
     <version>3.1.1</version>  
 </dependency>
 ```
-#### 3.配置文件
+#### 1.4.3 3.配置文件
 
 ```yml
 xxl:  
@@ -86,7 +86,7 @@ xxl:
       accessToken: root     # 和调度中心的 token 保持一致 也就是上面docker的参数里的
 ```
 
-#### 4.配置类
+#### 1.4.4 4.配置类
 ```java
   
 @Configuration  
@@ -129,7 +129,7 @@ public class XxlJobConfig {
 }
 ```
 
-#### 5. 你的业务逻辑(定时任务)
+#### 1.4.5 你的业务逻辑(定时任务)
 
 ```java
 @Component  
@@ -146,7 +146,7 @@ public class DemoJobHandler {
 ```
 
 
-#### 6.启动项目打开web页面
+#### 1.4.6 6.启动项目打开web页面
 
 启动项目后，打开`http://localhost:8080/xxl-job-admin/`
 

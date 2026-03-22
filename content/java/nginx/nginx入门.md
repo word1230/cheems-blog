@@ -10,13 +10,13 @@ categories: [java]
 
 <!--more-->
 
-## 什么是nginx -- what
+## 1 什么是nginx -- what
 
 nginx 是 一个 轻量，高性能 ，http， 反向代理服务器
 
 
 
-### 什么是反向代理
+### 1.1 什么是反向代理
 
 代理可以类比中介，你租房子，不是直接找房主，而是找中介。中介帮你去与房主交涉
 
@@ -32,7 +32,7 @@ nginx 是 一个 轻量，高性能 ，http， 反向代理服务器
 
 
 
-## 为什么需要nginx -- why
+## 2 为什么需要nginx -- why
 
 既然django，tomcat都能提供web服务，为什么还需要nginx？
 
@@ -56,7 +56,7 @@ nginx擅长处理网络流量的体现：
 
 
 
-## nginx命令
+## 3 nginx命令
 
 环境 ： debian 12
 
@@ -69,7 +69,7 @@ nginx擅长处理网络流量的体现：
 
 
 
-## nginx 要如何使用呢 -- how
+## 4 nginx 要如何使用呢 -- how
 
 nginx的 功能：
 
@@ -79,7 +79,7 @@ nginx的 功能：
 
 
 
-### nginx 的配置文件
+### 4.1 nginx 的配置文件
 
 nginx的配置文件有两种写法：
 
@@ -89,7 +89,7 @@ nginx的配置文件有两种写法：
 ==其实对后端来讲：也就部署网站会用，配置文件看得懂就行，不会让AI改就完了，所以这一部分可以先过，直接看实战==
 <br/>
 
-#### 配置文件的层级：
+#### 4.1.1 配置文件的层级：
 
 ```txt
 全局块
@@ -111,30 +111,30 @@ mail块
 - 在模块配置文件中， 写 upstream块，server块等
 
 
-#### 全局块：
+#### 4.1.2 全局块：
  ![image.png](https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140541294.png)
 <br/>
 
-#### event块：
+#### 4.1.3 event块：
 ![image.png](https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140548689.png)
 <br/>
 
-#### http块：
+#### 4.1.4 http块：
 ![image.png](https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140604955.png)
 
 ![image.png](https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225141454741.png)
 ![image.png](https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225141519313.png)
 
-#### server块和location块：
+#### 4.1.5 server块和location块：
 ![image.png](https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142351565.png)
 
 ![image.png](https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142401934.png)
 ![image.png](https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142526384.png)
 
 
-### 实战
+### 4.2 实战
 
-#### http反向代理配置实战
+#### 4.2.1 http反向代理配置实战
 环境： debian 12
 确保你已经打开了nginx： `systemctl status nginx` 
 
@@ -201,7 +201,7 @@ systemctl reload nginx # 重启nginx
 
 
 
-#### 负载均衡配置实战
+#### 4.2.2 负载均衡配置实战
 
 1. 准备两个后端服务
 
@@ -293,7 +293,7 @@ server{
 
 
 
-#### 静态页面配置
+#### 4.2.3 静态页面配置
 
 1. 创建静态页面
 ```shell

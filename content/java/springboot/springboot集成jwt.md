@@ -12,9 +12,9 @@ categories:
 <!--more-->
 
 
-## jwt简介
+## 1 jwt简介
 
-### 什么是jwt
+### 1.1 什么是jwt
 
 是用于信息传递的令牌，常用于身份认证和授权
 <br/>
@@ -23,7 +23,7 @@ categories:
 - **可验证性**：token 可以被签名，防止被篡改。
 - **无状态**：服务器不需要存储 session（常用于分布式系统）。
 
-### 为什么需要jwt
+### 1.2 为什么需要jwt
 - 在微服务项目中，需要分布式session才能保证多服务器session一致。这样每次请求都要去redis读取，同时管理session变得复杂
 - 高并发情况下，session存储压力大，需要额外考虑过期和清理策略
 - 跨域不方便
@@ -39,12 +39,12 @@ jwt的好处：
 - 可以轻松扩展到微服务
 
 
-### jwt 的构成
+### 1.3 jwt 的构成
 
 三个部分，中间用 `.` 隔开
 `header.payload.signature`
 
-#### 头部
+#### 1.3.1 头部
 
 声明算法和类型
 ```json
@@ -56,7 +56,7 @@ jwt的好处：
 
 被base64编码 后 -> header
 
-#### 负载
+#### 1.3.2 负载
 
 存放 **声明（Claims）**，即 token 的信息
 常见字段：
@@ -72,7 +72,7 @@ jwt的好处：
 
 同样会被base64编码
 
-### 签名
+### 1.4 签名
 
 签名用于**验证 token 的完整性和真实性**：
 ```text
@@ -86,7 +86,7 @@ HMACSHA256(
 - 如果 token 被篡改，签名校验会失败。
 
 
-### jwt 使用流程
+### 1.5 jwt 使用流程
 - 用户登录 → 服务端验证账号密码 → 返回 JWT
 - 客户端保存 JWT（一般在 localStorage 或 Cookie）
 - 客户端每次请求 → 在请求头 `Authorization` 带上 JWT
@@ -97,9 +97,9 @@ HMACSHA256(
 
 
 
-## 集成步骤
+## 2 集成步骤
 
-### 1. 引入依赖
+### 2.1 引入依赖
 
 主要是两部分的依赖：
 
@@ -141,7 +141,7 @@ spring security
 
 同时还可以添加 mybatis-plus mysql 等数据库相关依赖
 
-### 2.写jwt工具类
+### 2.2 2.写jwt工具类
 
 工具类里主要做三件事：
 - 生成token
@@ -149,7 +149,7 @@ spring security
 - 从token中解析我们存入的数据
 
 
-#### 生成token
+#### 2.2.1 生成token
 
 需要设置：主题，载荷，签发时间，过期时间，密钥
 
@@ -241,7 +241,7 @@ public class JwtUtil {
 4m}
 ```
 
-#### 解析token
+#### 2.2.2 解析token
 
 从token中解析出我们设置的载荷信息，同时解析的过程中也对token进行了验证
 
@@ -291,7 +291,7 @@ public Claims parseToken(String token) {
 
 
 
-#### 验证token
+#### 2.2.3 验证token
 token能顺利解析，就说明token是有效的
 ```java
 /**
@@ -327,7 +327,7 @@ token能顺利解析，就说明token是有效的
 ```
 
 
-### 3. 写jwt认证过滤器
+### 2.3 写jwt认证过滤器
 
 对token进行验证
 生成认证信息
@@ -434,7 +434,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 }
 ```
 
-### 4. 写SecurityConfig类
+### 2.4 写SecurityConfig类
 
 
 配置 
@@ -551,7 +551,7 @@ public class SecurityConfig {
 ```
 
 
-### 5. 登录接口
+### 2.5 登录接口
 
 生成token并返回给前端
 

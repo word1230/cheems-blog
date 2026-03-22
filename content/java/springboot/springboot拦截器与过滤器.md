@@ -10,17 +10,17 @@ categories:
 ---
 拦截
 <!--more-->
-## 拦截器 - interceptor
-### 什么是拦截器 -what
+## 1 拦截器 - interceptor
+### 1.1 什么是拦截器 -what
 Spring Boot 中的拦截器是基于 Spring MVC 的一种请求增强机制，在请求到达controller前后，插入自定义逻辑
 
-### 用途
+### 1.2 用途
 
 - 日志
 - 权限校验，拦截
 - 统计接口耗时
 
-### 执行流程
+### 1.3 执行流程
 
 请求到达controller之前，先经过拦截器的三个部分：
 - preHandle  :    在controller执行之前调用
@@ -62,14 +62,14 @@ A.afterCompletion
 
 
 
-### 具体使用 --- 日志案例
+### 1.4 具体使用 --- 日志案例
 步骤：
 1. 新建一个拦截器类LogInterceptor，实现HandlerInterceptor接口，将其交给ioc管理（@Component）
 2. 重写preHandle方法， 内部写前置拦截的逻辑
 3. 新建配置类 WebConfig ，实现WebMvcConfigurer接口，同样给ioc容器管理（@Configuration）
 4. 重写addInterceptors方法，将LogInterceptor注入进来，并在方法内部registry.addInterceptor(logInterceptor);
 
-#### 日志案例
+#### 1.4.1 日志案例
 
 > 前置拦截preHandle
 
@@ -179,29 +179,29 @@ public class WebConfig implements WebMvcConfigurer {
 ```
 
 
-### 与其他拦截方式的区别
+### 1.5 与其他拦截方式的区别
 
-#### filter 过滤器
+#### 1.5.1 filter 过滤器
 filter 属于servlet规范，更底层，在spring外也可以用
 
 interceptor属于spring mvc机制，更加贴近业务
 
 执行顺序： Filter -> Interceptor -> Controller
 
-#### AOP 
+#### 1.5.2 AOP 
 
 interceptor 更加针对web请求
 
 AOP 针对 方法进行拦截
 
-## 过滤器 -filter
-### 什么是过滤器
+## 2 过滤器 -filter
+### 2.1 什么是过滤器
 是servlet规范提供的机制， 用于在请求到达 spring mvc 之前 对请求进行预处理
 
 请求来了 → 过滤器 → 拦截器 → Controller → 返回 → 拦截器 → 过滤器
 
 
-### 用途
+### 2.2 用途
 
 - **字符编码**：统一设置请求和响应编码
 - **跨域处理**：CORS 配置
@@ -209,9 +209,9 @@ AOP 针对 方法进行拦截
 - **安全检查**：IP 黑名单、简单权限
 - **请求包装**：包装 request/response 修改数据
 
-### 示例
+### 2.3 示例
 
-#### 定义一个filter
+#### 2.3.1 定义一个filter
 继承Filter 类
 加上@WebFilter(urlPatterns = "/*") 注解  拦截所有请求
 ```java
@@ -244,11 +244,11 @@ public class MyFilter implements Filter {
     }
 }
 ```
-### 注册
+### 2.4 注册
 
-#### 方式一： 直接在过滤器上加上@Componet注解
+#### 2.4.1 方式一： 直接在过滤器上加上@Componet注解
 
-### 方式二：使用 `FilterRegistrationBean`（推荐，可以精确控制，要过滤哪些请求）
+### 2.5 方式二：使用 `FilterRegistrationBean`（推荐，可以精确控制，要过滤哪些请求）
 ```java
 @Configuration  
 public class FilterConfig {  
@@ -266,7 +266,7 @@ public class FilterConfig {
 }
 ```
 
-### 方式三：`@WebFilter` + `@ServletComponentScan`
+### 2.6 方式三：`@WebFilter` + `@ServletComponentScan`
 ```java
 
   
@@ -312,10 +312,10 @@ public class DemoApplication {
 ```
 
 
-### 记录请求耗时 实战 
+### 2.7 记录请求耗时 实战 
 
 
-#### 1.定义一个过滤器类
+#### 2.7.1 1.定义一个过滤器类
 
 
 继承Filter 类
@@ -338,9 +338,9 @@ public class TimeFilter implements Filter {
 ```
 
 
-#### 2.springboot中注册过滤器
+#### 2.7.2 2.springboot中注册过滤器
 
-##### 方法一
+##### 2.7.2.1 方法一
 
 加@WebFilter注解在filter上
 
@@ -354,7 +354,7 @@ public class DemoApplication {
 }
 ```
 
-##### 方法二
+##### 2.7.2.2 方法二
 这种不需要@WebFilter注解
 ```java
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
@@ -375,4 +375,4 @@ public class FilterConfig {
 }
 ```
 
-##### 方式三：加@Component注解
+##### 2.7.2.3 方式三：加@Component注解
