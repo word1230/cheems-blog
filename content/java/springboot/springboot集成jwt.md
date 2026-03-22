@@ -128,9 +128,10 @@ HMACSHA256(
 
 ```
 <br/>
-- spring security
+spring security
 <br/>
 ```java
+
 <!-- Spring Security：提供认证与授权框架，JWT 过滤器会整合进这里 -->  
 <dependency>  
     <groupId>org.springframework.boot</groupId>  

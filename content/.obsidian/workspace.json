@@ -13,12 +13,12 @@
             "state": {
               "type": "markdown",
               "state": {
-                "file": "java/项目/springboot集成jwt.md",
+                "file": "java/springboot/xxl-job.md",
                 "mode": "source",
                 "source": false
               },
               "icon": "lucide-file",
-              "title": "springboot集成jwt"
+              "title": "xxl-job"
             }
           }
         ]
@@ -94,13 +94,13 @@
             "state": {
               "type": "outline",
               "state": {
-                "file": "java/springboot/springboot拦截器与过滤器.md",
+                "file": "java/springboot/xxl-job.md",
                 "followCursor": false,
                 "showSearch": false,
                 "searchQuery": ""
               },
               "icon": "lucide-list",
-              "title": "springboot拦截器与过滤器 的大纲"
+              "title": "xxl-job 的大纲"
             }
           },
           {
@@ -191,13 +191,17 @@
       "templates:插入模板": false,
       "command-palette:打开命令面板": false,
       "bases:新建数据库": false,
-      "obsidian-git:Open Git source control": false
+      "obsidian-git:Open Git source control": false,
+      "terminal:Open terminal": false
     }
   },
-  "active": "633482e0ad540a1e",
+  "active": "7d95ddd52674441c",
   "lastOpenFiles": [
+    "java/springboot/springboot集成jwt.md",
+    "java/springboot/xxl-job.md",
+    "java/springboot/定时任务.md",
+    "java/springboot/跨域处理.md",
     "java/springboot/springboot拦截器与过滤器.md",
-    "java/项目/springboot集成jwt.md",
     "java/项目/cheemsoj.md",
     "java/spring/AOP入门.md",
     "java/spring/AOP进阶.md",

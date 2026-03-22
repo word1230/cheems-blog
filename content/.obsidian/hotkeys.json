@@ -1,0 +1,11 @@
+{
+  "workspace:new-tab": [],
+  "terminal:open-terminal.external.root": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "T"
+    }
+  ]
+}

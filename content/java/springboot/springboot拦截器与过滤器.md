@@ -209,7 +209,110 @@ AOP 针对 方法进行拦截
 - **安全检查**：IP 黑名单、简单权限
 - **请求包装**：包装 request/response 修改数据
 
-### 跨域 实战
+### 示例
+
+#### 定义一个filter
+继承Filter 类
+加上@WebFilter(urlPatterns = "/*") 注解  拦截所有请求
+```java
+import jakarta.servlet.*;
+import jakarta.servlet.http.HttpServletRequest;
+import java.io.IOException;
+
+public class MyFilter implements Filter {
+
+    @Override
+    public void init(FilterConfig filterConfig) throws ServletException {
+        System.out.println("过滤器初始化");
+    }
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        HttpServletRequest req = (HttpServletRequest) request;
+        System.out.println("请求进入过滤器：" + req.getRequestURI());
+
+        // 放行
+        chain.doFilter(request, response);
+
+        System.out.println("响应返回过滤器");
+    }
+
+    @Override
+    public void destroy() {
+        System.out.println("过滤器销毁");
+    }
+}
+```
+### 注册
+
+#### 方式一： 直接在过滤器上加上@Componet注解
+
+### 方式二：使用 `FilterRegistrationBean`（推荐，可以精确控制，要过滤哪些请求）
+```java
+@Configuration  
+public class FilterConfig {  
+  
+    @Bean  
+    public FilterRegistrationBean<MyFilter> filterRegistrationBean() {  
+        FilterRegistrationBean<MyFilter> myFilterFilterRegistrationBean = new FilterRegistrationBean<>(new MyFilter());  
+        myFilterFilterRegistrationBean.addUrlPatterns("/*"); //拦截所有请求  
+        myFilterFilterRegistrationBean.setName("MyFilter");  
+        myFilterFilterRegistrationBean.setOrder(1); //数字越小优先级越高  
+        return myFilterFilterRegistrationBean;  
+    }  
+  
+  
+}
+```
+
+### 方式三：`@WebFilter` + `@ServletComponentScan`
+```java
+
+  
+@WebFilter(urlPatterns = "/*")  
+//@Component  
+public class MyFilter implements Filter {  
+  
+    @Override  
+    public void init(FilterConfig filterConfig) throws ServletException {  
+        System.out.println("过滤器初始化");  
+    }  
+  
+    @Override  
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)  
+            throws IOException, ServletException {  
+        HttpServletRequest req = (HttpServletRequest) request;  
+        System.out.println("请求进入过滤器：" + req.getRequestURI());  
+  
+        // 放行  
+        chain.doFilter(request, response);  
+  
+        System.out.println("响应返回过滤器");  
+    }  
+  
+    @Override  
+    public void destroy() {  
+        System.out.println("过滤器销毁");  
+    }  
+}
+```
+
+```java
+  
+@ServletComponentScan  
+@SpringBootApplication  
+public class DemoApplication {  
+  
+    public static void main(String[] args) {  
+        SpringApplication.run(DemoApplication.class, args);  
+    }  
+  
+}
+```
+
+
+### 记录请求耗时 实战 
 
 
 #### 1.定义一个过滤器类
@@ -218,23 +321,28 @@ AOP 针对 方法进行拦截
 继承Filter 类
 加上@WebFilter(urlPatterns = "/*") 注解  拦截所有请求
 ```java
-@WebFilter(urlPatterns = "/*")
-public class CorsFilter implements Filter {
+public class TimeFilter implements Filter {
+
     @Override
-    public void doFilter(ServletRequest req, ServletResponse res, FilterChain chain) 
-        throws IOException, ServletException {
-        HttpServletResponse response = (HttpServletResponse) res;
-        response.setHeader("Access-Control-Allow-Origin", "*");
-        response.setHeader("Access-Control-Allow-Methods", "GET,POST,PUT,DELETE,OPTIONS");
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Authorization");
-        chain.doFilter(req, res);
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
+            throws IOException, ServletException {
+        long start = System.currentTimeMillis();
+        HttpServletRequest req = (HttpServletRequest) request;
+
+        chain.doFilter(request, response);
+
+        long end = System.currentTimeMillis();
+        System.out.println(req.getRequestURI() + " 耗时：" + (end - start) + " ms");
     }
 }
 ```
 
+
 #### 2.springboot中注册过滤器
 
 ##### 方法一
+
+加@WebFilter注解在filter上
 
 ```java
 @SpringBootApplication
@@ -247,7 +355,7 @@ public class DemoApplication {
 ```
 
 ##### 方法二
-
+这种不需要@WebFilter注解
 ```java
 import org.springframework.boot.web.servlet.FilterRegistrationBean;
 import org.springframework.context.annotation.Bean;
@@ -266,3 +374,5 @@ public class FilterConfig {
     }
 }
 ```
+
+##### 方式三：加@Component注解
