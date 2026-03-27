@@ -14,7 +14,7 @@ scoop安装，使用。
 # scoop 
 
 
-## 放在最上面： 新电脑初始化步骤
+## 1 放在最上面： 新电脑初始化步骤
 ```
 # 1. 设置安装路径到 D 盘
 $env:SCOOP = 'D:\Scoop'
@@ -41,7 +41,7 @@ nvm use 20.20.0
 ```
 
 
-## 什么是scoop
+## 2 什么是scoop
 是windows 的一个命令行安装包管理器，使用命令行来安装软件，类似于linux的apt
 
 核心思路：
@@ -57,7 +57,7 @@ nvm use 20.20.0
 适用：
 - 开发人员 快速安装开发环境
 - 对系统洁癖的用户
-## 安装
+## 3 安装
 官方文档：[ScoopInstaller/Scoop：一款适用于 Windows 的命令行安装程序。](https://github.com/ScoopInstaller/Scoop)
 
 scoop会默认安装在 c盘用户目录下的scoop目录中，我们需要将其改到d盘再安装，节省c盘空间
@@ -74,7 +74,7 @@ scoop会默认安装在 c盘用户目录下的scoop目录中，我们需要将�
 
 安装完成后可以打开 D:\Scoop查看目录结构：	![image.png](https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218083841314.png)
 
-## 使用示例1：安装aria2
+## 4 使用示例1：安装aria2
 aria2是一个命令行下载工具，可以实现多连接下载
 
 如何使用scoop安装
@@ -85,7 +85,7 @@ aria2是一个命令行下载工具，可以实现多连接下载
 	`scoop install aria2`
 
 
-## 常用命令
+## 5 常用命令
 搜索软件:
 `scoop search <name>`
 
@@ -103,7 +103,7 @@ aria2是一个命令行下载工具，可以实现多连接下载
 `scoop update *`  更新所有已安装软件         或者      `scoop u *`
 
 
-## 软件仓库
+## 6 软件仓库
 ![image.png](https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218083841314.png)
 上图中的buckets就是软件仓库
 ![image.png](https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260218085034879.png)
@@ -112,14 +112,14 @@ aria2是一个命令行下载工具，可以实现多连接下载
 
 也就是说scoop官方只提供了main仓库，我们可以添加其他的软件仓库
 
-### scoop常用的软件仓库：
+### 6.1 scoop常用的软件仓库：
 - main: 默认源，命令行工具为主。
 - extras: 必加，包含常用 GUI 软件（Chrome, VSCode, 微信等）。
 - java: 各种版本的 JDK。
 - versions: 软件的历史旧版本。
 - nirsoft: NirSoft 工具集。
 
-### 管理仓库命令
+### 6.2 管理仓库命令
 添加仓库:
 	`scoop bucket add <name>`
 列出已添加的
@@ -132,7 +132,7 @@ aria2是一个命令行下载工具，可以实现多连接下载
 安装仓库的方式： 就是使用git clone
 
 
-## 使用示例2：安装java8
+## 7 使用示例2：安装java8
 1. 添加java仓库
 	`scoop bucket add java`
 2. 搜索
@@ -148,7 +148,7 @@ aria2是一个命令行下载工具，可以实现多连接下载
 不需要配置环境变量吗？
 不需要
 
-### 多版本java切换
+### 7.1 多版本java切换
 比如你又安装了一个openjdk21
 
 查看一下所有安装的jdk
