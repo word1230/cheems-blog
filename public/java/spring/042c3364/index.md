@@ -2,7 +2,7 @@
 
 IOC，DI，bean作用域。
 <!--more-->
-## IOC 是什么
+## 1 IOC 是什么
 
 IOC是控制反转，那什么是控制反转呢？
 
@@ -14,7 +14,7 @@ IOC是控制反转，那什么是控制反转呢？
 
 那控制反转就是这个意思：对于对象的控制权，由开发人员交给了容器
 
-### 为什么要控制反转呢
+### 1.1 为什么要控制反转呢
 
 让程序员自己来管理不行吗？为什么要让容器管理
 
@@ -157,7 +157,7 @@ public class ElectricMotor implements Engine {
 - 统一配置和管理
 - 方便单元测试
 
-## 如何实现IOC呢
+## 2 如何实现IOC呢
 
 这么一看IOC确实不错，那如何实现IOC呢
 那就是 依赖注入（DI）
@@ -178,7 +178,7 @@ DI有三种形式:
 
 还是上面的Car 的例子：
 
-### 通过构造起注入
+### 2.1 通过构造起注入
 
 1. 依旧先写Engine接口（跟上面一样，这里省略了）
 2. 然后定义一个V6engine实现类，交给ioc容器管理（同上）
@@ -213,7 +213,7 @@ public class Car {
 
 4.13 之前要使用一个注解 @Autowired
 
-### 通过Setter字段注入
+### 2.2 通过Setter字段注入
 
 前两步是一样的
 第三步：
@@ -245,7 +245,7 @@ public class Car {
 
 这里去掉了构造器， 使用setter方法，并在其上加了@Autowired注解
 
-### 通过字段注入
+### 2.3 通过字段注入
 
 ```java
 @Component
@@ -271,13 +271,13 @@ public class Car {
 
 你可以直接在字段上加 @Autowired 注解，来实现di
 
-### 总结一下DI的步骤
+### 2.4 总结一下DI的步骤
 
 1. 首先写一个接口
 2. 写一个实现， 并用@component注解标记
 3. 在需要注入的地方，使用@component + @Autowired
 
-### 问题1：如果两个类都用@component注解了，那@Autowired注入哪个
+### 2.5 问题1：如果两个类都用@component注解了，那@Autowired注入哪个
 
 两个类都用@component注解标记了，spring懵了，注入哪个呢？
 这时就会报错。
@@ -298,7 +298,7 @@ spring 的寻找逻辑是：
 4. 没叫名字？最后看看你的**变量名**是不是刚好碰上了 Bean 的名字。
 5. 都匹配不上？直接报错罢工。
 
-#### @Qualifier
+#### 2.5.1 @Qualifier
 
 1. 先写接口
 
@@ -370,7 +370,7 @@ public class Car {
 同样@Autowired 可以省略
 
 
-#### @Primary
+#### 2.5.2 @Primary
 
 1. 先写接口
 
@@ -415,7 +415,7 @@ public class ElectricMotor implements Engine {
 
 Car 类不变， 这样所有的Engine的注入都是ElectricMotor
 
-#### 通过字段推断
+#### 2.5.3 通过字段推断
 
 前两个步骤依旧：定义接口，定义实现类
 
@@ -451,7 +451,7 @@ public class Car {
 同样你也可以改 字段/setter里的参数都可以实现
 
 
-### 问题2 引入别人的包后，也希望使用ioc管理对方的类，但是不能动对方的源码，要如何做呢？
+### 2.6 问题2 引入别人的包后，也希望使用ioc管理对方的类，但是不能动对方的源码，要如何做呢？
 
 使用 `@Configuration` 和 `@Bean`
 
@@ -491,7 +491,7 @@ public class CarConfig {
 
 这个方法的返回值为 接口， 方法名为对象的名称，内部new 一个要让spring容器管理的对象
 
-## Bean的作用域
+## 3 Bean的作用域
 
 既然对象被容器管理了， 那容器里是 一个对象， 还是多个对象呢
 这就是Bean的作用域
@@ -502,7 +502,7 @@ public class CarConfig {
 2. 多例
 3. 针对web 的 request session等
 
-### 单例
+### 3.1 单例
 
 容器中的一个类，就只有一个对象，你在什么地方去注入，都是这个对象
 
@@ -528,7 +528,7 @@ public class ElectricMotor implements Engine {
 
 就是这个 @Scope("singleton")  但是因为是默认的，所以一般不会写出来
 
-### 多例
+### 3.2 多例
 
 容器中，一个类有多个对象。 每次注入都是一个全新的对象
 

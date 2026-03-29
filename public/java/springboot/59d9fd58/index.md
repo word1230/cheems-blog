@@ -1,0 +1,115 @@
+# 定时任务
+
+springboot中使用定时任务
+
+<!--more-->
+## 1 springboot中使用定时任务
+### 1.1 步骤
+
+#### 1.1.1 开启定时任务注解
+@EnableScheduling 
+
+```java
+@EnableScheduling  
+@SpringBootApplication  
+public class DemoApplication {  
+  
+    public static void main(String[] args) {  
+        SpringApplication.run(DemoApplication.class, args);  
+    }  
+  
+}
+```
+
+#### 1.1.2 编写任务
+
+在方法上加上Scheduled注解
+
+```java
+  
+@Component  
+public class MyTask {  
+  
+  
+    @Scheduled(fixedRate = 1000)      //每一秒执行一次  
+    public void run()  
+    {  
+        System.out.println("Hello World  fiexdRate");  
+    }  
+  
+    @Scheduled(fixedDelay = 5000)  //间隔5s执行一次  
+    public void run1()  
+    {  
+        System.out.println("Hello World  Delay");  
+    }  
+  
+    @Scheduled(initialDelay = 3000,fixedRate = 10000)  
+    public void run2()  
+    {  
+        System.out.println("Hello World  首次延迟3秒  FixedRate");  
+    }  
+  
+    @Scheduled(cron = "0 * * * * *")       //每分钟执行一次  
+    public void run3(){  
+        System.out.println("Corn");  
+    }  
+}
+```
+
+
+### 1.2 多线程任务
+
+spring的默认调度是单线程的
+如果多个任务，或者任务执行时间很长，可以使用线程池
+```java
+@Configuration  
+public class SchedulingConfig {  
+  
+    @Bean  
+    public ThreadPoolTaskScheduler taskScheduler() {  
+        ThreadPoolTaskScheduler scheduler = new ThreadPoolTaskScheduler();  
+        scheduler.setPoolSize(5);  
+        scheduler.setThreadNamePrefix("scheduled-task-");  
+        scheduler.initialize();  
+        return scheduler;  
+  
+    }  
+}
+```
+
+### 1.3 异步执行定时任务
+
+让定时任务并发执行
+
+#### 1.3.1 开启异步
+```java
+@Configuration  
+@EnableAsync  
+public class AsyncConfig {  
+}
+```
+
+#### 1.3.2 写异步定时任务
+```java
+@Component
+public class AsyncTask {
+
+    @Async
+    @Scheduled(fixedRate = 5000)
+    public void run() throws InterruptedException {
+        System.out.println("start");
+        Thread.sleep(8000);
+        System.out.println("end");
+    }
+}
+```
+
+
+
+
+
+---
+
+> 作者: cheems  
+> URL: http://localhost:1313/java/springboot/59d9fd58/  
+

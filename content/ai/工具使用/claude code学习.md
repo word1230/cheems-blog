@@ -522,8 +522,21 @@ subAgent 是 Claude Code 在执行主任务时，**动态派生出来的独立 C
 
 
 
-### 比较好玩的mcp
+
+
+
+
+### 7.1 比较好玩的mcp
+
+#### 通过mcp 调用其他ai
 通过mcp 去调用codex 写代码
+通过mcp 调用 grok 搜索  https://linux.do/t/topic/1674101
+
+
+### 操作数据库的mcp
+
+
+
 
 
 
@@ -775,7 +788,7 @@ Never write new code unless explicitly asked.
 
 
 ![image.png](https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260327102321641.png)
-ctrl +t 查看
+`ctrl +t` 查看 , `shift + 上下箭头` 选择,enter 查看单个成员在干啥
 ![image.png](https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260327102352164.png)
 
 a 已完成
@@ -843,7 +856,12 @@ a 已完成
 
 让外部事件(比如 telegram ) 直接触发claude code 执行任务 ,实现远程指挥
 
-### 配置一个telegram bot
+### 11.1 配置一个telegram bot
 
 
 ## 12 Plugins 插件
+
+
+## 13 总结出工作流
+要结合的功能
+- 

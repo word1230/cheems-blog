@@ -1,0 +1,105 @@
+{{- $params := .Params | merge .Site.Params.page -}}
+{{- $categories := .GetTerms "categories" -}}
+{{- $collections := .GetTerms "collections" -}}
+{{- $tagTerms := .GetTerms "tags" -}}
+{{- $image := $params.featuredimagepreview | default $params.featuredimage -}}
+{{- $matches := slice -}}
+{{- if .Resources.GetMatch "featured-image-preview" -}}
+  {{- $matches = $matches | append "featured-image-preview" -}}
+{{- else if .Resources.GetMatch "featured-image" -}}
+  {{- $matches = $matches | append "featured-image" -}}
+{{- end -}}
+
+{{- $summaryText := "" -}}
+{{- if .Summary -}}
+  {{- $summaryText = .Summary | plainify | htmlUnescape -}}
+{{- else if .Description -}}
+  {{- $summaryText = .Description | plainify | htmlUnescape -}}
+{{- else -}}
+  {{- $summaryText = .Plain | plainify | htmlUnescape -}}
+{{- end -}}
+{{- $summaryText = replaceRE `\s+` " " $summaryText | strings.TrimSpace -}}
+{{- if gt (len $summaryText) 160 -}}
+  {{- $summaryText = $summaryText | truncate 160 -}}
+{{- end -}}
+{{- if eq $summaryText "" -}}
+  {{- $summaryText = "点击进入阅读全文，查看完整内容。" -}}
+{{- end -}}
+
+<article class="single summary post-card" itemscope itemtype="http://schema.org/Article">
+  <div class="post-card-shell">
+    {{- if $image | or (gt (len $matches) 0) -}}
+      <div class="featured-image-preview">
+        <a href="{{ $.RelPermalink }}" aria-label="{{ $.Title }}">
+          {{- $optim := slice
+            (dict "Process" "fill 800x336 Center webp" "descriptor" "800w")
+            (dict "Process" "fill 1200x504 Center webp" "descriptor" "1200w")
+            (dict "Process" "fill 1600x672 Center webp" "descriptor" "1600w")
+          -}}
+          {{- dict "Src" $image "Title" $.Title "Resources" $.Resources "Matches" $matches "Loading" "lazy" "Width" "800" "Height" "336" "Sizes" "(max-width: 680px) 100vw, (max-width: 960px) 80vw, (max-width: 1440px) 56vw, 800px" "OptimConfig" $optim "Alt" (printf "Featured image for %v" $.Title) | partial "plugin/image.html" -}}
+        </a>
+      </div>
+    {{- end -}}
+
+    <div class="post-card-body">
+      <div class="post-card-top">
+        <div class="post-card-taxonomies">
+          {{- range first 1 $categories -}}
+            <a href="{{ partial `function/escapeurl.html` .RelPermalink }}" class="post-card-taxonomy post-card-taxonomy-category">
+              {{- dict "Class" "fa-regular fa-folder" | partial "plugin/icon.html" -}}
+              <span>{{ .LinkTitle }}</span>
+            </a>
+          {{- end -}}
+          {{- range first 1 $collections -}}
+            <a href="{{ partial `function/escapeurl.html` .RelPermalink }}" class="post-card-taxonomy post-card-taxonomy-collection">
+              {{- dict "Class" "fa-solid fa-layer-group" | partial "plugin/icon.html" -}}
+              <span>{{ .LinkTitle }}</span>
+            </a>
+          {{- end -}}
+        </div>
+
+        <div class="post-card-meta">
+          <span class="post-card-meta-item">
+            {{- dict "Class" "fa-regular fa-calendar" | partial "plugin/icon.html" -}}
+            <time datetime="{{ .PublishDate.Format `2006-01-02` }}">{{ .PublishDate | dateFormat (.Site.Params.dateFormat | default "2006-01-02") }}</time>
+          </span>
+          <span class="post-card-meta-item">
+            {{- dict "Class" "fa-regular fa-clock" | partial "plugin/icon.html" -}}
+            <span>约 {{ .ReadingTime }} 分钟</span>
+          </span>
+        </div>
+      </div>
+
+      <h2 class="single-title" itemprop="name headline">
+        {{- with $params.weight -}}
+          <span title="{{ T `single.pin` }}" class="icon-pin">{{- dict "Class" "fa-solid fa-thumbtack" | partial "plugin/icon.html" -}}</span>
+        {{- end -}}
+        <a href="{{ .RelPermalink }}">{{ cond (.Param "capitalizeTitles") (title .Title) .Title }}</a>
+      </h2>
+
+      <div class="content">
+        <p>{{ $summaryText }}</p>
+      </div>
+
+      <div class="post-footer">
+        {{- if $tagTerms -}}
+          <div class="post-tags">
+            {{- range first 3 $tagTerms -}}
+              <a href="{{ partial `function/escapeurl.html` .RelPermalink }}" class="post-tag">{{ .LinkTitle }}</a>
+            {{- end -}}
+          </div>
+        {{- else -}}
+          <div class="post-tags post-tags-empty">
+            <span>持续整理中</span>
+          </div>
+        {{- end -}}
+
+        <a class="post-card-link" href="{{ .RelPermalink }}">
+          <span>{{ T "single.readMore" }}</span>
+          {{- dict "Class" "fa-solid fa-arrow-right" | partial "plugin/icon.html" -}}
+        </a>
+      </div>
+    </div>
+  </div>
+</article>
+{{- /* EOF */ -}}

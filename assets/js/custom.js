@@ -1,0 +1,54 @@
+(() => {
+  const closeDesktopMenus = (exceptItem = null) => {
+    document.querySelectorAll('#header-desktop .menu-item.has-children.is-open').forEach((item) => {
+      if (item === exceptItem) return;
+      item.classList.remove('is-open');
+      const button = item.querySelector('.menu-toggle-link');
+      const submenu = item.querySelector('.sub-menu');
+      if (button) button.setAttribute('aria-expanded', 'false');
+      if (submenu) submenu.classList.remove('open');
+    });
+  };
+
+  const syncToggleState = (button, open) => {
+    button.setAttribute('aria-expanded', String(open));
+    const icon = button.querySelector('.dropdown-icon');
+    if (icon) icon.classList.toggle('open', open);
+  };
+
+  document.querySelectorAll('.menu-item.has-children > .menu-parent > .menu-toggle-link').forEach((button) => {
+    const item = button.closest('.menu-item.has-children');
+    const submenu = item?.querySelector('.sub-menu');
+    const inDesktopHeader = Boolean(button.closest('#header-desktop'));
+    if (!item || !submenu) return;
+
+    button.addEventListener('click', (event) => {
+      event.preventDefault();
+      event.stopPropagation();
+
+      if (inDesktopHeader) {
+        const open = !item.classList.contains('is-open');
+        closeDesktopMenus(item);
+        item.classList.toggle('is-open', open);
+        syncToggleState(button, open);
+        return;
+      }
+
+      const open = !submenu.classList.contains('open');
+      submenu.classList.toggle('open', open);
+      syncToggleState(button, open);
+    });
+  });
+
+  document.addEventListener('click', (event) => {
+    if (!event.target.closest('#header-desktop .menu-item.has-children')) {
+      closeDesktopMenus();
+    }
+  });
+
+  document.addEventListener('keydown', (event) => {
+    if (event.key === 'Escape') {
+      closeDesktopMenus();
+    }
+  });
+})();

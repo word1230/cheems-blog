@@ -1,0 +1,124 @@
+{{- define "title" -}}
+  {{- .Site.Title -}}
+  {{- if .Site.Params.indexWithSubtitle | and .Site.Params.header.subtitle.name -}}
+    {{- printf " - %v" .Site.Params.header.subtitle.name -}}
+  {{- end -}}
+{{- end -}}
+
+{{- define "content" -}}
+  {{- $params := partial "function/params.html" -}}
+  {{- $posts := .Site.Params.home.posts -}}
+  {{- $allPages := .Site.Store.Get "mainSectionPages" -}}
+  {{- $lead := .Site.Params.description | default "记录开发过程中的实践、踩坑与工具经验，让零散问题沉淀成可复用的知识。" -}}
+  {{- $latest := false -}}
+  {{- $pageNumber := 1 -}}
+
+  {{- if .Site.Params.page.hiddenFromHomePage -}}
+    {{- $allPages = where $allPages "Params.hiddenfromhomepage" false -}}
+  {{- else -}}
+    {{- $allPages = where $allPages "Params.hiddenfromhomepage" "!=" true -}}
+  {{- end -}}
+  {{- if gt (len $allPages) 0 -}}
+    {{- $latest = index $allPages 0 -}}
+  {{- end -}}
+
+  {{- $pages := slice -}}
+  {{- if ne $posts.enable false -}}
+    {{- with $posts.paginate | default .Site.Params.paginate -}}
+      {{- $pages = $.Paginate $allPages . -}}
+    {{- else -}}
+      {{- $pages = .Paginate $allPages -}}
+    {{- end -}}
+    {{- $pageNumber = $pages.PageNumber -}}
+  {{- end -}}
+
+  <div class="page home{{ if ne $posts.enable false }} posts{{ end }} home-layout">
+    {{- if eq $pageNumber 1 -}}
+      <section class="home-hero">
+        <div class="home-hero-copy">
+          <p class="home-hero-kicker">Personal Engineering Notebook</p>
+          <h1 class="home-hero-title">{{ .Site.Title }}</h1>
+          <p class="home-hero-lead">{{ $lead }}</p>
+          <div class="home-hero-actions">
+            <a class="home-action home-action-primary" href="{{ relLangURL `archives/` }}">浏览时间轴</a>
+            <a class="home-action home-action-secondary" href="{{ relLangURL `collections/` }}">进入系列</a>
+          </div>
+        </div>
+
+        <div class="home-hero-panel">
+          {{- with $latest -}}
+            <a class="home-latest-card" href="{{ .RelPermalink }}">
+              <span class="home-panel-label">最近更新</span>
+              <strong>{{ cond (.Param "capitalizeTitles") (title .Title) .Title }}</strong>
+              <span class="home-latest-meta">
+                <time datetime="{{ .Lastmod.Format `2006-01-02` }}">{{ .Lastmod | dateFormat (.Site.Params.dateFormat | default "2006-01-02") }}</time>
+                <span>约 {{ .ReadingTime }} 分钟</span>
+              </span>
+            </a>
+          {{- end -}}
+
+          <div class="home-stat-grid">
+            <div class="home-stat-card">
+              <span class="home-panel-label">文章</span>
+              <strong>{{ len $allPages }}</strong>
+            </div>
+            <div class="home-stat-card">
+              <span class="home-panel-label">分类</span>
+              <strong>{{ len .Site.Taxonomies.categories }}</strong>
+            </div>
+            <div class="home-stat-card">
+              <span class="home-panel-label">系列</span>
+              <strong>{{ len .Site.Taxonomies.collections }}</strong>
+            </div>
+          </div>
+
+          {{- with .Site.Taxonomies.collections -}}
+            <div class="home-focus-block">
+              <span class="home-panel-label">高频系列</span>
+              <div class="home-focus-list">
+                {{- range first 4 .ByCount -}}
+                  <a class="home-focus-chip" href="{{ .Page.RelPermalink }}">
+                    <span>{{ .Page.LinkTitle }}</span>
+                    <strong>{{ .Count }}</strong>
+                  </a>
+                {{- end -}}
+              </div>
+            </div>
+          {{- end -}}
+        </div>
+      </section>
+
+      {{- if .Content -}}
+        <div class="home-intro single">
+          <div class="content" id="content">
+            {{- dict "Content" .Content "Ruby" $params.ruby "Fraction" $params.fraction "Fontawesome" $params.fontawesome | partial "function/content.html" | safeHTML -}}
+          </div>
+        </div>
+      {{- end -}}
+    {{- end -}}
+
+    {{- if ne $posts.enable false -}}
+      <section class="home-feed-shell">
+        <div class="home-feed-head">
+          <div>
+            <p class="home-feed-kicker">Latest Notes</p>
+            <h2 class="home-feed-title">{{ if gt $pageNumber 1 }}文章归档 · 第 {{ $pageNumber }} 页{{ else }}最新文章{{ end }}</h2>
+          </div>
+          <div class="home-feed-links">
+            <a href="{{ relLangURL `tags/` }}">标签</a>
+            <a href="{{ relLangURL `categories/` }}">分类</a>
+            <a href="{{ relLangURL `collections/` }}">系列</a>
+          </div>
+        </div>
+
+        <div class="home-post-grid">
+          {{- range $pages.Pages -}}
+            {{- .Render "summary" -}}
+          {{- end -}}
+        </div>
+
+        {{- partial "paginator.html" . -}}
+      </section>
+    {{- end -}}
+  </div>
+{{- end -}}

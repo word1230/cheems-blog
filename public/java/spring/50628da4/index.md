@@ -3,7 +3,7 @@
 
 <!--more-->
 
-## 代理
+## 1 代理
 
 AOP 就是通过代理来实现的
 
@@ -17,7 +17,7 @@ AOP 就是通过代理来实现的
 
 
 
-### 静态代理
+### 1.1 静态代理
 
 特征：在编译时就已经写好了
 
@@ -78,7 +78,7 @@ proxy.save();
 
 
 
-### 动态代理
+### 1.2 动态代理
 
 特征： 运行时生成代理类
 
@@ -113,7 +113,7 @@ java中有两种实现：
 
 
 
-#### jdk动态代理
+#### 1.2.1 jdk动态代理
 
 例如：
 
@@ -175,7 +175,7 @@ public class MyInvocationHandler implements InvocationHandler {
 
 
 
-## AOP本质
+## 2 AOP本质
 
 AOP 本质：
 
@@ -196,7 +196,7 @@ spring 在bean实例化时，发现有AOP代理逻辑，返回了代理对象
 
 
 
-## spring事务与AOP
+## 3 spring事务与AOP
 
 @Transactional  事务 就是使用AOP来实现的
 
@@ -245,11 +245,11 @@ public void transferMoney() {
 
 
 
-### 事务失效
+### 3.1 事务失效
 
  `@Transactional` 的底层是 **AOP 动态代理**
 
-那么ve'ge同类内部方法调用，事务会失效！
+那么这个问题：同类内部方法调用，事务会失效！
 
 ```java
 @Service
