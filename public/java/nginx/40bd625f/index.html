@@ -1,312 +1,744 @@
-<!doctype html><html itemscope itemtype=http://schema.org/WebPage lang=zh-CN><head><meta charset=utf-8><meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=2"><meta name=robots content="noodp"><title>Nginx入门 - Cheems Blog</title><meta name=author content="cheems"><meta name=description content="记录开发过程中的实践、踩坑与工具经验，让零散问题沉淀成可复用的知识。"><meta itemprop=name content="Nginx入门"><meta itemprop=description content="记录开发过程中的实践、踩坑与工具经验，让零散问题沉淀成可复用的知识。"><meta itemprop=datePublished content="2026-02-25T10:55:10+08:00"><meta itemprop=dateModified content="2026-03-22T19:55:26+08:00"><meta itemprop=wordCount content="2283"><meta itemprop=keywords content="Java,Nginx"><meta property="og:url" content="http://localhost:1313/java/nginx/40bd625f/"><meta property="og:site_name" content="Cheems Blog"><meta property="og:title" content="Nginx入门"><meta property="og:description" content="记录开发过程中的实践、踩坑与工具经验，让零散问题沉淀成可复用的知识。"><meta property="og:locale" content="zh_CN"><meta property="og:type" content="article"><meta property="article:section" content="java"><meta property="article:published_time" content="2026-02-25T10:55:10+08:00"><meta property="article:modified_time" content="2026-03-22T19:55:26+08:00"><meta name=twitter:card content="summary"><meta name=twitter:title content="Nginx入门"><meta name=twitter:description content="记录开发过程中的实践、踩坑与工具经验，让零散问题沉淀成可复用的知识。"><meta name=application-name content="Cheems Blog"><meta name=apple-mobile-web-app-title content="Cheems Blog"><meta name=theme-color data-light=#f8f8f8 data-dark=#252627 content="#f8f8f8"><meta name=msapplication-TileColor content="#da532c"><link rel="shortcut icon" type=image/x-icon href=/favicon.ico><link rel=canonical type=text/html href=http://localhost:1313/java/nginx/40bd625f/ title="Nginx入门 - Cheems Blog"><link rel=prev type=text/html href=http://localhost:1313/java/spring/50628da4/ title=AOP进阶><link rel=next type=text/html href=http://localhost:1313/%E8%A7%82%E7%9C%8B%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/8a3350e3/ title=自慰影响身体的机制><link rel=alternate type=text/markdown href=http://localhost:1313/java/nginx/40bd625f/index.md title="Nginx入门 - Cheems Blog"><link rel=stylesheet href=/css/config.min.d474c59e6577d6c1d91f85fcb9cc3fc330351929b88245d1f4a36b26df312de3.css integrity="sha256-1HTFnmV31sHZH4X8ucw/wzA1GSm4gkXR9KNrJt8xLeM="><link rel=stylesheet href=/css/style.min.b8376e16139aa10fcbf3ff080380205d58d3f4a2e00131165e8e5639af2c5e19.css integrity="sha256-uDduFhOaoQ/L8/8IA4AgXVjT9KLgATEWXo5WOa8sXhk="><link rel=preload href=/lib/fontawesome-free/all.min.961db4b355491b4bcd300fb6af555f05b7fafd1110b79adeac830ca5bee19d72.css integrity="sha256-lh20s1VJG0vNMA+2r1VfBbf6/REQt5rerIMMpb7hnXI=" as=style onload='this.removeAttribute("onload"),this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/fontawesome-free/all.min.961db4b355491b4bcd300fb6af555f05b7fafd1110b79adeac830ca5bee19d72.css integrity="sha256-lh20s1VJG0vNMA+2r1VfBbf6/REQt5rerIMMpb7hnXI="></noscript><link rel=preload href=/lib/animate/animate.min.a61e123314188bd0453320008e01b4bbb665bee09039f4cbd9bef44de410ce67.css integrity="sha256-ph4SMxQYi9BFMyAAjgG0u7ZlvuCQOfTL2b70TeQQzmc=" as=style onload='this.removeAttribute("onload"),this.rel="stylesheet"'><noscript><link rel=stylesheet href=/lib/animate/animate.min.a61e123314188bd0453320008e01b4bbb665bee09039f4cbd9bef44de410ce67.css integrity="sha256-ph4SMxQYi9BFMyAAjgG0u7ZlvuCQOfTL2b70TeQQzmc="></noscript><script type=application/ld+json>{"@context":"http://schema.org","@type":"BlogPosting","headline":"Nginx入门","inLanguage":"zh-CN","mainEntityOfPage":{"@type":"WebPage","@id":"http:\/\/localhost:1313\/java\/nginx\/40bd625f\/"},"genre":"posts","wordcount":2283,"url":"http:\/\/localhost:1313\/java\/nginx\/40bd625f\/","datePublished":"2026-02-25T10:55:10+08:00","dateModified":"2026-03-22T19:55:26+08:00","publisher":{"@type":"Organization","name":""},"author":{"@type":"Person","name":"cheems"},"description":""}</script><script src=/js/head/color-scheme.min.69f5cf37e9eb7ae9de2a537ee9a73161155340dc71103ddd157f324edef64758.js integrity="sha256-afXPN+nreuneKlN+6acxYRVTQNxxED3dFX8yTt72R1g="></script></head><body data-instant-intensity=viewport data-header-desktop=sticky data-header-mobile=auto><div class=wrapper data-page-style=normal><header class="desktop animate__faster" id=header-desktop><div class=header-wrapper><div class=header-title><a href=/ title="Cheems Blog"><span class=header-title-text>Cheems Blog</span></a><span class=header-subtitle></span></div><nav><ul class=menu><li class=menu-item><a class=menu-link href=/archives/><i class="fa-solid fa-archive fa-sm" aria-hidden=true></i> 时间轴</a></li><li class="menu-item has-children"><div class=menu-parent><a class=menu-link href=/collections/><i class="fa-solid fa-bars fa-sm" aria-hidden=true></i> 系列</a>
-<button class=menu-toggle-link type=button aria-label="Toggle 系列 submenu" aria-haspopup=true aria-expanded=false aria-controls=menu-desktop-collections>
-<i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden=true></i></button></div><ul class=sub-menu id=menu-desktop-collections><li class=menu-item><a class=menu-link href=/categories/><i class="fa-solid fa-folder-tree fa-sm" aria-hidden=true></i> 分类</a></li><li class=menu-item><a class=menu-link href=/tags/><i class="fa-solid fa-tags fa-sm" aria-hidden=true></i> 标签</a></li></ul></li><li class="menu-item delimiter"></li><li class="menu-item search" id=search-desktop><input type=text placeholder=搜索文章标题或内容…… id=search-input-desktop>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-desktop title=搜索><i class="fa-solid fa-search" aria-hidden=true></i>
-</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-desktop title=清空><i class="fa-solid fa-times-circle" aria-hidden=true></i>
-</a><span class="search-button search-loading" id=search-loading-desktop><i class="fa-solid fa-spinner fa-spin" aria-hidden=true></i></span></li><li class="menu-item theme-switch" role=button aria-label=切换主题 title=切换主题><i class="fa-solid fa-adjust" aria-hidden=true></i></li></ul></nav></div></header><header class="mobile animate__faster" id=header-mobile><div class=header-container><div class=header-wrapper><div class=header-title><a href=/ title="Cheems Blog"><span class=header-title-text>Cheems Blog</span></a><span class=header-subtitle></span></div><div class=theme-switch role=button aria-label=切换主题><i class="fa-solid fa-adjust" aria-hidden=true></i></div><div class=menu-toggle id=menu-toggle-mobile role=button aria-labelledby=menu-mobile><span></span><span></span><span></span></div></div><nav><ul class=menu id=menu-mobile><li class=search-wrapper><div class="search mobile" id=search-mobile><input type=text placeholder=搜索文章标题或内容…… id=search-input-mobile>
-<a href=javascript:void(0); class="search-button search-toggle" id=search-toggle-mobile title=搜索><i class="fa-solid fa-search" aria-hidden=true></i>
-</a><a href=javascript:void(0); class="search-button search-clear" id=search-clear-mobile title=清空><i class="fa-solid fa-times-circle" aria-hidden=true></i>
-</a><span class="search-button search-loading" id=search-loading-mobile><i class="fa-solid fa-spinner fa-spin" aria-hidden=true></i></span></div><a href=javascript:void(0); class=search-cancel id=search-cancel-mobile>取消</a></li><li class=menu-item><a class=menu-link href=/archives/><i class="fa-solid fa-archive fa-sm" aria-hidden=true></i> 时间轴</a></li><li class="menu-item has-children"><div class=menu-parent><a class=menu-link href=/collections/><i class="fa-solid fa-bars fa-sm" aria-hidden=true></i> 系列</a>
-<button class=menu-toggle-link type=button aria-label="Toggle 系列 submenu" aria-haspopup=true aria-expanded=false aria-controls=menu-mobile-collections>
-<i class="dropdown-icon fa-solid fa-chevron-right" aria-hidden=true></i></button></div><ul class=sub-menu id=menu-mobile-collections><li class=menu-item><a class=menu-link href=/categories/><i class="fa-solid fa-folder-tree fa-sm" aria-hidden=true></i> 分类</a></li><li class=menu-item><a class=menu-link href=/tags/><i class="fa-solid fa-tags fa-sm" aria-hidden=true></i> 标签</a></li></ul></li><li class="menu-item menu-system"></li></ul></nav></div></header><div class="search-dropdown desktop"><div id=search-dropdown-desktop></div></div><div class="search-dropdown mobile"><div id=search-dropdown-mobile></div></div><main class=fi-container><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label=合集></aside><article class="page single"><div class=header><h1 class="single-title animate__animated animate__flipInX"><span>Nginx入门</span></h1></div><div class=post-meta><div class=post-meta-line><span class=post-author><span class=author><i class="fa-solid fa-user-circle" aria-hidden=true></i>
-cheems</span></span><span class=post-included-in>&nbsp;收录于 <a href=/categories/java/ class=post-category title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden=true></i> Java</a> 和 <a href=/collections/nginx/ class=post-collection title="合集 - Nginx"><i class="fa-solid fa-layer-group" aria-hidden=true></i> Nginx</a></span></div><div class=post-meta-line><span title="发布于 2026-02-25 10:55:10"><i class="fa-solid fa-calendar-days me-1" aria-hidden=true></i><time datetime=2026-02-25>2026-02-25</time></span>&nbsp;<span title="更新于 2026-03-22 19:55:26"><i class="fa-regular fa-calendar-check me-1" aria-hidden=true></i><time datetime=2026-03-22>2026-03-22</time></span>&nbsp;<span title="2283 字"><i class="fa-solid fa-pencil-alt me-1" aria-hidden=true></i>约 2300 字</span>&nbsp;<span><i class="fa-regular fa-clock me-1" aria-hidden=true></i>预计阅读 5 分钟</span>&nbsp;</div></div><div class="details toc" id=toc-static data-kept=false><div class="details-summary toc-title"><span>目录</span>
-<span><i class="details-icon fa-solid fa-angle-right" aria-hidden=true></i></span></div><div class="details-content toc-content" id=toc-content-static><nav id=TableOfContents><ul><li><a href=#1-什么是nginx--what>1 什么是nginx &ndash; what</a><ul><li><a href=#11-什么是反向代理>1.1 什么是反向代理</a></li></ul></li><li><a href=#2-为什么需要nginx--why>2 为什么需要nginx &ndash; why</a></li><li><a href=#3-nginx命令>3 nginx命令</a></li><li><a href=#4-nginx-要如何使用呢--how>4 nginx 要如何使用呢 &ndash; how</a><ul><li><a href=#41-nginx-的配置文件>4.1 nginx 的配置文件</a><ul><li><a href=#411-配置文件的层级>4.1.1 配置文件的层级：</a></li><li><a href=#412-全局块>4.1.2 全局块：</a></li><li><a href=#413-event块>4.1.3 event块：</a></li><li><a href=#414-http块>4.1.4 http块：</a></li><li><a href=#415-server块和location块>4.1.5 server块和location块：</a></li></ul></li><li><a href=#42-实战>4.2 实战</a><ul><li><a href=#421-http反向代理配置实战>4.2.1 http反向代理配置实战</a></li><li><a href=#422-负载均衡配置实战>4.2.2 负载均衡配置实战</a></li><li><a href=#423-静态页面配置>4.2.3 静态页面配置</a></li></ul></li></ul></li></ul></nav></div></div><div class=content id=content><h2 class=heading-element id=1-什么是nginx--what><span>1 什么是nginx &ndash; what</span>
-<a href=#1-%e4%bb%80%e4%b9%88%e6%98%afnginx--what class=heading-mark><svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5.0 114.95 4.95l-2.5 2.5a3.5 3.5.0 01-4.95.0.751.751.0 01.018-1.042.751.751.0 011.042-.018 1.998 1.998.0 002.83.0l2.5-2.5a2.002 2.002.0 00-2.83-2.83l-1.25 1.25a.751.751.0 01-1.042-.018.751.751.0 01-.018-1.042zm-4.69 9.64a1.998 1.998.0 002.83.0l1.25-1.25a.751.751.0 011.042.018.751.751.0 01.018 1.042l-1.25 1.25a3.5 3.5.0 11-4.95-4.95l2.5-2.5a3.5 3.5.0 014.95.0.751.751.0 01-.018 1.042.751.751.0 01-1.042.018 1.998 1.998.0 00-2.83.0l-2.5 2.5a1.998 1.998.0 000 2.83z"/></svg></a></h2><p>nginx 是 一个 轻量，高性能 ，http， 反向代理服务器</p><h3 class=heading-element id=11-什么是反向代理><span>1.1 什么是反向代理</span>
-<a href=#11-%e4%bb%80%e4%b9%88%e6%98%af%e5%8f%8d%e5%90%91%e4%bb%a3%e7%90%86 class=heading-mark><svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5.0 114.95 4.95l-2.5 2.5a3.5 3.5.0 01-4.95.0.751.751.0 01.018-1.042.751.751.0 011.042-.018 1.998 1.998.0 002.83.0l2.5-2.5a2.002 2.002.0 00-2.83-2.83l-1.25 1.25a.751.751.0 01-1.042-.018.751.751.0 01-.018-1.042zm-4.69 9.64a1.998 1.998.0 002.83.0l1.25-1.25a.751.751.0 011.042.018.751.751.0 01.018 1.042l-1.25 1.25a3.5 3.5.0 11-4.95-4.95l2.5-2.5a3.5 3.5.0 014.95.0.751.751.0 01-.018 1.042.751.751.0 01-1.042.018 1.998 1.998.0 00-2.83.0l-2.5 2.5a1.998 1.998.0 000 2.83z"/></svg></a></h3><p>代理可以类比中介，你租房子，不是直接找房主，而是找中介。中介帮你去与房主交涉</p><p>正向代理：是客户端进行代理，客户端<mark class=mark-default>知道</mark>自己进行了代理，客户端将数据发送给了代理服务器，代理服务器转发给真实服务器。真实服务器<mark class=mark-default>不知道</mark>有代理服务器，以为代理服务器就是客户端。 这就是正向代理。 类比海外代购</p><p>反向代理： 是服务端的代理，客户端<mark class=mark-default>不知道</mark>有代理服务器，以为自己访问的是真实服务器，实际上访问的是代理服务器。</p><p>正向代理的好处：帮你做你不能做的事</p><p>反向代理的好处： 隐藏真实地址，负载均衡。</p><h2 class=heading-element id=2-为什么需要nginx--why><span>2 为什么需要nginx &ndash; why</span>
-<a href=#2-%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9c%80%e8%a6%81nginx--why class=heading-mark><svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5.0 114.95 4.95l-2.5 2.5a3.5 3.5.0 01-4.95.0.751.751.0 01.018-1.042.751.751.0 011.042-.018 1.998 1.998.0 002.83.0l2.5-2.5a2.002 2.002.0 00-2.83-2.83l-1.25 1.25a.751.751.0 01-1.042-.018.751.751.0 01-.018-1.042zm-4.69 9.64a1.998 1.998.0 002.83.0l1.25-1.25a.751.751.0 011.042.018.751.751.0 01.018 1.042l-1.25 1.25a3.5 3.5.0 11-4.95-4.95l2.5-2.5a3.5 3.5.0 014.95.0.751.751.0 01-.018 1.042.751.751.0 01-1.042.018 1.998 1.998.0 00-2.83.0l-2.5 2.5a1.998 1.998.0 000 2.83z"/></svg></a></h2><p>既然django，tomcat都能提供web服务，为什么还需要nginx？</p><br><p>虽然这些服务器可以提供web服务，但是他们更擅长处理后端逻辑。而nginx更擅长处理网络流量。专业的事交给专业的人。</p><br><p>nginx擅长处理网络流量的体现：</p><ol><li><p>nginx高并发能力强，处理特别快</p><ol><li>nginx事件驱动机制，底层采用多路复用技术，一个worker可以在一个线程中处理数万个连接</li><li>master-worker进程模型：<ol><li>master进程： 主进程，主要处理配置文件，管理worker</li><li>worker进程：可以有多个，处理网络请求</li></ol></li></ol></li><li><p>支持反代</p></li><li><p>支持负载均衡</p></li><li><p>处理静态文件极快</p></li></ol><h2 class=heading-element id=3-nginx命令><span>3 nginx命令</span>
-<a href=#3-nginx%e5%91%bd%e4%bb%a4 class=heading-mark><svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5.0 114.95 4.95l-2.5 2.5a3.5 3.5.0 01-4.95.0.751.751.0 01.018-1.042.751.751.0 011.042-.018 1.998 1.998.0 002.83.0l2.5-2.5a2.002 2.002.0 00-2.83-2.83l-1.25 1.25a.751.751.0 01-1.042-.018.751.751.0 01-.018-1.042zm-4.69 9.64a1.998 1.998.0 002.83.0l1.25-1.25a.751.751.0 011.042.018.751.751.0 01.018 1.042l-1.25 1.25a3.5 3.5.0 11-4.95-4.95l2.5-2.5a3.5 3.5.0 014.95.0.751.751.0 01-.018 1.042.751.751.0 01-1.042.018 1.998 1.998.0 00-2.83.0l-2.5 2.5a1.998 1.998.0 000 2.83z"/></svg></a></h2><p>环境 ： debian 12</p><ol><li>安装： <code>apt install nginx -y</code></li><li>启动： <code>systemctl start nginx</code></li><li>打开防火墙： <code>ufw allow 'nginx full'</code><ol><li><code>ufw reload</code></li></ol></li><li>重启nginx： <code>systemctl reload nginx</code></li><li>检查语法： <code>nginx -t</code></li></ol><h2 class=heading-element id=4-nginx-要如何使用呢--how><span>4 nginx 要如何使用呢 &ndash; how</span>
-<a href=#4-nginx-%e8%a6%81%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8%e5%91%a2--how class=heading-mark><svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5.0 114.95 4.95l-2.5 2.5a3.5 3.5.0 01-4.95.0.751.751.0 01.018-1.042.751.751.0 011.042-.018 1.998 1.998.0 002.83.0l2.5-2.5a2.002 2.002.0 00-2.83-2.83l-1.25 1.25a.751.751.0 01-1.042-.018.751.751.0 01-.018-1.042zm-4.69 9.64a1.998 1.998.0 002.83.0l1.25-1.25a.751.751.0 011.042.018.751.751.0 01.018 1.042l-1.25 1.25a3.5 3.5.0 11-4.95-4.95l2.5-2.5a3.5 3.5.0 014.95.0.751.751.0 01-.018 1.042.751.751.0 01-1.042.018 1.998 1.998.0 00-2.83.0l-2.5 2.5a1.998 1.998.0 000 2.83z"/></svg></a></h2><p>nginx的 功能：</p><ol><li>反向代理</li><li>负载均衡</li><li>处理静态资源很快</li></ol><h3 class=heading-element id=41-nginx-的配置文件><span>4.1 nginx 的配置文件</span>
-<a href=#41-nginx-%e7%9a%84%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6 class=heading-mark><svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5.0 114.95 4.95l-2.5 2.5a3.5 3.5.0 01-4.95.0.751.751.0 01.018-1.042.751.751.0 011.042-.018 1.998 1.998.0 002.83.0l2.5-2.5a2.002 2.002.0 00-2.83-2.83l-1.25 1.25a.751.751.0 01-1.042-.018.751.751.0 01-.018-1.042zm-4.69 9.64a1.998 1.998.0 002.83.0l1.25-1.25a.751.751.0 011.042.018.751.751.0 01.018 1.042l-1.25 1.25a3.5 3.5.0 11-4.95-4.95l2.5-2.5a3.5 3.5.0 014.95.0.751.751.0 01-.018 1.042.751.751.0 01-1.042.018 1.998 1.998.0 00-2.83.0l-2.5 2.5a1.998 1.998.0 000 2.83z"/></svg></a></h3><p>nginx的配置文件有两种写法：</p><ul><li>所有的配置写到一个文件中</li><li>分两个文件写： 一个是主配置文件，一个模块配置文件</li></ul><p><mark class=mark-default>其实对后端来讲：也就部署网站会用，配置文件看得懂就行，不会让AI改就完了，所以这一部分可以先过，直接看实战</mark><br><br></p><h4 class=heading-element id=411-配置文件的层级><span>4.1.1 配置文件的层级：</span>
-<a href=#411-%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6%e7%9a%84%e5%b1%82%e7%ba%a7 class=heading-mark><svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5.0 114.95 4.95l-2.5 2.5a3.5 3.5.0 01-4.95.0.751.751.0 01.018-1.042.751.751.0 011.042-.018 1.998 1.998.0 002.83.0l2.5-2.5a2.002 2.002.0 00-2.83-2.83l-1.25 1.25a.751.751.0 01-1.042-.018.751.751.0 01-.018-1.042zm-4.69 9.64a1.998 1.998.0 002.83.0l1.25-1.25a.751.751.0 011.042.018.751.751.0 01.018 1.042l-1.25 1.25a3.5 3.5.0 11-4.95-4.95l2.5-2.5a3.5 3.5.0 014.95.0.751.751.0 01-.018 1.042.751.751.0 01-1.042.018 1.998 1.998.0 00-2.83.0l-2.5 2.5a1.998 1.998.0 000 2.83z"/></svg></a></h4><div class="code-block highlight" data-mode=classic data-copyable=true><div class=chroma><div class="code-header language-txt"><span class=code-title><i class="arrow fa-solid fa-chevron-down" aria-hidden=true></i></span><span class=ellipses-btn aria-label="Show more options" role=button><i class="fa-solid fa-ellipsis-h" aria-hidden=true></i></span><span class=line-nos-btn aria-label=切换行号 role=button title=切换行号><i class="fa-solid fa-list-ol" aria-hidden=true></i></span><span class=line-wrap-btn aria-label=切换自动换行 role=button title=切换自动换行><i class="fa-solid fa-right-left" aria-hidden=true></i></span><span class=copy-btn aria-label=复制到剪贴板 role=button title=复制到剪贴板><i class="fa-regular fa-clone" aria-hidden=true></i></span></div><div class=code-wrapper data-max=10 data-line-digit=2 style=--fi-max-shown-lines:10;--fi-line-digit:2;--fi-line-start:1><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-txt data-lang=txt><span class=line><span class=cl>全局块
-</span></span><span class=line><span class=cl>event块
-</span></span><span class=line><span class=cl>http块
-</span></span><span class=line><span class=cl>	-http全局配置
-</span></span><span class=line><span class=cl>	-upstream块
-</span></span><span class=line><span class=cl>	-server块
-</span></span><span class=line><span class=cl>		-server全局配置
-</span></span><span class=line><span class=cl>		-location块
-</span></span><span class=line><span class=cl>			location配置指令
-</span></span><span class=line><span class=cl>mail块</span></span></code></pre></td></tr></table></div></div></div><p>如果是将所有配置写到一个文件的写法，就是将这些块都写到一个文件中<br>如果是 模块化的配置方法：</p><ul><li>全局，event，http块里的配置等 写到一个文件中，同时在这个文件中导入模块配置文件<ul><li><code>include /etc/nginx/conf.d/*.conf;</code></li></ul></li><li>在模块配置文件中， 写 upstream块，server块等</li></ul><h4 class=heading-element id=412-全局块><span>4.1.2 全局块：</span>
-<a href=#412-%e5%85%a8%e5%b1%80%e5%9d%97 class=heading-mark><svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5.0 114.95 4.95l-2.5 2.5a3.5 3.5.0 01-4.95.0.751.751.0 01.018-1.042.751.751.0 011.042-.018 1.998 1.998.0 002.83.0l2.5-2.5a2.002 2.002.0 00-2.83-2.83l-1.25 1.25a.751.751.0 01-1.042-.018.751.751.0 01-.018-1.042zm-4.69 9.64a1.998 1.998.0 002.83.0l1.25-1.25a.751.751.0 011.042.018.751.751.0 01.018 1.042l-1.25 1.25a3.5 3.5.0 11-4.95-4.95l2.5-2.5a3.5 3.5.0 014.95.0.751.751.0 01-.018 1.042.751.751.0 01-1.042.018 1.998 1.998.0 00-2.83.0l-2.5 2.5a1.998 1.998.0 000 2.83z"/></svg></a></h4><p><a class=lightgallery target=_blank href=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140541294.png title=image.png data-thumbnail=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140541294.png data-sub-html="<h2>image.png</h2>"><img loading=lazy src=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140541294.png alt=image.png></a><br><br></p><h4 class=heading-element id=413-event块><span>4.1.3 event块：</span>
-<a href=#413-event%e5%9d%97 class=heading-mark><svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5.0 114.95 4.95l-2.5 2.5a3.5 3.5.0 01-4.95.0.751.751.0 01.018-1.042.751.751.0 011.042-.018 1.998 1.998.0 002.83.0l2.5-2.5a2.002 2.002.0 00-2.83-2.83l-1.25 1.25a.751.751.0 01-1.042-.018.751.751.0 01-.018-1.042zm-4.69 9.64a1.998 1.998.0 002.83.0l1.25-1.25a.751.751.0 011.042.018.751.751.0 01.018 1.042l-1.25 1.25a3.5 3.5.0 11-4.95-4.95l2.5-2.5a3.5 3.5.0 014.95.0.751.751.0 01-.018 1.042.751.751.0 01-1.042.018 1.998 1.998.0 00-2.83.0l-2.5 2.5a1.998 1.998.0 000 2.83z"/></svg></a></h4><p><a class=lightgallery target=_blank href=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140548689.png title=image.png data-thumbnail=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140548689.png data-sub-html="<h2>image.png</h2>"><img loading=lazy src=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140548689.png alt=image.png></a><br><br></p><h4 class=heading-element id=414-http块><span>4.1.4 http块：</span>
-<a href=#414-http%e5%9d%97 class=heading-mark><svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5.0 114.95 4.95l-2.5 2.5a3.5 3.5.0 01-4.95.0.751.751.0 01.018-1.042.751.751.0 011.042-.018 1.998 1.998.0 002.83.0l2.5-2.5a2.002 2.002.0 00-2.83-2.83l-1.25 1.25a.751.751.0 01-1.042-.018.751.751.0 01-.018-1.042zm-4.69 9.64a1.998 1.998.0 002.83.0l1.25-1.25a.751.751.0 011.042.018.751.751.0 01.018 1.042l-1.25 1.25a3.5 3.5.0 11-4.95-4.95l2.5-2.5a3.5 3.5.0 014.95.0.751.751.0 01-.018 1.042.751.751.0 01-1.042.018 1.998 1.998.0 00-2.83.0l-2.5 2.5a1.998 1.998.0 000 2.83z"/></svg></a></h4><p><a class=lightgallery target=_blank href=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140604955.png title=image.png data-thumbnail=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140604955.png data-sub-html="<h2>image.png</h2>"><img loading=lazy src=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140604955.png alt=image.png></a></p><p><a class=lightgallery target=_blank href=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225141454741.png title=image.png data-thumbnail=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225141454741.png data-sub-html="<h2>image.png</h2>"><img loading=lazy src=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225141454741.png alt=image.png></a><br><a class=lightgallery target=_blank href=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225141519313.png title=image.png data-thumbnail=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225141519313.png data-sub-html="<h2>image.png</h2>"><img loading=lazy src=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225141519313.png alt=image.png></a></p><h4 class=heading-element id=415-server块和location块><span>4.1.5 server块和location块：</span>
-<a href=#415-server%e5%9d%97%e5%92%8clocation%e5%9d%97 class=heading-mark><svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5.0 114.95 4.95l-2.5 2.5a3.5 3.5.0 01-4.95.0.751.751.0 01.018-1.042.751.751.0 011.042-.018 1.998 1.998.0 002.83.0l2.5-2.5a2.002 2.002.0 00-2.83-2.83l-1.25 1.25a.751.751.0 01-1.042-.018.751.751.0 01-.018-1.042zm-4.69 9.64a1.998 1.998.0 002.83.0l1.25-1.25a.751.751.0 011.042.018.751.751.0 01.018 1.042l-1.25 1.25a3.5 3.5.0 11-4.95-4.95l2.5-2.5a3.5 3.5.0 014.95.0.751.751.0 01-.018 1.042.751.751.0 01-1.042.018 1.998 1.998.0 00-2.83.0l-2.5 2.5a1.998 1.998.0 000 2.83z"/></svg></a></h4><p><a class=lightgallery target=_blank href=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142351565.png title=image.png data-thumbnail=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142351565.png data-sub-html="<h2>image.png</h2>"><img loading=lazy src=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142351565.png alt=image.png></a></p><p><a class=lightgallery target=_blank href=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142401934.png title=image.png data-thumbnail=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142401934.png data-sub-html="<h2>image.png</h2>"><img loading=lazy src=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142401934.png alt=image.png></a><br><a class=lightgallery target=_blank href=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142526384.png title=image.png data-thumbnail=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142526384.png data-sub-html="<h2>image.png</h2>"><img loading=lazy src=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142526384.png alt=image.png></a></p><h3 class=heading-element id=42-实战><span>4.2 实战</span>
-<a href=#42-%e5%ae%9e%e6%88%98 class=heading-mark><svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5.0 114.95 4.95l-2.5 2.5a3.5 3.5.0 01-4.95.0.751.751.0 01.018-1.042.751.751.0 011.042-.018 1.998 1.998.0 002.83.0l2.5-2.5a2.002 2.002.0 00-2.83-2.83l-1.25 1.25a.751.751.0 01-1.042-.018.751.751.0 01-.018-1.042zm-4.69 9.64a1.998 1.998.0 002.83.0l1.25-1.25a.751.751.0 011.042.018.751.751.0 01.018 1.042l-1.25 1.25a3.5 3.5.0 11-4.95-4.95l2.5-2.5a3.5 3.5.0 014.95.0.751.751.0 01-.018 1.042.751.751.0 01-1.042.018 1.998 1.998.0 00-2.83.0l-2.5 2.5a1.998 1.998.0 000 2.83z"/></svg></a></h3><h4 class=heading-element id=421-http反向代理配置实战><span>4.2.1 http反向代理配置实战</span>
-<a href=#421-http%e5%8f%8d%e5%90%91%e4%bb%a3%e7%90%86%e9%85%8d%e7%bd%ae%e5%ae%9e%e6%88%98 class=heading-mark><svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5.0 114.95 4.95l-2.5 2.5a3.5 3.5.0 01-4.95.0.751.751.0 01.018-1.042.751.751.0 011.042-.018 1.998 1.998.0 002.83.0l2.5-2.5a2.002 2.002.0 00-2.83-2.83l-1.25 1.25a.751.751.0 01-1.042-.018.751.751.0 01-.018-1.042zm-4.69 9.64a1.998 1.998.0 002.83.0l1.25-1.25a.751.751.0 011.042.018.751.751.0 01.018 1.042l-1.25 1.25a3.5 3.5.0 11-4.95-4.95l2.5-2.5a3.5 3.5.0 014.95.0.751.751.0 01-.018 1.042.751.751.0 01-1.042.018 1.998 1.998.0 00-2.83.0l-2.5 2.5a1.998 1.998.0 000 2.83z"/></svg></a></h4><p>环境： debian 12<br>确保你已经打开了nginx： <code>systemctl status nginx</code></p><ol><li>开启一个后端服务</li></ol><div class="code-block highlight" data-mode=classic data-copyable=true><div class=chroma><div class="code-header language-shell"><span class=code-title><i class="arrow fa-solid fa-chevron-down" aria-hidden=true></i></span><span class=ellipses-btn aria-label="Show more options" role=button><i class="fa-solid fa-ellipsis-h" aria-hidden=true></i></span><span class=line-nos-btn aria-label=切换行号 role=button title=切换行号><i class="fa-solid fa-list-ol" aria-hidden=true></i></span><span class=line-wrap-btn aria-label=切换自动换行 role=button title=切换自动换行><i class="fa-solid fa-right-left" aria-hidden=true></i></span><span class=copy-btn aria-label=复制到剪贴板 role=button title=复制到剪贴板><i class="fa-regular fa-clone" aria-hidden=true></i></span></div><div class=code-wrapper data-max=10 data-line-digit=2 style=--fi-max-shown-lines:10;--fi-line-digit:2;--fi-line-start:1><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>1. 创建文件夹
-</span></span><span class=line><span class=cl>mkdir -p ~/nginx-test
-</span></span><span class=line><span class=cl><span class=nb>cd</span> ~/nginx-test
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>2. 编写一个页面
-</span></span><span class=line><span class=cl>cat &gt; index.html <span class=s>&lt;&lt; &#39;EOF&#39;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;!DOCTYPE html&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;html&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;head&gt;
-</span></span></span><span class=line><span class=cl><span class=s>    &lt;meta charset=&#34;UTF-8&#34;&gt;
-</span></span></span><span class=line><span class=cl><span class=s>    &lt;title&gt;后端页面 - 被 Nginx 代理&lt;/title&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;/head&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;body style=&#34;background:#112233;color:#00ff88;font-family:monospace;text-align:center;padding-top:80px;&#34;&gt;
-</span></span></span><span class=line><span class=cl><span class=s>    &lt;h1&gt;🎉 成功！这是后端返回的内容（端口 8080）&lt;/h1&gt;
-</span></span></span><span class=line><span class=cl><span class=s>    &lt;p&gt;你现在看到的内容经过 Nginx 反向代理转发。&lt;/p&gt;
-</span></span></span><span class=line><span class=cl><span class=s>    &lt;p&gt;代理功能正常工作！&lt;/p&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;/body&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;/html&gt;
-</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>3. 启动后端服务（后台运行）
-</span></span><span class=line><span class=cl>nohup python3 -m http.server <span class=m>8080</span> &gt; backend.log 2&gt;<span class=p>&amp;</span><span class=m>1</span> <span class=p>&amp;</span>
-</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;后端已启动在 8080 端口！&#34;</span></span></span></code></pre></td></tr></table></div><div class=code-expand-btn aria-label=展开或折叠代码块 role=button><i class="fa-solid fa-angles-down" aria-hidden=true></i></div></div></div><ol start=2><li>在/etc/nginx/sites-enabled/default 这个模块配置文件中写</li></ol><div class="code-block highlight" data-mode=classic data-copyable=true><div class=chroma><div class="code-header language-fallback"><span class=code-title><i class="arrow fa-solid fa-chevron-down" aria-hidden=true></i></span><span class=ellipses-btn aria-label="Show more options" role=button><i class="fa-solid fa-ellipsis-h" aria-hidden=true></i></span><span class=line-nos-btn aria-label=切换行号 role=button title=切换行号><i class="fa-solid fa-list-ol" aria-hidden=true></i></span><span class=line-wrap-btn aria-label=切换自动换行 role=button title=切换自动换行><i class="fa-solid fa-right-left" aria-hidden=true></i></span><span class=copy-btn aria-label=复制到剪贴板 role=button title=复制到剪贴板><i class="fa-regular fa-clone" aria-hidden=true></i></span></div><div class=code-wrapper data-max=10 data-line-digit=2 style=--fi-max-shown-lines:10;--fi-line-digit:2;--fi-line-start:1><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-fallback data-lang=fallback><span class=line><span class=cl>server{
-</span></span><span class=line><span class=cl>	listen 80;  #监听端口
-</span></span><span class=line><span class=cl>	server_name _;  #域名匹配
-</span></span><span class=line><span class=cl>	
-</span></span><span class=line><span class=cl>	location / {
-</span></span><span class=line><span class=cl>		proxy_pass http://localhost:8080;  #将80端口的请求转发到后端8080
-</span></span><span class=line><span class=cl>		charset utf-8;   # 防止乱码
-</span></span><span class=line><span class=cl>	}
-</span></span><span class=line><span class=cl>	
-</span></span><span class=line><span class=cl>}</span></span></code></pre></td></tr></table></div></div></div><p>保存<br>3. 检查语法并重启nginx</p><div class="code-block highlight" data-mode=classic data-copyable=true><div class=chroma><div class="code-header language-shell"><span class=code-title><i class="arrow fa-solid fa-chevron-down" aria-hidden=true></i></span><span class=ellipses-btn aria-label="Show more options" role=button><i class="fa-solid fa-ellipsis-h" aria-hidden=true></i></span><span class=line-nos-btn aria-label=切换行号 role=button title=切换行号><i class="fa-solid fa-list-ol" aria-hidden=true></i></span><span class=line-wrap-btn aria-label=切换自动换行 role=button title=切换自动换行><i class="fa-solid fa-right-left" aria-hidden=true></i></span><span class=copy-btn aria-label=复制到剪贴板 role=button title=复制到剪贴板><i class="fa-regular fa-clone" aria-hidden=true></i></span></div><div class=code-wrapper data-max=10 data-line-digit=1 style=--fi-max-shown-lines:10;--fi-line-digit:1;--fi-line-start:1><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt>1
-</span><span class=lnt>2
-</span><span class=lnt>3
-</span><span class=lnt>4
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>nginx -t  <span class=c1># 检查语法</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>systemctl reload nginx <span class=c1># 重启nginx</span></span></span></code></pre></td></tr></table></div></div></div><p>打开服务器的ip地址，即可看到<br><a class=lightgallery target=_blank href=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225163709166.png title=image.png data-thumbnail=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225163709166.png data-sub-html="<h2>image.png</h2>"><img loading=lazy src=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225163709166.png alt=image.png></a></p><p>在location 块中除了 proxy_pass 外还可以配：<br><a class=lightgallery target=_blank href=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225164322989.png title=image.png data-thumbnail=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225164322989.png data-sub-html="<h2>image.png</h2>"><img loading=lazy src=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225164322989.png alt=image.png></a></p><h4 class=heading-element id=422-负载均衡配置实战><span>4.2.2 负载均衡配置实战</span>
-<a href=#422-%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1%e9%85%8d%e7%bd%ae%e5%ae%9e%e6%88%98 class=heading-mark><svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5.0 114.95 4.95l-2.5 2.5a3.5 3.5.0 01-4.95.0.751.751.0 01.018-1.042.751.751.0 011.042-.018 1.998 1.998.0 002.83.0l2.5-2.5a2.002 2.002.0 00-2.83-2.83l-1.25 1.25a.751.751.0 01-1.042-.018.751.751.0 01-.018-1.042zm-4.69 9.64a1.998 1.998.0 002.83.0l1.25-1.25a.751.751.0 011.042.018.751.751.0 01.018 1.042l-1.25 1.25a3.5 3.5.0 11-4.95-4.95l2.5-2.5a3.5 3.5.0 014.95.0.751.751.0 01-.018 1.042.751.751.0 01-1.042.018 1.998 1.998.0 00-2.83.0l-2.5 2.5a1.998 1.998.0 000 2.83z"/></svg></a></h4><ol><li>准备两个后端服务</li></ol><div class="code-block highlight" data-mode=classic data-copyable=true><div class=chroma><div class="code-header language-shell"><span class=code-title><i class="arrow fa-solid fa-chevron-down" aria-hidden=true></i></span><span class=ellipses-btn aria-label="Show more options" role=button><i class="fa-solid fa-ellipsis-h" aria-hidden=true></i></span><span class=line-nos-btn aria-label=切换行号 role=button title=切换行号><i class="fa-solid fa-list-ol" aria-hidden=true></i></span><span class=line-wrap-btn aria-label=切换自动换行 role=button title=切换自动换行><i class="fa-solid fa-right-left" aria-hidden=true></i></span><span class=copy-btn aria-label=复制到剪贴板 role=button title=复制到剪贴板><i class="fa-regular fa-clone" aria-hidden=true></i></span></div><div class=code-wrapper data-max=10 data-line-digit=2 style=--fi-max-shown-lines:10;--fi-line-digit:2;--fi-line-start:1><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span><span class=lnt>27
-</span><span class=lnt>28
-</span><span class=lnt>29
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl><span class=c1># 1 创建文件夹</span>
-</span></span><span class=line><span class=cl>mkdir -p ~/backend-1 ~/backend-2
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 2 创建两个页面</span>
-</span></span><span class=line><span class=cl>cat &gt; ~/backend1/index.html <span class=s>&lt;&lt; &#39;EOF&#39;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;!DOCTYPE html&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;html&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;head&gt;&lt;meta charset=&#34;UTF-8&#34;&gt;&lt;title&gt;Backend-1&lt;/title&gt;&lt;/head&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;body style=&#34;background:#112233;color:#00ff88;text-align:center;padding-top:100px;&#34;&gt;
-</span></span></span><span class=line><span class=cl><span class=s>    &lt;h1&gt;我是 Backend-1 (端口 8080)&lt;/h1&gt;
-</span></span></span><span class=line><span class=cl><span class=s>    &lt;p&gt;这是第一台后端服务器&lt;/p&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;/body&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;/html&gt;
-</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>cat &gt; ~/backend2/index.html <span class=s>&lt;&lt; &#39;EOF&#39;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;!DOCTYPE html&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;html&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;head&gt;&lt;meta charset=&#34;UTF-8&#34;&gt;&lt;title&gt;Backend-2&lt;/title&gt;&lt;/head&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;body style=&#34;background:#331122;color:#ff8800;text-align:center;padding-top:100px;&#34;&gt;
-</span></span></span><span class=line><span class=cl><span class=s>    &lt;h1&gt;我是 Backend-2 (端口 8081)&lt;/h1&gt;
-</span></span></span><span class=line><span class=cl><span class=s>    &lt;p&gt;这是第二台后端服务器&lt;/p&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;/body&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;/html&gt;
-</span></span></span><span class=line><span class=cl><span class=s>EOF</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 3. 启动两个后端（后台运行） </span>
-</span></span><span class=line><span class=cl><span class=nb>cd</span> ~/backend1 <span class=o>&amp;&amp;</span> nohup python3 -m http.server <span class=m>8080</span> &gt; backend1.log 2&gt;<span class=p>&amp;</span><span class=m>1</span> <span class=p>&amp;</span> <span class=nb>cd</span> ~/backend2 <span class=o>&amp;&amp;</span> nohup python3 -m http.server <span class=m>8081</span> &gt; backend2.log 2&gt;<span class=p>&amp;</span><span class=m>1</span> <span class=p>&amp;</span>
-</span></span><span class=line><span class=cl><span class=nb>echo</span> <span class=s2>&#34;两个后端已启动！&#34;</span> </span></span></code></pre></td></tr></table></div><div class=code-expand-btn aria-label=展开或折叠代码块 role=button><i class="fa-solid fa-angles-down" aria-hidden=true></i></div></div></div><ol start=2><li>配置nginx</li></ol><p>在/etc/nginx/sites-available/default 文件中修改</p><div class="code-block highlight" data-mode=classic data-copyable=true><div class=chroma><div class="code-header language-shell"><span class=code-title><i class="arrow fa-solid fa-chevron-down" aria-hidden=true></i></span><span class=ellipses-btn aria-label="Show more options" role=button><i class="fa-solid fa-ellipsis-h" aria-hidden=true></i></span><span class=line-nos-btn aria-label=切换行号 role=button title=切换行号><i class="fa-solid fa-list-ol" aria-hidden=true></i></span><span class=line-wrap-btn aria-label=切换自动换行 role=button title=切换自动换行><i class="fa-solid fa-right-left" aria-hidden=true></i></span><span class=copy-btn aria-label=复制到剪贴板 role=button title=复制到剪贴板><i class="fa-regular fa-clone" aria-hidden=true></i></span></div><div class=code-wrapper data-max=10 data-line-digit=2 style=--fi-max-shown-lines:10;--fi-line-digit:2;--fi-line-start:1><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1>#定义upstream</span>
-</span></span><span class=line><span class=cl>upstream backend_pool<span class=o>{</span>
-</span></span><span class=line><span class=cl>	server localhost:8081<span class=p>;</span> 
-</span></span><span class=line><span class=cl>	server localhost:8082<span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=o>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>server<span class=o>{</span>
-</span></span><span class=line><span class=cl>	listen 80<span class=p>;</span>
-</span></span><span class=line><span class=cl>	server_name _<span class=p>;</span>
-</span></span><span class=line><span class=cl>	
-</span></span><span class=line><span class=cl>	location / <span class=o>{</span>
-</span></span><span class=line><span class=cl>		proxy_pass http://backend_pool/<span class=p>;</span>
-</span></span><span class=line><span class=cl>		proxy_set_header Host <span class=nv>$host</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>        proxy_set_header X-Real-IP <span class=nv>$remote_addr</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>        proxy_set_header X-Forwarded-For <span class=nv>$proxy_add_x_forwarded_for</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>        proxy_set_header X-Forwarded-Proto <span class=nv>$scheme</span><span class=p>;</span>
-</span></span><span class=line><span class=cl>        charset utf-8<span class=p>;</span>
-</span></span><span class=line><span class=cl>	<span class=o>}</span>
-</span></span><span class=line><span class=cl>	
-</span></span><span class=line><span class=cl>	
-</span></span><span class=line><span class=cl><span class=o>}</span></span></span></code></pre></td></tr></table></div><div class=code-expand-btn aria-label=展开或折叠代码块 role=button><i class="fa-solid fa-angles-down" aria-hidden=true></i></div></div></div><ol start=3><li>重启nginx</li></ol><p>访问页面 并 ctrl + f5<br>可以看到：<br><a class=lightgallery target=_blank href=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225165757067.png title=image.png data-thumbnail=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225165757067.png data-sub-html="<h2>image.png</h2>"><img loading=lazy src=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225165757067.png alt=image.png></a></p><p>与<br><a class=lightgallery target=_blank href=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225165808450.png title=image.png data-thumbnail=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225165808450.png data-sub-html="<h2>image.png</h2>"><img loading=lazy src=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225165808450.png alt=image.png></a><br>交替出现</p><blockquote><p>负载均衡策略</p></blockquote><ol><li>轮询（默认） 轮流分配</li><li>给连接最少的后端服务 least_conn</li><li>根据用户ip算哈希 ip_hash</li><li>按权重分配 weigth =1 数字越大权重越高</li><li>完全随机 random</li></ol><h4 class=heading-element id=423-静态页面配置><span>4.2.3 静态页面配置</span>
-<a href=#423-%e9%9d%99%e6%80%81%e9%a1%b5%e9%9d%a2%e9%85%8d%e7%bd%ae class=heading-mark><svg class="octicon octicon-link" viewBox="0 0 16 16" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5.0 114.95 4.95l-2.5 2.5a3.5 3.5.0 01-4.95.0.751.751.0 01.018-1.042.751.751.0 011.042-.018 1.998 1.998.0 002.83.0l2.5-2.5a2.002 2.002.0 00-2.83-2.83l-1.25 1.25a.751.751.0 01-1.042-.018.751.751.0 01-.018-1.042zm-4.69 9.64a1.998 1.998.0 002.83.0l1.25-1.25a.751.751.0 011.042.018.751.751.0 01.018 1.042l-1.25 1.25a3.5 3.5.0 11-4.95-4.95l2.5-2.5a3.5 3.5.0 014.95.0.751.751.0 01-.018 1.042.751.751.0 01-1.042.018 1.998 1.998.0 00-2.83.0l-2.5 2.5a1.998 1.998.0 000 2.83z"/></svg></a></h4><ol><li>创建静态页面</li></ol><div class="code-block highlight" data-mode=classic data-copyable=true><div class=chroma><div class="code-header language-shell"><span class=code-title><i class="arrow fa-solid fa-chevron-down" aria-hidden=true></i></span><span class=ellipses-btn aria-label="Show more options" role=button><i class="fa-solid fa-ellipsis-h" aria-hidden=true></i></span><span class=line-nos-btn aria-label=切换行号 role=button title=切换行号><i class="fa-solid fa-list-ol" aria-hidden=true></i></span><span class=line-wrap-btn aria-label=切换自动换行 role=button title=切换自动换行><i class="fa-solid fa-right-left" aria-hidden=true></i></span><span class=copy-btn aria-label=复制到剪贴板 role=button title=复制到剪贴板><i class="fa-regular fa-clone" aria-hidden=true></i></span></div><div class=code-wrapper data-max=10 data-line-digit=2 style=--fi-max-shown-lines:10;--fi-line-digit:2;--fi-line-start:1><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span><span class=lnt>22
-</span><span class=lnt>23
-</span><span class=lnt>24
-</span><span class=lnt>25
-</span><span class=lnt>26
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 1. 进入默认静态目录</span>
-</span></span><span class=line><span class=cl><span class=nb>cd</span> /var/www/html
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=c1># 2. 创建一个漂亮的静态首页</span>
-</span></span><span class=line><span class=cl>cat &gt; index.html <span class=s>&lt;&lt; &#39;EOF&#39;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;!DOCTYPE html&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;html&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;head&gt;
-</span></span></span><span class=line><span class=cl><span class=s>    &lt;meta charset=&#34;UTF-8&#34;&gt;
-</span></span></span><span class=line><span class=cl><span class=s>    &lt;title&gt;我的第一个 Nginx 静态网站&lt;/title&gt;
-</span></span></span><span class=line><span class=cl><span class=s>    &lt;style&gt;
-</span></span></span><span class=line><span class=cl><span class=s>        body { font-family: Arial; text-align: center; padding: 100px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
-</span></span></span><span class=line><span class=cl><span class=s>        h1 { font-size: 3em; }
-</span></span></span><span class=line><span class=cl><span class=s>        .card { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; display: inline-block; margin-top: 30px; }
-</span></span></span><span class=line><span class=cl><span class=s>    &lt;/style&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;/head&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;body&gt;
-</span></span></span><span class=line><span class=cl><span class=s>    &lt;div class=&#34;card&#34;&gt;
-</span></span></span><span class=line><span class=cl><span class=s>        &lt;h1&gt;🎉 恭喜！你用 Nginx 成功运行了静态网站！&lt;/h1&gt;
-</span></span></span><span class=line><span class=cl><span class=s>        &lt;p&gt;这是纯静态页面，由 Nginx 直接提供。&lt;/p&gt;
-</span></span></span><span class=line><span class=cl><span class=s>        &lt;p&gt;当前时间：$(date)&lt;/p&gt;
-</span></span></span><span class=line><span class=cl><span class=s>    &lt;/div&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;/body&gt;
-</span></span></span><span class=line><span class=cl><span class=s>&lt;/html&gt;
-</span></span></span><span class=line><span class=cl><span class=s>EOF</span></span></span></code></pre></td></tr></table></div><div class=code-expand-btn aria-label=展开或折叠代码块 role=button><i class="fa-solid fa-angles-down" aria-hidden=true></i></div></div></div><ol start=2><li>修改配置文件</li></ol><p>修改 /etc/nginx/sites-available/default 文件</p><div class="code-block highlight" data-mode=classic data-copyable=true><div class=chroma><div class="code-header language-shell"><span class=code-title><i class="arrow fa-solid fa-chevron-down" aria-hidden=true></i></span><span class=ellipses-btn aria-label="Show more options" role=button><i class="fa-solid fa-ellipsis-h" aria-hidden=true></i></span><span class=line-nos-btn aria-label=切换行号 role=button title=切换行号><i class="fa-solid fa-list-ol" aria-hidden=true></i></span><span class=line-wrap-btn aria-label=切换自动换行 role=button title=切换自动换行><i class="fa-solid fa-right-left" aria-hidden=true></i></span><span class=copy-btn aria-label=复制到剪贴板 role=button title=复制到剪贴板><i class="fa-regular fa-clone" aria-hidden=true></i></span></div><div class=code-wrapper data-max=10 data-line-digit=2 style=--fi-max-shown-lines:10;--fi-line-digit:2;--fi-line-start:1><table class=lntable><tr><td class=lntd><pre tabindex=0 class=chroma><code><span class=lnt> 1
-</span><span class=lnt> 2
-</span><span class=lnt> 3
-</span><span class=lnt> 4
-</span><span class=lnt> 5
-</span><span class=lnt> 6
-</span><span class=lnt> 7
-</span><span class=lnt> 8
-</span><span class=lnt> 9
-</span><span class=lnt>10
-</span><span class=lnt>11
-</span><span class=lnt>12
-</span><span class=lnt>13
-</span><span class=lnt>14
-</span><span class=lnt>15
-</span><span class=lnt>16
-</span><span class=lnt>17
-</span><span class=lnt>18
-</span><span class=lnt>19
-</span><span class=lnt>20
-</span><span class=lnt>21
-</span></code></pre></td><td class=lntd><pre tabindex=0 class=chroma><code class=language-shell data-lang=shell><span class=line><span class=cl>upstream backend_pool <span class=o>{</span>
-</span></span><span class=line><span class=cl>    least_conn<span class=p>;</span>
-</span></span><span class=line><span class=cl>    server 127.0.0.1:8080<span class=p>;</span>
-</span></span><span class=line><span class=cl>    server 127.0.0.1:8081<span class=p>;</span>
-</span></span><span class=line><span class=cl><span class=o>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>server <span class=o>{</span>
-</span></span><span class=line><span class=cl>    listen 80<span class=p>;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    server_name _<span class=p>;</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=c1># 静态页面根目录配置（重点！）</span>
-</span></span><span class=line><span class=cl>    root /var/www/html<span class=p>;</span>      <span class=c1># 静态文件根目录</span>
-</span></span><span class=line><span class=cl>    index index.html<span class=p>;</span>        <span class=c1># 默认访问的文件名</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl>    <span class=c1># 静态页面（根路径）</span>
-</span></span><span class=line><span class=cl>    location / <span class=o>{</span>
-</span></span><span class=line><span class=cl>        try_files <span class=nv>$uri</span> <span class=nv>$uri</span>/ <span class=o>=</span>404<span class=p>;</span>   <span class=c1># 优先找文件，找不到返回404</span>
-</span></span><span class=line><span class=cl>    <span class=o>}</span>
-</span></span><span class=line><span class=cl>
-</span></span><span class=line><span class=cl><span class=o>}</span></span></span></code></pre></td></tr></table></div><div class=code-expand-btn aria-label=展开或折叠代码块 role=button><i class="fa-solid fa-angles-down" aria-hidden=true></i></div></div></div><ol start=3><li>重启</li></ol><p>可以看到<br><a class=lightgallery target=_blank href=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225170744193.png title=image.png data-thumbnail=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225170744193.png data-sub-html="<h2>image.png</h2>"><img loading=lazy src=https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225170744193.png alt=image.png></a></p></div><div class=post-footer id=post-footer><div class=post-info><div class=post-info-line><div class=post-info-mod><span title="更新于 2026-03-22 19:55:26">更新于 2026-03-22&nbsp;</span></div></div></div><div class=post-info-more><section class=post-tags></section><section><span><a href=javascript:void(0); onclick=window.history.back()>返回</a></span>&nbsp;|&nbsp;<span><a href=/>主页</a></span></section></div><div class=post-nav><a href=/java/spring/50628da4/ class=post-nav-item rel=prev title=AOP进阶><i class="fa-solid fa-angle-left" aria-hidden=true></i>AOP进阶</a><a href=/%E8%A7%82%E7%9C%8B%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/8a3350e3/ class=post-nav-item rel=next title=自慰影响身体的机制>自慰影响身体的机制<i class="fa-solid fa-angle-right" aria-hidden=true></i></a></div></div></article><aside class=toc id=toc-auto aria-label=目录><h2 class=toc-title>目录&nbsp;<i class="toc-icon fa-solid fa-angle-down" aria-hidden=true></i></h2><div class=toc-content id=toc-content-auto></div></aside><dialog id=toc-dialog aria-labelledby=toc-dialog-title role=dialog><div class=toc><h2 class=toc-title>目录</h2><div class=toc-content id=toc-content-drawer><nav><ul><li><a href=#1-什么是nginx--what>1 什么是nginx &ndash; what</a><ul><li><a href=#11-什么是反向代理>1.1 什么是反向代理</a></li></ul></li><li><a href=#2-为什么需要nginx--why>2 为什么需要nginx &ndash; why</a></li><li><a href=#3-nginx命令>3 nginx命令</a></li><li><a href=#4-nginx-要如何使用呢--how>4 nginx 要如何使用呢 &ndash; how</a><ul><li><a href=#41-nginx-的配置文件>4.1 nginx 的配置文件</a><ul><li><a href=#411-配置文件的层级>4.1.1 配置文件的层级：</a></li><li><a href=#412-全局块>4.1.2 全局块：</a></li><li><a href=#413-event块>4.1.3 event块：</a></li><li><a href=#414-http块>4.1.4 http块：</a></li><li><a href=#415-server块和location块>4.1.5 server块和location块：</a></li></ul></li><li><a href=#42-实战>4.2 实战</a><ul><li><a href=#421-http反向代理配置实战>4.2.1 http反向代理配置实战</a></li><li><a href=#422-负载均衡配置实战>4.2.2 负载均衡配置实战</a></li><li><a href=#423-静态页面配置>4.2.3 静态页面配置</a></li></ul></li></ul></li></ul></nav></div></div></dialog></main><footer class=footer><div class=footer-container><div class="footer-line copyright" itemscope itemtype=http://schema.org/CreativeWork><i class="fa-regular fa-copyright" aria-hidden=true></i>
-<span itemprop=copyrightYear>2026</span><span class=author itemprop=copyrightHolder>
-<a href=/>cheems</a></span></div></div></footer></div><div class=widgets><div class=fixed-buttons><div class="fixed-button back-to-top animate__faster d-none" role=button aria-label=回到顶部><i class="fa-solid fa-arrow-up" aria-hidden=true></i></div><div id=toc-drawer-button class="fixed-button toc-drawer-button d-none" role=button aria-label=目录><i class="fa-solid fa-bars" aria-hidden=true></i></div></div><div id=mask></div><noscript><div class=noscript-warning>该网站在启用 JavaScript 的情况下效果最佳。</div></noscript></div><link rel=stylesheet href=/lib/lightgallery/css/lightgallery-bundle.min.120f067ebd6f322339e2ccccd7e87e334d7c7ea5b2bd553f325f2ae3c3ae6fe8.css integrity="sha256-Eg8Gfr1vMiM54szM1+h+M018fqWyvVU/Ml8q48Oub+g="><link rel=stylesheet href=/lib/cookieconsent/cookieconsent.min.d15ac8c0ae2d09eb2a19e5080e0f3ebfa7190fb705e3b7d265395b38ad583b40.css integrity="sha256-0VrIwK4tCesqGeUIDg8+v6cZD7cF47fSZTlbOK1YO0A="><script src=/lib/autocomplete/autocomplete.min.efcd9994416f8ef0e9904c0ebc34d39ab92f5fe72a60224553434d3a818b25e5.js integrity="sha256-782ZlEFvjvDpkEwOvDTTmrkvX+cqYCJFU0NNOoGLJeU=" defer></script><script src=/lib/fuse/fuse.min.376aba77efa1c95e9d886fb00af55c096607a5cc8eb58ea8b024faf3a44a9914.js integrity="sha256-N2q6d++hyV6diG+wCvVcCWYHpcyOtY6osCT686RKmRQ=" defer></script><script src=/lib/lightgallery/lightgallery.min.fd89888c69a37f6850ff5718231f26bf502310de8489dc5111da0db5d9f51b57.js integrity="sha256-/YmIjGmjf2hQ/1cYIx8mv1AjEN6EidxREdoNtdn1G1c=" defer></script><script src=/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.a502d6f402482d60810b3e6965bd06cac0290f5284a79037c90bece078ed29cd.js integrity="sha256-pQLW9AJILWCBCz5pZb0GysApD1KEp5A3yQvs4HjtKc0=" defer></script><script src=/lib/lightgallery/plugins/zoom/lg-zoom.min.d26a9098ce778cc15f30cf87b310bd6850f4d6601b06dbde5205454058b8cbc3.js integrity="sha256-0mqQmM53jMFfMM+HsxC9aFD01mAbBtveUgVFQFi4y8M=" defer></script><script src=/lib/cookieconsent/cookieconsent.min.e55842a856a6d829feca3c3ad736c136b6c7549e9247274f78aa296259e06e24.js integrity="sha256-5VhCqFam2Cn+yjw61zbBNrbHVJ6SRydPeKopYlngbiQ=" defer></script><script src=/js/config/41a63c30a563a168b1921f53e26b7865.js defer></script><script src=/js/theme.min.4c2338941a06dbbc7a7347ed4bd3b9ddd047de50ce4c07e11ecd8f7ad3588f43.js integrity="sha256-TCM4lBoG27x6c0ftS9O53dBH3lDOTAfhHs2PetNYj0M=" defer></script><script src=/js/custom.min.1dafff4165b876b371b74feb23d110d0496b6f532cae960ec94f996780e8c032.js integrity="sha256-Ha//QWW4drNxt0/rI9EQ0Elrb1MsrpYOyU+ZZ4DowDI=" defer></script></body></html>
+<!DOCTYPE html>
+<html itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
+  <head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=59658&amp;path=livereload" data-no-instant defer></script>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+    <meta name="robots" content="noodp" />
+    <title>Nginx入门 - Cheems Blog</title><meta name="author" content="cheems">
+<meta name="description" content="记录开发过程中的实践、踩坑与工具经验，让零散问题沉淀成可复用的知识。">
+  <meta itemprop="name" content="Nginx入门">
+  <meta itemprop="description" content="记录开发过程中的实践、踩坑与工具经验，让零散问题沉淀成可复用的知识。">
+  <meta itemprop="datePublished" content="2026-02-25T10:55:10+08:00">
+  <meta itemprop="dateModified" content="2026-03-22T19:55:26+08:00">
+  <meta itemprop="wordCount" content="2283">
+  <meta itemprop="keywords" content="Java,Nginx"><meta property="og:url" content="http://localhost:59658/java/nginx/40bd625f/">
+  <meta property="og:site_name" content="Cheems Blog">
+  <meta property="og:title" content="Nginx入门">
+  <meta property="og:description" content="记录开发过程中的实践、踩坑与工具经验，让零散问题沉淀成可复用的知识。">
+  <meta property="og:locale" content="zh_CN">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="java">
+    <meta property="article:published_time" content="2026-02-25T10:55:10+08:00">
+    <meta property="article:modified_time" content="2026-03-22T19:55:26+08:00">
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Nginx入门">
+  <meta name="twitter:description" content="记录开发过程中的实践、踩坑与工具经验，让零散问题沉淀成可复用的知识。">
+<meta name="application-name" content="Cheems Blog">
+<meta name="apple-mobile-web-app-title" content="Cheems Blog"><meta name="theme-color" data-light="#f8f8f8" data-dark="#252627" content="#f8f8f8"><meta name="msapplication-TileColor" content="#da532c"><link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" /><link rel="canonical" type="text/html" href="http://localhost:59658/java/nginx/40bd625f/" title="Nginx入门 - Cheems Blog" /><link rel="prev" type="text/html" href="http://localhost:59658/java/spring/50628da4/" title="AOP进阶" /><link rel="next" type="text/html" href="http://localhost:59658/%E8%A7%82%E7%9C%8B%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/8a3350e3/" title="自慰影响身体的机制" /><link rel="alternate" type="text/markdown" href="http://localhost:59658/java/nginx/40bd625f/index.md" title="Nginx入门 - Cheems Blog"><link rel="stylesheet" href="/css/config.min.css"><link rel="stylesheet" href="/css/style.min.css"><link rel="preload" href="/lib/fontawesome-free/all.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/fontawesome-free/all.min.css"></noscript><link rel="preload" href="/lib/animate/animate.min.css" as="style" onload="this.removeAttribute('onload');this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="/lib/animate/animate.min.css"></noscript><script type="application/ld+json">
+  {
+    "@context": "http://schema.org",
+    "@type": "BlogPosting",
+    "headline": "Nginx入门",
+    "inLanguage": "zh-CN",
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": "http:\/\/localhost:59658\/java\/nginx\/40bd625f\/"
+    },"genre": "posts","wordcount":  2283 ,
+    "url": "http:\/\/localhost:59658\/java\/nginx\/40bd625f\/","datePublished": "2026-02-25T10:55:10+08:00","dateModified": "2026-03-22T19:55:26+08:00","publisher": {
+      "@type": "Organization",
+      "name": ""},"author": {
+        "@type": "Person",
+        "name": "cheems"
+      },"description": ""
+  }
+  </script><script src="/js/head/color-scheme.min.js"></script></head>
+  <body data-instant-intensity="viewport" data-header-desktop="sticky" data-header-mobile="auto"><div class="wrapper" data-page-style="normal"><header class="desktop animate__faster" id="header-desktop">
+  <div class="header-wrapper">
+    <div class="header-title">
+      <a href="/" title="Cheems Blog"><span class="header-title-text">Cheems Blog</span></a><span class="header-subtitle"></span></div>
+    <nav>
+      <ul class="menu"><li class="menu-item"><a class="menu-link" href="/archives/"><i class="fa-solid fa-archive fa-sm" aria-hidden="true"></i> 时间轴</a></li><li class="menu-item has-children"><div class="menu-parent">
+                  <a class="menu-link" href="/collections/"><i class="fa-solid fa-bars fa-sm" aria-hidden="true"></i> 系列</a>
+                  <button class="menu-toggle-link" type="button" aria-label="Toggle 系列 submenu" aria-haspopup="true" aria-expanded="false" aria-controls="menu-desktop-collections">
+                    <i class="dropdown-icon fa-solid fa-chevron-down" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <ul class="sub-menu" id="menu-desktop-collections"><li class="menu-item">
+                        <a class="menu-link" href="/categories/"><i class="fa-solid fa-folder-tree fa-sm" aria-hidden="true"></i> 分类</a>
+                      </li><li class="menu-item">
+                        <a class="menu-link" href="/tags/"><i class="fa-solid fa-tags fa-sm" aria-hidden="true"></i> 标签</a>
+                      </li></ul></li><li class="menu-item delimiter"></li><li class="menu-item search" id="search-desktop">
+            <input type="text" placeholder="搜索文章标题或内容……" id="search-input-desktop">
+            <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-desktop" title="搜索">
+              <i class="fa-solid fa-search" aria-hidden="true"></i>
+            </a>
+            <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-desktop" title="清空">
+              <i class="fa-solid fa-times-circle" aria-hidden="true"></i>
+            </a>
+            <span class="search-button search-loading" id="search-loading-desktop">
+              <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>
+            </span>
+          </li><li class="menu-item theme-switch" role="button" aria-label="切换主题" title="切换主题"><i class="fa-solid fa-adjust" aria-hidden="true"></i></li></ul>
+    </nav>
+  </div>
+</header><header class="mobile animate__faster" id="header-mobile">
+  <div class="header-container">
+    <div class="header-wrapper">
+      <div class="header-title">
+        <a href="/" title="Cheems Blog"><span class="header-title-text">Cheems Blog</span></a><span class="header-subtitle"></span></div>
+      <div class="theme-switch" role="button" aria-label="切换主题"><i class="fa-solid fa-adjust" aria-hidden="true"></i></div>
+      <div class="menu-toggle" id="menu-toggle-mobile" role="button" aria-labelledby="menu-mobile">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+    <nav>
+      <ul class="menu" id="menu-mobile"><li class="search-wrapper">
+            <div class="search mobile" id="search-mobile">
+              <input type="text" placeholder="搜索文章标题或内容……" id="search-input-mobile">
+              <a href="javascript:void(0);" class="search-button search-toggle" id="search-toggle-mobile" title="搜索">
+                <i class="fa-solid fa-search" aria-hidden="true"></i>
+              </a>
+              <a href="javascript:void(0);" class="search-button search-clear" id="search-clear-mobile" title="清空">
+                <i class="fa-solid fa-times-circle" aria-hidden="true"></i>
+              </a>
+              <span class="search-button search-loading" id="search-loading-mobile">
+                <i class="fa-solid fa-spinner fa-spin" aria-hidden="true"></i>
+              </span>
+            </div>
+            <a href="javascript:void(0);" class="search-cancel" id="search-cancel-mobile">
+              取消
+            </a>
+          </li><li class="menu-item"><a class="menu-link" href="/archives/"><i class="fa-solid fa-archive fa-sm" aria-hidden="true"></i> 时间轴</a></li><li class="menu-item has-children"><div class="menu-parent">
+                  <a class="menu-link" href="/collections/"><i class="fa-solid fa-bars fa-sm" aria-hidden="true"></i> 系列</a>
+                  <button class="menu-toggle-link" type="button" aria-label="Toggle 系列 submenu" aria-haspopup="true" aria-expanded="false" aria-controls="menu-mobile-collections">
+                    <i class="dropdown-icon fa-solid fa-chevron-right" aria-hidden="true"></i>
+                  </button>
+                </div>
+                <ul class="sub-menu" id="menu-mobile-collections"><li class="menu-item">
+                        <a class="menu-link" href="/categories/"><i class="fa-solid fa-folder-tree fa-sm" aria-hidden="true"></i> 分类</a>
+                      </li><li class="menu-item">
+                        <a class="menu-link" href="/tags/"><i class="fa-solid fa-tags fa-sm" aria-hidden="true"></i> 标签</a>
+                      </li></ul></li><li class="menu-item menu-system"></li>
+      </ul>
+    </nav>
+  </div>
+</header><div class="search-dropdown desktop">
+    <div id="search-dropdown-desktop"></div>
+  </div>
+  <div class="search-dropdown mobile">
+    <div id="search-dropdown-mobile"></div>
+  </div><main class="fi-container"><aside class="aside-collection animate__animated animate__fadeIn animate__faster" aria-label="合集"></aside>
+
+  <article class="page single">
+    <div class="header"><h1 class="single-title animate__animated animate__flipInX"><span>Nginx入门</span>
+      </h1></div><div class="post-meta">
+      <div class="post-meta-line"><span class="post-author"><span class="author"><i class="fa-solid fa-user-circle" aria-hidden="true"></i>
+      cheems</span></span><span class="post-included-in">&nbsp;收录于 <a href="/categories/java/" class="post-category" title="分类 - Java"><i class="fa-regular fa-folder" aria-hidden="true"></i> Java</a> 和 <a href="/collections/nginx/" class="post-collection" title="合集 - Nginx"><i class="fa-solid fa-layer-group" aria-hidden="true"></i> Nginx</a></span></div><div class="post-meta-line"><span title="发布于 2026-02-25 10:55:10"><i class="fa-solid fa-calendar-days me-1" aria-hidden="true"></i><time datetime="2026-02-25">2026-02-25</time></span>&nbsp;<span title="更新于 2026-03-22 19:55:26"><i class="fa-regular fa-calendar-check me-1" aria-hidden="true"></i><time datetime="2026-03-22">2026-03-22</time></span>&nbsp;<span title="2283 字"><i class="fa-solid fa-pencil-alt me-1" aria-hidden="true"></i>约 2300 字</span>&nbsp;<span><i class="fa-regular fa-clock me-1" aria-hidden="true"></i>预计阅读 5 分钟</span>&nbsp;</div>
+    </div><div class="details toc" id="toc-static" data-kept="false">
+        <div class="details-summary toc-title">
+          <span>目录</span>
+          <span><i class="details-icon fa-solid fa-angle-right" aria-hidden="true"></i></span>
+        </div>
+        <div class="details-content toc-content" id="toc-content-static"><nav id="TableOfContents">
+  <ul>
+    <li><a href="#1-什么是nginx--what">1 什么是nginx &ndash; what</a>
+      <ul>
+        <li><a href="#11-什么是反向代理">1.1 什么是反向代理</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-为什么需要nginx--why">2 为什么需要nginx &ndash; why</a></li>
+    <li><a href="#3-nginx命令">3 nginx命令</a></li>
+    <li><a href="#4-nginx-要如何使用呢--how">4 nginx 要如何使用呢 &ndash; how</a>
+      <ul>
+        <li><a href="#41-nginx-的配置文件">4.1 nginx 的配置文件</a>
+          <ul>
+            <li><a href="#411-配置文件的层级">4.1.1 配置文件的层级：</a></li>
+            <li><a href="#412-全局块">4.1.2 全局块：</a></li>
+            <li><a href="#413-event块">4.1.3 event块：</a></li>
+            <li><a href="#414-http块">4.1.4 http块：</a></li>
+            <li><a href="#415-server块和location块">4.1.5 server块和location块：</a></li>
+          </ul>
+        </li>
+        <li><a href="#42-实战">4.2 实战</a>
+          <ul>
+            <li><a href="#421-http反向代理配置实战">4.2.1 http反向代理配置实战</a></li>
+            <li><a href="#422-负载均衡配置实战">4.2.2 负载均衡配置实战</a></li>
+            <li><a href="#423-静态页面配置">4.2.3 静态页面配置</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div><div class="content" id="content"><h2 class="heading-element" id="1-什么是nginx--what"><span>1 什么是nginx &ndash; what</span>
+  <a href="#1-%e4%bb%80%e4%b9%88%e6%98%afnginx--what" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>nginx 是 一个 轻量，高性能 ，http， 反向代理服务器</p>
+<h3 class="heading-element" id="11-什么是反向代理"><span>1.1 什么是反向代理</span>
+  <a href="#11-%e4%bb%80%e4%b9%88%e6%98%af%e5%8f%8d%e5%90%91%e4%bb%a3%e7%90%86" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>代理可以类比中介，你租房子，不是直接找房主，而是找中介。中介帮你去与房主交涉</p>
+<p>正向代理：是客户端进行代理，客户端<mark class="mark-default">知道</mark>自己进行了代理，客户端将数据发送给了代理服务器，代理服务器转发给真实服务器。真实服务器<mark class="mark-default">不知道</mark>有代理服务器，以为代理服务器就是客户端。 这就是正向代理。 类比海外代购</p>
+<p>反向代理： 是服务端的代理，客户端<mark class="mark-default">不知道</mark>有代理服务器，以为自己访问的是真实服务器，实际上访问的是代理服务器。</p>
+<p>正向代理的好处：帮你做你不能做的事</p>
+<p>反向代理的好处： 隐藏真实地址，负载均衡。</p>
+<h2 class="heading-element" id="2-为什么需要nginx--why"><span>2 为什么需要nginx &ndash; why</span>
+  <a href="#2-%e4%b8%ba%e4%bb%80%e4%b9%88%e9%9c%80%e8%a6%81nginx--why" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>既然django，tomcat都能提供web服务，为什么还需要nginx？</p>
+<br/>
+<p>虽然这些服务器可以提供web服务，但是他们更擅长处理后端逻辑。而nginx更擅长处理网络流量。专业的事交给专业的人。</p>
+<br/>
+<p>nginx擅长处理网络流量的体现：</p>
+<ol>
+<li>
+<p>nginx高并发能力强，处理特别快</p>
+<ol>
+<li>nginx事件驱动机制，底层采用多路复用技术，一个worker可以在一个线程中处理数万个连接</li>
+<li>master-worker进程模型：
+<ol>
+<li>master进程： 主进程，主要处理配置文件，管理worker</li>
+<li>worker进程：可以有多个，处理网络请求</li>
+</ol>
+</li>
+</ol>
+</li>
+<li>
+<p>支持反代</p>
+</li>
+<li>
+<p>支持负载均衡</p>
+</li>
+<li>
+<p>处理静态文件极快</p>
+</li>
+</ol>
+<h2 class="heading-element" id="3-nginx命令"><span>3 nginx命令</span>
+  <a href="#3-nginx%e5%91%bd%e4%bb%a4" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>环境 ： debian 12</p>
+<ol>
+<li>安装： <code>apt install nginx -y</code></li>
+<li>启动： <code>systemctl start nginx</code></li>
+<li>打开防火墙： <code>ufw allow 'nginx full'</code>
+<ol>
+<li><code>ufw reload</code></li>
+</ol>
+</li>
+<li>重启nginx： <code>systemctl reload nginx</code></li>
+<li>检查语法： <code>nginx -t</code></li>
+</ol>
+<h2 class="heading-element" id="4-nginx-要如何使用呢--how"><span>4 nginx 要如何使用呢 &ndash; how</span>
+  <a href="#4-nginx-%e8%a6%81%e5%a6%82%e4%bd%95%e4%bd%bf%e7%94%a8%e5%91%a2--how" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h2><p>nginx的 功能：</p>
+<ol>
+<li>反向代理</li>
+<li>负载均衡</li>
+<li>处理静态资源很快</li>
+</ol>
+<h3 class="heading-element" id="41-nginx-的配置文件"><span>4.1 nginx 的配置文件</span>
+  <a href="#41-nginx-%e7%9a%84%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><p>nginx的配置文件有两种写法：</p>
+<ul>
+<li>所有的配置写到一个文件中</li>
+<li>分两个文件写： 一个是主配置文件，一个模块配置文件</li>
+</ul>
+<p><mark class="mark-default">其实对后端来讲：也就部署网站会用，配置文件看得懂就行，不会让AI改就完了，所以这一部分可以先过，直接看实战</mark><br>
+<br/></p>
+<h4 class="heading-element" id="411-配置文件的层级"><span>4.1.1 配置文件的层级：</span>
+  <a href="#411-%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6%e7%9a%84%e5%b1%82%e7%ba%a7" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><div class="code-block highlight" data-mode="classic" data-copyable="true"><div class="chroma">
+<div class="code-header language-txt"><span class="code-title"><i class="arrow fa-solid fa-chevron-down" aria-hidden="true"></i></span><span class="ellipses-btn" aria-label="Show more options" role="button"><i class="fa-solid fa-ellipsis-h" aria-hidden="true"></i></span><span class="line-nos-btn" aria-label="切换行号" role="button" title="切换行号"><i class="fa-solid fa-list-ol" aria-hidden="true"></i></span><span class="line-wrap-btn" aria-label="切换自动换行" role="button" title="切换自动换行"><i class="fa-solid fa-right-left" aria-hidden="true"></i></span><span class="copy-btn" aria-label="复制到剪贴板" role="button" title="复制到剪贴板"><i class="fa-regular fa-clone" aria-hidden="true"></i></span></div><div class="code-wrapper" data-max="10" data-line-digit="2" style="--fi-max-shown-lines:10;--fi-line-digit:2;--fi-line-start:1;"><table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-txt" data-lang="txt"><span class="line"><span class="cl">全局块
+</span></span><span class="line"><span class="cl">event块
+</span></span><span class="line"><span class="cl">http块
+</span></span><span class="line"><span class="cl">	-http全局配置
+</span></span><span class="line"><span class="cl">	-upstream块
+</span></span><span class="line"><span class="cl">	-server块
+</span></span><span class="line"><span class="cl">		-server全局配置
+</span></span><span class="line"><span class="cl">		-location块
+</span></span><span class="line"><span class="cl">			location配置指令
+</span></span><span class="line"><span class="cl">mail块</span></span></code></pre></td></tr></table></div>
+</div>
+</div><p>如果是将所有配置写到一个文件的写法，就是将这些块都写到一个文件中<br>
+如果是 模块化的配置方法：</p>
+<ul>
+<li>全局，event，http块里的配置等 写到一个文件中，同时在这个文件中导入模块配置文件
+<ul>
+<li><code>include /etc/nginx/conf.d/*.conf;</code></li>
+</ul>
+</li>
+<li>在模块配置文件中， 写 upstream块，server块等</li>
+</ul>
+<h4 class="heading-element" id="412-全局块"><span>4.1.2 全局块：</span>
+  <a href="#412-%e5%85%a8%e5%b1%80%e5%9d%97" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p><a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140541294.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140541294.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140541294.png' alt="image.png"></a><br>
+<br/></p>
+<h4 class="heading-element" id="413-event块"><span>4.1.3 event块：</span>
+  <a href="#413-event%e5%9d%97" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p><a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140548689.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140548689.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140548689.png' alt="image.png"></a><br>
+<br/></p>
+<h4 class="heading-element" id="414-http块"><span>4.1.4 http块：</span>
+  <a href="#414-http%e5%9d%97" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p><a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140604955.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140604955.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225140604955.png' alt="image.png"></a></p>
+<p><a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225141454741.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225141454741.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225141454741.png' alt="image.png"></a><br>
+<a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225141519313.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225141519313.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225141519313.png' alt="image.png"></a></p>
+<h4 class="heading-element" id="415-server块和location块"><span>4.1.5 server块和location块：</span>
+  <a href="#415-server%e5%9d%97%e5%92%8clocation%e5%9d%97" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p><a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142351565.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142351565.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142351565.png' alt="image.png"></a></p>
+<p><a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142401934.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142401934.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142401934.png' alt="image.png"></a><br>
+<a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142526384.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142526384.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225142526384.png' alt="image.png"></a></p>
+<h3 class="heading-element" id="42-实战"><span>4.2 实战</span>
+  <a href="#42-%e5%ae%9e%e6%88%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h3><h4 class="heading-element" id="421-http反向代理配置实战"><span>4.2.1 http反向代理配置实战</span>
+  <a href="#421-http%e5%8f%8d%e5%90%91%e4%bb%a3%e7%90%86%e9%85%8d%e7%bd%ae%e5%ae%9e%e6%88%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><p>环境： debian 12<br>
+确保你已经打开了nginx： <code>systemctl status nginx</code></p>
+<ol>
+<li>开启一个后端服务</li>
+</ol>
+<div class="code-block highlight" data-mode="classic" data-copyable="true"><div class="chroma">
+<div class="code-header language-shell"><span class="code-title"><i class="arrow fa-solid fa-chevron-down" aria-hidden="true"></i></span><span class="ellipses-btn" aria-label="Show more options" role="button"><i class="fa-solid fa-ellipsis-h" aria-hidden="true"></i></span><span class="line-nos-btn" aria-label="切换行号" role="button" title="切换行号"><i class="fa-solid fa-list-ol" aria-hidden="true"></i></span><span class="line-wrap-btn" aria-label="切换自动换行" role="button" title="切换自动换行"><i class="fa-solid fa-right-left" aria-hidden="true"></i></span><span class="copy-btn" aria-label="复制到剪贴板" role="button" title="复制到剪贴板"><i class="fa-regular fa-clone" aria-hidden="true"></i></span></div><div class="code-wrapper" data-max="10" data-line-digit="2" style="--fi-max-shown-lines:10;--fi-line-digit:2;--fi-line-start:1;"><table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">1. 创建文件夹
+</span></span><span class="line"><span class="cl">mkdir -p ~/nginx-test
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ~/nginx-test
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">2. 编写一个页面
+</span></span><span class="line"><span class="cl">cat &gt; index.html <span class="s">&lt;&lt; &#39;EOF&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;!DOCTYPE html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;head&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">    &lt;meta charset=&#34;UTF-8&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">    &lt;title&gt;后端页面 - 被 Nginx 代理&lt;/title&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;/head&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;body style=&#34;background:#112233;color:#00ff88;font-family:monospace;text-align:center;padding-top:80px;&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">    &lt;h1&gt;🎉 成功！这是后端返回的内容（端口 8080）&lt;/h1&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">    &lt;p&gt;你现在看到的内容经过 Nginx 反向代理转发。&lt;/p&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">    &lt;p&gt;代理功能正常工作！&lt;/p&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;/body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;/html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">3. 启动后端服务（后台运行）
+</span></span><span class="line"><span class="cl">nohup python3 -m http.server <span class="m">8080</span> &gt; backend.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;后端已启动在 8080 端口！&#34;</span></span></span></code></pre></td></tr></table></div><div class="code-expand-btn" aria-label="展开或折叠代码块" role="button"><i class="fa-solid fa-angles-down" aria-hidden="true"></i></div>
+</div>
+</div><ol start="2">
+<li>在/etc/nginx/sites-enabled/default 这个模块配置文件中写</li>
+</ol>
+<div class="code-block highlight" data-mode="classic" data-copyable="true"><div class="chroma">
+<div class="code-header language-fallback"><span class="code-title"><i class="arrow fa-solid fa-chevron-down" aria-hidden="true"></i></span><span class="ellipses-btn" aria-label="Show more options" role="button"><i class="fa-solid fa-ellipsis-h" aria-hidden="true"></i></span><span class="line-nos-btn" aria-label="切换行号" role="button" title="切换行号"><i class="fa-solid fa-list-ol" aria-hidden="true"></i></span><span class="line-wrap-btn" aria-label="切换自动换行" role="button" title="切换自动换行"><i class="fa-solid fa-right-left" aria-hidden="true"></i></span><span class="copy-btn" aria-label="复制到剪贴板" role="button" title="复制到剪贴板"><i class="fa-regular fa-clone" aria-hidden="true"></i></span></div><div class="code-wrapper" data-max="10" data-line-digit="2" style="--fi-max-shown-lines:10;--fi-line-digit:2;--fi-line-start:1;"><table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">server{
+</span></span><span class="line"><span class="cl">	listen 80;  #监听端口
+</span></span><span class="line"><span class="cl">	server_name _;  #域名匹配
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	location / {
+</span></span><span class="line"><span class="cl">		proxy_pass http://localhost:8080;  #将80端口的请求转发到后端8080
+</span></span><span class="line"><span class="cl">		charset utf-8;   # 防止乱码
+</span></span><span class="line"><span class="cl">	}
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">}</span></span></code></pre></td></tr></table></div>
+</div>
+</div><p>保存<br>
+3. 检查语法并重启nginx</p>
+<div class="code-block highlight" data-mode="classic" data-copyable="true"><div class="chroma">
+<div class="code-header language-shell"><span class="code-title"><i class="arrow fa-solid fa-chevron-down" aria-hidden="true"></i></span><span class="ellipses-btn" aria-label="Show more options" role="button"><i class="fa-solid fa-ellipsis-h" aria-hidden="true"></i></span><span class="line-nos-btn" aria-label="切换行号" role="button" title="切换行号"><i class="fa-solid fa-list-ol" aria-hidden="true"></i></span><span class="line-wrap-btn" aria-label="切换自动换行" role="button" title="切换自动换行"><i class="fa-solid fa-right-left" aria-hidden="true"></i></span><span class="copy-btn" aria-label="复制到剪贴板" role="button" title="复制到剪贴板"><i class="fa-regular fa-clone" aria-hidden="true"></i></span></div><div class="code-wrapper" data-max="10" data-line-digit="1" style="--fi-max-shown-lines:10;--fi-line-digit:1;--fi-line-start:1;"><table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">nginx -t  <span class="c1"># 检查语法</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">systemctl reload nginx <span class="c1"># 重启nginx</span></span></span></code></pre></td></tr></table></div>
+</div>
+</div><p>打开服务器的ip地址，即可看到<br>
+<a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225163709166.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225163709166.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225163709166.png' alt="image.png"></a></p>
+<p>在location 块中除了 proxy_pass 外还可以配：<br>
+<a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225164322989.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225164322989.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225164322989.png' alt="image.png"></a></p>
+<h4 class="heading-element" id="422-负载均衡配置实战"><span>4.2.2 负载均衡配置实战</span>
+  <a href="#422-%e8%b4%9f%e8%bd%bd%e5%9d%87%e8%a1%a1%e9%85%8d%e7%bd%ae%e5%ae%9e%e6%88%98" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><ol>
+<li>准备两个后端服务</li>
+</ol>
+<div class="code-block highlight" data-mode="classic" data-copyable="true"><div class="chroma">
+<div class="code-header language-shell"><span class="code-title"><i class="arrow fa-solid fa-chevron-down" aria-hidden="true"></i></span><span class="ellipses-btn" aria-label="Show more options" role="button"><i class="fa-solid fa-ellipsis-h" aria-hidden="true"></i></span><span class="line-nos-btn" aria-label="切换行号" role="button" title="切换行号"><i class="fa-solid fa-list-ol" aria-hidden="true"></i></span><span class="line-wrap-btn" aria-label="切换自动换行" role="button" title="切换自动换行"><i class="fa-solid fa-right-left" aria-hidden="true"></i></span><span class="copy-btn" aria-label="复制到剪贴板" role="button" title="复制到剪贴板"><i class="fa-regular fa-clone" aria-hidden="true"></i></span></div><div class="code-wrapper" data-max="10" data-line-digit="2" style="--fi-max-shown-lines:10;--fi-line-digit:2;--fi-line-start:1;"><table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl"><span class="c1"># 1 创建文件夹</span>
+</span></span><span class="line"><span class="cl">mkdir -p ~/backend-1 ~/backend-2
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 2 创建两个页面</span>
+</span></span><span class="line"><span class="cl">cat &gt; ~/backend1/index.html <span class="s">&lt;&lt; &#39;EOF&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;!DOCTYPE html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;head&gt;&lt;meta charset=&#34;UTF-8&#34;&gt;&lt;title&gt;Backend-1&lt;/title&gt;&lt;/head&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;body style=&#34;background:#112233;color:#00ff88;text-align:center;padding-top:100px;&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">    &lt;h1&gt;我是 Backend-1 (端口 8080)&lt;/h1&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">    &lt;p&gt;这是第一台后端服务器&lt;/p&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;/body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;/html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">cat &gt; ~/backend2/index.html <span class="s">&lt;&lt; &#39;EOF&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;!DOCTYPE html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;head&gt;&lt;meta charset=&#34;UTF-8&#34;&gt;&lt;title&gt;Backend-2&lt;/title&gt;&lt;/head&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;body style=&#34;background:#331122;color:#ff8800;text-align:center;padding-top:100px;&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">    &lt;h1&gt;我是 Backend-2 (端口 8081)&lt;/h1&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">    &lt;p&gt;这是第二台后端服务器&lt;/p&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;/body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;/html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 3. 启动两个后端（后台运行） </span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> ~/backend1 <span class="o">&amp;&amp;</span> nohup python3 -m http.server <span class="m">8080</span> &gt; backend1.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span> <span class="nb">cd</span> ~/backend2 <span class="o">&amp;&amp;</span> nohup python3 -m http.server <span class="m">8081</span> &gt; backend2.log 2&gt;<span class="p">&amp;</span><span class="m">1</span> <span class="p">&amp;</span>
+</span></span><span class="line"><span class="cl"><span class="nb">echo</span> <span class="s2">&#34;两个后端已启动！&#34;</span> </span></span></code></pre></td></tr></table></div><div class="code-expand-btn" aria-label="展开或折叠代码块" role="button"><i class="fa-solid fa-angles-down" aria-hidden="true"></i></div>
+</div>
+</div><ol start="2">
+<li>配置nginx</li>
+</ol>
+<p>在/etc/nginx/sites-available/default 文件中修改</p>
+<div class="code-block highlight" data-mode="classic" data-copyable="true"><div class="chroma">
+<div class="code-header language-shell"><span class="code-title"><i class="arrow fa-solid fa-chevron-down" aria-hidden="true"></i></span><span class="ellipses-btn" aria-label="Show more options" role="button"><i class="fa-solid fa-ellipsis-h" aria-hidden="true"></i></span><span class="line-nos-btn" aria-label="切换行号" role="button" title="切换行号"><i class="fa-solid fa-list-ol" aria-hidden="true"></i></span><span class="line-wrap-btn" aria-label="切换自动换行" role="button" title="切换自动换行"><i class="fa-solid fa-right-left" aria-hidden="true"></i></span><span class="copy-btn" aria-label="复制到剪贴板" role="button" title="复制到剪贴板"><i class="fa-regular fa-clone" aria-hidden="true"></i></span></div><div class="code-wrapper" data-max="10" data-line-digit="2" style="--fi-max-shown-lines:10;--fi-line-digit:2;--fi-line-start:1;"><table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">#定义upstream</span>
+</span></span><span class="line"><span class="cl">upstream backend_pool<span class="o">{</span>
+</span></span><span class="line"><span class="cl">	server localhost:8081<span class="p">;</span> 
+</span></span><span class="line"><span class="cl">	server localhost:8082<span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">server<span class="o">{</span>
+</span></span><span class="line"><span class="cl">	listen 80<span class="p">;</span>
+</span></span><span class="line"><span class="cl">	server_name _<span class="p">;</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	location / <span class="o">{</span>
+</span></span><span class="line"><span class="cl">		proxy_pass http://backend_pool/<span class="p">;</span>
+</span></span><span class="line"><span class="cl">		proxy_set_header Host <span class="nv">$host</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        proxy_set_header X-Real-IP <span class="nv">$remote_addr</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        proxy_set_header X-Forwarded-For <span class="nv">$proxy_add_x_forwarded_for</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        proxy_set_header X-Forwarded-Proto <span class="nv">$scheme</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        charset utf-8<span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="o">}</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></td></tr></table></div><div class="code-expand-btn" aria-label="展开或折叠代码块" role="button"><i class="fa-solid fa-angles-down" aria-hidden="true"></i></div>
+</div>
+</div><ol start="3">
+<li>重启nginx</li>
+</ol>
+<p>访问页面 并 ctrl + f5<br>
+可以看到：<br>
+<a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225165757067.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225165757067.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225165757067.png' alt="image.png"></a></p>
+<p>与<br>
+<a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225165808450.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225165808450.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225165808450.png' alt="image.png"></a><br>
+交替出现</p>
+<blockquote>
+<p>负载均衡策略</p>
+</blockquote>
+<ol>
+<li>轮询（默认） 轮流分配</li>
+<li>给连接最少的后端服务        least_conn</li>
+<li>根据用户ip算哈希               ip_hash</li>
+<li>按权重分配                        weigth =1    数字越大权重越高</li>
+<li>完全随机                            random</li>
+</ol>
+<h4 class="heading-element" id="423-静态页面配置"><span>4.2.3 静态页面配置</span>
+  <a href="#423-%e9%9d%99%e6%80%81%e9%a1%b5%e9%9d%a2%e9%85%8d%e7%bd%ae" class="heading-mark">
+    <svg class="octicon octicon-link" viewBox="0 0 16 16" version="1.1" width="16" height="16" aria-hidden="true"><path d="m7.775 3.275 1.25-1.25a3.5 3.5 0 1 1 4.95 4.95l-2.5 2.5a3.5 3.5 0 0 1-4.95 0 .751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018 1.998 1.998 0 0 0 2.83 0l2.5-2.5a2.002 2.002 0 0 0-2.83-2.83l-1.25 1.25a.751.751 0 0 1-1.042-.018.751.751 0 0 1-.018-1.042Zm-4.69 9.64a1.998 1.998 0 0 0 2.83 0l1.25-1.25a.751.751 0 0 1 1.042.018.751.751 0 0 1 .018 1.042l-1.25 1.25a3.5 3.5 0 1 1-4.95-4.95l2.5-2.5a3.5 3.5 0 0 1 4.95 0 .751.751 0 0 1-.018 1.042.751.751 0 0 1-1.042.018 1.998 1.998 0 0 0-2.83 0l-2.5 2.5a1.998 1.998 0 0 0 0 2.83Z"></path></svg>
+  </a>
+</h4><ol>
+<li>创建静态页面</li>
+</ol>
+<div class="code-block highlight" data-mode="classic" data-copyable="true"><div class="chroma">
+<div class="code-header language-shell"><span class="code-title"><i class="arrow fa-solid fa-chevron-down" aria-hidden="true"></i></span><span class="ellipses-btn" aria-label="Show more options" role="button"><i class="fa-solid fa-ellipsis-h" aria-hidden="true"></i></span><span class="line-nos-btn" aria-label="切换行号" role="button" title="切换行号"><i class="fa-solid fa-list-ol" aria-hidden="true"></i></span><span class="line-wrap-btn" aria-label="切换自动换行" role="button" title="切换自动换行"><i class="fa-solid fa-right-left" aria-hidden="true"></i></span><span class="copy-btn" aria-label="复制到剪贴板" role="button" title="复制到剪贴板"><i class="fa-regular fa-clone" aria-hidden="true"></i></span></div><div class="code-wrapper" data-max="10" data-line-digit="2" style="--fi-max-shown-lines:10;--fi-line-digit:2;--fi-line-start:1;"><table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 1. 进入默认静态目录</span>
+</span></span><span class="line"><span class="cl"><span class="nb">cd</span> /var/www/html
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 2. 创建一个漂亮的静态首页</span>
+</span></span><span class="line"><span class="cl">cat &gt; index.html <span class="s">&lt;&lt; &#39;EOF&#39;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;!DOCTYPE html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;head&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">    &lt;meta charset=&#34;UTF-8&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">    &lt;title&gt;我的第一个 Nginx 静态网站&lt;/title&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">    &lt;style&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">        body { font-family: Arial; text-align: center; padding: 100px; background: linear-gradient(135deg, #667eea, #764ba2); color: white; }
+</span></span></span><span class="line"><span class="cl"><span class="s">        h1 { font-size: 3em; }
+</span></span></span><span class="line"><span class="cl"><span class="s">        .card { background: rgba(255,255,255,0.1); padding: 30px; border-radius: 15px; display: inline-block; margin-top: 30px; }
+</span></span></span><span class="line"><span class="cl"><span class="s">    &lt;/style&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;/head&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">    &lt;div class=&#34;card&#34;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">        &lt;h1&gt;🎉 恭喜！你用 Nginx 成功运行了静态网站！&lt;/h1&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">        &lt;p&gt;这是纯静态页面，由 Nginx 直接提供。&lt;/p&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">        &lt;p&gt;当前时间：$(date)&lt;/p&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">    &lt;/div&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;/body&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">&lt;/html&gt;
+</span></span></span><span class="line"><span class="cl"><span class="s">EOF</span></span></span></code></pre></td></tr></table></div><div class="code-expand-btn" aria-label="展开或折叠代码块" role="button"><i class="fa-solid fa-angles-down" aria-hidden="true"></i></div>
+</div>
+</div><ol start="2">
+<li>修改配置文件</li>
+</ol>
+<p>修改 /etc/nginx/sites-available/default 文件</p>
+<div class="code-block highlight" data-mode="classic" data-copyable="true"><div class="chroma">
+<div class="code-header language-shell"><span class="code-title"><i class="arrow fa-solid fa-chevron-down" aria-hidden="true"></i></span><span class="ellipses-btn" aria-label="Show more options" role="button"><i class="fa-solid fa-ellipsis-h" aria-hidden="true"></i></span><span class="line-nos-btn" aria-label="切换行号" role="button" title="切换行号"><i class="fa-solid fa-list-ol" aria-hidden="true"></i></span><span class="line-wrap-btn" aria-label="切换自动换行" role="button" title="切换自动换行"><i class="fa-solid fa-right-left" aria-hidden="true"></i></span><span class="copy-btn" aria-label="复制到剪贴板" role="button" title="复制到剪贴板"><i class="fa-regular fa-clone" aria-hidden="true"></i></span></div><div class="code-wrapper" data-max="10" data-line-digit="2" style="--fi-max-shown-lines:10;--fi-line-digit:2;--fi-line-start:1;"><table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-shell" data-lang="shell"><span class="line"><span class="cl">upstream backend_pool <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    least_conn<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    server 127.0.0.1:8080<span class="p">;</span>
+</span></span><span class="line"><span class="cl">    server 127.0.0.1:8081<span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">server <span class="o">{</span>
+</span></span><span class="line"><span class="cl">    listen 80<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    server_name _<span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 静态页面根目录配置（重点！）</span>
+</span></span><span class="line"><span class="cl">    root /var/www/html<span class="p">;</span>      <span class="c1"># 静态文件根目录</span>
+</span></span><span class="line"><span class="cl">    index index.html<span class="p">;</span>        <span class="c1"># 默认访问的文件名</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 静态页面（根路径）</span>
+</span></span><span class="line"><span class="cl">    location / <span class="o">{</span>
+</span></span><span class="line"><span class="cl">        try_files <span class="nv">$uri</span> <span class="nv">$uri</span>/ <span class="o">=</span>404<span class="p">;</span>   <span class="c1"># 优先找文件，找不到返回404</span>
+</span></span><span class="line"><span class="cl">    <span class="o">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">}</span></span></span></code></pre></td></tr></table></div><div class="code-expand-btn" aria-label="展开或折叠代码块" role="button"><i class="fa-solid fa-angles-down" aria-hidden="true"></i></div>
+</div>
+</div><ol start="3">
+<li>重启</li>
+</ol>
+<p>可以看到<br>
+<a class="lightgallery" target="_blank" href="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225170744193.png" title="image.png" data-thumbnail="https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225170744193.png" data-sub-html="<h2>image.png</h2>"><img loading="lazy" src='https://cdn.jsdelivr.net/gh/word1230/image-ob@main/image/20260225170744193.png' alt="image.png"></a></p></div><div class="post-footer" id="post-footer">
+  <div class="post-info">
+    <div class="post-info-line">
+      <div class="post-info-mod"><span title="更新于 2026-03-22 19:55:26">更新于 2026-03-22&nbsp;</span>
+      </div></div></div>
+
+  <div class="post-info-more">
+    <section class="post-tags"></section>
+    <section><span><a href="javascript:void(0);" onclick="window.history.back();">返回</a></span>&nbsp;|&nbsp;<span><a href="/">主页</a></span>
+    </section>
+  </div><div class="post-nav"><a href="/java/spring/50628da4/" class="post-nav-item" rel="prev" title="AOP进阶"><i class="fa-solid fa-angle-left" aria-hidden="true"></i>AOP进阶</a><a href="/%E8%A7%82%E7%9C%8B%E8%A7%86%E9%A2%91%E6%80%BB%E7%BB%93/8a3350e3/" class="post-nav-item" rel="next" title="自慰影响身体的机制">自慰影响身体的机制<i class="fa-solid fa-angle-right" aria-hidden="true"></i></a></div>
+</div>
+</article>
+
+  <aside class="toc" id="toc-auto" aria-label="目录"><h2 class="toc-title">目录&nbsp;<i class="toc-icon fa-solid fa-angle-down" aria-hidden="true"></i></h2>
+      <div class="toc-content" id="toc-content-auto"></div></aside><dialog id="toc-dialog" aria-labelledby="toc-dialog-title" role="dialog">
+      <div class="toc">
+        <h2 class="toc-title">目录</h2>
+        <div class="toc-content" id="toc-content-drawer"><nav >
+  <ul>
+    <li><a href="#1-什么是nginx--what">1 什么是nginx &ndash; what</a>
+      <ul>
+        <li><a href="#11-什么是反向代理">1.1 什么是反向代理</a></li>
+      </ul>
+    </li>
+    <li><a href="#2-为什么需要nginx--why">2 为什么需要nginx &ndash; why</a></li>
+    <li><a href="#3-nginx命令">3 nginx命令</a></li>
+    <li><a href="#4-nginx-要如何使用呢--how">4 nginx 要如何使用呢 &ndash; how</a>
+      <ul>
+        <li><a href="#41-nginx-的配置文件">4.1 nginx 的配置文件</a>
+          <ul>
+            <li><a href="#411-配置文件的层级">4.1.1 配置文件的层级：</a></li>
+            <li><a href="#412-全局块">4.1.2 全局块：</a></li>
+            <li><a href="#413-event块">4.1.3 event块：</a></li>
+            <li><a href="#414-http块">4.1.4 http块：</a></li>
+            <li><a href="#415-server块和location块">4.1.5 server块和location块：</a></li>
+          </ul>
+        </li>
+        <li><a href="#42-实战">4.2 实战</a>
+          <ul>
+            <li><a href="#421-http反向代理配置实战">4.2.1 http反向代理配置实战</a></li>
+            <li><a href="#422-负载均衡配置实战">4.2.2 负载均衡配置实战</a></li>
+            <li><a href="#423-静态页面配置">4.2.3 静态页面配置</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav></div>
+      </div>
+    </dialog></main><footer class="footer">
+    <div class="footer-container"><div class="footer-line copyright" itemscope itemtype="http://schema.org/CreativeWork"><i class="fa-regular fa-copyright" aria-hidden="true"></i>
+            <span itemprop="copyrightYear">2026</span><span class="author" itemprop="copyrightHolder">
+              <a href="/">cheems</a></span></div></div>
+  </footer></div><div class="widgets"><div class="fixed-buttons"><div class="fixed-button back-to-top animate__faster d-none" role="button" aria-label="回到顶部"><i class="fa-solid fa-arrow-up" aria-hidden="true"></i></div><div id="toc-drawer-button" class="fixed-button toc-drawer-button d-none" role="button" aria-label="目录"><i class="fa-solid fa-bars" aria-hidden="true"></i></div></div><div id="mask"></div><noscript>
+    <div class="noscript-warning">该网站在启用 JavaScript 的情况下效果最佳。</div>
+  </noscript>
+</div><link rel="stylesheet" href="/lib/lightgallery/css/lightgallery-bundle.min.css"><link rel="stylesheet" href="/lib/cookieconsent/cookieconsent.min.css"><script src="/lib/autocomplete/autocomplete.min.js" defer></script><script src="/lib/fuse/fuse.min.js" defer></script><script src="/lib/lightgallery/lightgallery.min.js" defer></script><script src="/lib/lightgallery/plugins/thumbnail/lg-thumbnail.min.js" defer></script><script src="/lib/lightgallery/plugins/zoom/lg-zoom.min.js" defer></script><script src="/lib/cookieconsent/cookieconsent.min.js" defer></script><script src="/js/config/41a63c30a563a168b1921f53e26b7865.js" defer></script><script src="/js/theme.min.js" defer></script><script src="/js/custom.min.js" defer></script></body>
+</html>

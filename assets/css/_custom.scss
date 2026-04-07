@@ -764,10 +764,17 @@ body[data-theme='dark'],
   padding: clamp(1.4rem, 3vw, 2.4rem);
 }
 
+.page.single .header {
+  padding-top: 0.35rem;
+  scroll-margin-top: calc(var(--fi-scroll-mt, 5rem) + 1.25rem);
+}
+
 .page.single .single-title {
-  margin-bottom: 1rem;
+  margin: 0 0 1rem;
+  padding-top: 0.08em;
   font-size: clamp(2.5rem, 5vw, 4.25rem);
-  line-height: 0.98;
+  line-height: 1.08;
+  overflow-wrap: anywhere;
 }
 
 .page.single .post-meta {
@@ -784,6 +791,10 @@ body[data-theme='dark'],
 .page.single .content {
   color: var(--blog-ink);
   line-height: 1.95;
+}
+
+.page.single .content [id] {
+  scroll-margin-top: calc(var(--fi-scroll-mt, 5rem) + 1.2rem);
 }
 
 .page.single .content :is(h2, h3, h4, h5) {
