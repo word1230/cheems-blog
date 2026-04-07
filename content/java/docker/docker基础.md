@@ -1,11 +1,12 @@
 ---
-date: '2026-03-30T13:22:41+08:00'
+date: 2026-03-30T13:22:41+08:00
 draft: false
-slug: '8e44ea1e'
+slug: 8e44ea1e
 type: posts
-title: 'Docker基础'
-collections: ""
-categories: []
+title: Docker基础
+collections: docker
+categories:
+  - java
 ---
 
 <!--more-->
