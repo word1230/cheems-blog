@@ -1,4 +1,37 @@
 (() => {
+  const isMobileViewport = () => window.matchMedia('only screen and (max-width: 680px)').matches;
+
+  const getActiveHeader = () => {
+    const header = document.getElementById(isMobileViewport() ? 'header-mobile' : 'header-desktop');
+    if (!header) return null;
+
+    const { position, display } = window.getComputedStyle(header);
+    if (display === 'none' || position === 'static') return null;
+
+    return header;
+  };
+
+  const getScrollOffset = () => {
+    const header = getActiveHeader();
+    return header ? header.getBoundingClientRect().height + 12 : 0;
+  };
+
+  const getHashTarget = (hash) => {
+    if (!hash || hash === '#') return null;
+
+    const id = decodeURIComponent(hash.slice(1));
+    return document.getElementById(id);
+  };
+
+  const scrollToHashTarget = (hash, behavior = 'smooth') => {
+    const target = getHashTarget(hash);
+    if (!target) return false;
+
+    const top = target.getBoundingClientRect().top + window.scrollY - getScrollOffset();
+    window.scrollTo({ top: Math.max(top, 0), behavior });
+    return true;
+  };
+
   const closeDesktopMenus = (exceptItem = null) => {
     document.querySelectorAll('#header-desktop .menu-item.has-children.is-open').forEach((item) => {
       if (item === exceptItem) return;
@@ -51,4 +84,27 @@
       closeDesktopMenus();
     }
   });
+
+  document.addEventListener('click', (event) => {
+    const anchor = event.target.closest('a[href^="#"]');
+    if (!anchor) return;
+
+    const hash = anchor.getAttribute('href');
+    if (!scrollToHashTarget(hash)) return;
+
+    event.preventDefault();
+    if (window.location.hash !== hash) {
+      window.history.pushState(null, '', hash);
+    }
+  });
+
+  window.addEventListener('hashchange', () => {
+    scrollToHashTarget(window.location.hash, 'auto');
+  });
+
+  if (window.location.hash) {
+    window.requestAnimationFrame(() => {
+      scrollToHashTarget(window.location.hash, 'auto');
+    });
+  }
 })();
