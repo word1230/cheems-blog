@@ -1,11 +1,12 @@
 ---
-date: '2026-04-16T09:18:46+08:00'
+date: 2026-04-16T09:18:46+08:00
 draft: false
-slug: '470aa138'
+slug: 470aa138
 type: posts
-title: 'Mysql'
-collections: ""
-categories: []
+title: Mysql
+collections: 面试题
+categories:
+  - java
 ---
 
 <!--more-->
