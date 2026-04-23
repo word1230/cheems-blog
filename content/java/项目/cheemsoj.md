@@ -326,11 +326,6 @@ RabbitMQ用于判题的异步操作，用户提交代码后不用一直等待结
   - 你这个方案保证的是 at-least-once、at-most-once 还是 exactly-once？
 
 
-exactly-once
-
-实际语义更接近“至少一次 + 下游幂等”。
-
-
   - 如果消息重复投递了，你怎么保证判题不会重复执行？
 
   - 你用了手动 ACK，那 ACK 的时机是什么？如果判题中途异常，你怎么处理？
@@ -352,8 +347,6 @@ exactly-once
 
   - 幂等是靠什么兜住的
 
-  如果再深一点，我会继续问：
-
   - 你有没有做 publisher confirm？
 
 
@@ -365,12 +358,7 @@ exactly-once
 
   - 你控制并发，是在 MQ 消费端控制，还是在 sandbox 执行端控制？
 
-
-  
-  
   - 你会用哪些手段做并发控制？consumer concurrency、prefetch、Semaphore、线程池，还是别的？
-
-
 
   - 为什么并发控制能减少 Docker 容器过量创建？
   - 并发数是怎么定的？拍脑袋，还是按 CPU / 内存 / 单任务资源占用估算？
