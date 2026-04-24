@@ -80,26 +80,26 @@
       <div class="content">
         <p>{{ $summaryText }}</p>
       </div>
-
-      <div class="post-footer">
-        {{- if $tagTerms -}}
-          <div class="post-tags">
-            {{- range first 3 $tagTerms -}}
-              <a href="{{ partial `function/escapeurl.html` .RelPermalink }}" class="post-tag">{{ .LinkTitle }}</a>
-            {{- end -}}
-          </div>
-        {{- else -}}
-          <div class="post-tags post-tags-empty">
-            <span>持续整理中</span>
-          </div>
-        {{- end -}}
-
-        <a class="post-card-link" href="{{ .RelPermalink }}">
-          <span>{{ T "single.readMore" }}</span>
-          {{- dict "Class" "fa-solid fa-arrow-right" | partial "plugin/icon.html" -}}
-        </a>
-      </div>
     </div>
+  </div>
+
+  <div class="post-footer">
+    {{- if $tagTerms -}}
+      <div class="post-tags">
+        {{- range first 3 $tagTerms -}}
+          <a href="{{ partial `function/escapeurl.html` .RelPermalink }}" class="post-tag">{{ .LinkTitle }}</a>
+        {{- end -}}
+      </div>
+    {{- else -}}
+      <div class="post-tags post-tags-empty">
+        <span>持续整理中</span>
+      </div>
+    {{- end -}}
+
+    <a class="post-card-link" href="{{ .RelPermalink }}">
+      <span>{{ T "single.readMore" }}</span>
+      {{- dict "Class" "fa-solid fa-arrow-right" | partial "plugin/icon.html" -}}
+    </a>
   </div>
 </article>
 {{- /* EOF */ -}}

@@ -1,0 +1,21 @@
+- generic [active] [ref=e1]:
+  - dialog "cookieconsent" [ref=e2]:
+    - generic [ref=e3]:
+      - text: 本网站使用 Cookies 来改善您的浏览体验。
+      - button "learn more about cookies" [ref=e4] [cursor=pointer]: 了解更多
+    - button "dismiss cookie message" [ref=e6] [cursor=pointer]: 同意
+  - generic [ref=e7]:
+    - banner [ref=e8]:
+      - generic [ref=e9]:
+        - link "Cheems Blog" [ref=e11] [cursor=pointer]:
+          - /url: /
+        - navigation [ref=e12]
+    - main [ref=e31]:
+      - generic [ref=e32]:
+        - generic [ref=e33]
+        - generic [ref=e73]
+    - contentinfo [ref=e252]:
+      - generic [ref=e254]:
+        - generic [ref=e256]: "2026"
+        - link "cheems" [ref=e258] [cursor=pointer]:
+          - /url: /

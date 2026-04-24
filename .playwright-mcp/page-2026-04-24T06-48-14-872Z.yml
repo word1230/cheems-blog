@@ -1,0 +1,227 @@
+- generic [active] [ref=e1]:
+  - dialog "cookieconsent" [ref=e2]:
+    - generic [ref=e3]:
+      - text: 本网站使用 Cookies 来改善您的浏览体验。
+      - button "learn more about cookies" [ref=e4] [cursor=pointer]: 了解更多
+    - button "dismiss cookie message" [ref=e6] [cursor=pointer]: 同意
+  - generic [ref=e7]:
+    - banner [ref=e8]:
+      - generic [ref=e9]:
+        - link "Cheems Blog" [ref=e11] [cursor=pointer]:
+          - /url: /
+        - navigation [ref=e12]:
+          - list [ref=e13]:
+            - listitem [ref=e14]:
+              - link "时间轴" [ref=e15] [cursor=pointer]:
+                - /url: /archives/
+                - text: 时间轴
+            - listitem [ref=e17]:
+              - generic [ref=e18]:
+                - link "系列" [ref=e19] [cursor=pointer]:
+                  - /url: /collections/
+                  - text: 系列
+                - button "Toggle 系列 submenu" [ref=e21] [cursor=pointer]
+            - listitem [ref=e23]
+            - listitem [ref=e24]:
+              - combobox "搜索文章标题或内容……" [ref=e26]
+              - link "搜索" [ref=e27] [cursor=pointer]:
+                - /url: javascript:void(0);
+            - button "切换主题" [ref=e29] [cursor=pointer]
+    - main [ref=e31]:
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - generic [ref=e34]:
+            - paragraph [ref=e35]: Personal Engineering Notebook
+            - heading "Cheems Blog" [level=1] [ref=e36]
+            - paragraph [ref=e37]: 记录开发过程中的实践、踩坑与工具经验，让零散问题沉淀成可复用的知识。
+            - generic [ref=e38]:
+              - link "浏览时间轴" [ref=e39] [cursor=pointer]:
+                - /url: /archives/
+              - link "进入系列" [ref=e40] [cursor=pointer]:
+                - /url: /collections/
+          - generic [ref=e41]:
+            - link "最近更新 Pomodoro 2026-04-17 约 2 分钟" [ref=e42] [cursor=pointer]:
+              - /url: /ai/%E5%AE%9E%E6%93%8D/f8b3fa0f/
+              - generic [ref=e43]: 最近更新
+              - strong [ref=e44]: Pomodoro
+              - generic [ref=e45]:
+                - time [ref=e46]: 2026-04-17
+                - generic [ref=e47]: 约 2 分钟
+            - generic [ref=e48]:
+              - generic [ref=e49]:
+                - generic [ref=e50]: 文章
+                - strong [ref=e51]: "29"
+              - generic [ref=e52]:
+                - generic [ref=e53]: 分类
+                - strong [ref=e54]: "5"
+              - generic [ref=e55]:
+                - generic [ref=e56]: 系列
+                - strong [ref=e57]: "12"
+            - generic [ref=e58]:
+              - generic [ref=e59]: 高频系列
+              - generic [ref=e60]:
+                - link "面试题 7" [ref=e61] [cursor=pointer]:
+                  - /url: /collections/%E9%9D%A2%E8%AF%95%E9%A2%98/
+                  - generic [ref=e62]: 面试题
+                  - strong [ref=e63]: "7"
+                - link "Spring 4" [ref=e64] [cursor=pointer]:
+                  - /url: /collections/spring/
+                  - generic [ref=e65]: Spring
+                  - strong [ref=e66]: "4"
+                - link "Springboot 4" [ref=e67] [cursor=pointer]:
+                  - /url: /collections/springboot/
+                  - generic [ref=e68]: Springboot
+                  - strong [ref=e69]: "4"
+                - link "Docker 1" [ref=e70] [cursor=pointer]:
+                  - /url: /collections/docker/
+                  - generic [ref=e71]: Docker
+                  - strong [ref=e72]: "1"
+        - generic [ref=e73]:
+          - generic [ref=e74]:
+            - generic [ref=e75]:
+              - paragraph [ref=e76]: Latest Notes
+              - heading "最新文章" [level=2] [ref=e77]
+            - generic [ref=e78]:
+              - link "标签" [ref=e79] [cursor=pointer]:
+                - /url: /tags/
+              - link "分类" [ref=e80] [cursor=pointer]:
+                - /url: /categories/
+              - link "系列" [ref=e81] [cursor=pointer]:
+                - /url: /collections/
+          - generic [ref=e82]:
+            - article [ref=e83]:
+              - generic [ref=e85]:
+                - generic [ref=e87]:
+                  - time [ref=e90]: 2026-04-17
+                  - generic [ref=e93]: 约 2 分钟
+                - heading "Pomodoro" [level=2] [ref=e94]:
+                  - link "Pomodoro" [ref=e95] [cursor=pointer]:
+                    - /url: /ai/%E5%AE%9E%E6%93%8D/f8b3fa0f/
+                - paragraph [ref=e97]: "superpower 将核心逻辑发送并让他补充. 通过askQuestionuser 提示词: 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 我想要做一个番茄钟加任务管理的 Windows 应用，它的核心逻辑如下：核心逻辑： 1.番茄钟必须要绑定一个任务才能开始 ， 允许用户一键创 …"
+              - generic [ref=e98]:
+                - generic [ref=e100]: 持续整理中
+                - link "阅读全文" [ref=e101] [cursor=pointer]:
+                  - /url: /ai/%E5%AE%9E%E6%93%8D/f8b3fa0f/
+                  - generic [ref=e102]: 阅读全文
+            - article [ref=e104]:
+              - generic [ref=e106]:
+                - generic [ref=e108]:
+                  - time [ref=e111]: 2026-04-16
+                  - generic [ref=e114]: 约 1 分钟
+                - heading "AutoDev Workbench" [level=2] [ref=e115]:
+                  - link "AutoDev Workbench" [ref=e116] [cursor=pointer]:
+                    - /url: /ai/%E6%A1%88%E4%BE%8B%E5%AD%A6%E4%B9%A0/628e2510/
+                - paragraph [ref=e118]: "开发流程 需求分析+ 产品设计:使用google deepresearch UI 原型+ 交互: 使用chatgpt +v0 +Firebase 进行原型设计 这样相当于获取到了一个基础代码,可以基于这个代码继续开发 生成前端: 收获 可以通过现成的设计软件来生成基础代码.来代替模板工具 长代码不适合AI理解与再次修改 …"
+              - generic [ref=e119]:
+                - generic [ref=e121]: 持续整理中
+                - link "阅读全文" [ref=e122] [cursor=pointer]:
+                  - /url: /ai/%E6%A1%88%E4%BE%8B%E5%AD%A6%E4%B9%A0/628e2510/
+                  - generic [ref=e123]: 阅读全文
+            - article [ref=e125]:
+              - generic [ref=e127]:
+                - generic [ref=e128]:
+                  - generic [ref=e129]:
+                    - link "Ai" [ref=e130] [cursor=pointer]:
+                      - /url: /categories/ai/
+                      - generic [ref=e132]: Ai
+                    - link "案例学习" [ref=e133] [cursor=pointer]:
+                      - /url: /collections/%E6%A1%88%E4%BE%8B%E5%AD%A6%E4%B9%A0/
+                      - generic [ref=e135]: 案例学习
+                  - generic [ref=e136]:
+                    - time [ref=e139]: 2026-04-16
+                    - generic [ref=e142]: 约 1 分钟
+                - heading "简单小程序vibe开发" [level=2] [ref=e143]:
+                  - link "简单小程序vibe开发" [ref=e144] [cursor=pointer]:
+                    - /url: /ai/%E6%A1%88%E4%BE%8B%E5%AD%A6%E4%B9%A0/76aaac05/
+                - paragraph [ref=e146]: "原贴地址: https://cloud.tencent.com/developer/article/2537907"
+              - generic [ref=e147]:
+                - generic [ref=e149]: 持续整理中
+                - link "阅读全文" [ref=e150] [cursor=pointer]:
+                  - /url: /ai/%E6%A1%88%E4%BE%8B%E5%AD%A6%E4%B9%A0/76aaac05/
+                  - generic [ref=e151]: 阅读全文
+            - article [ref=e153]:
+              - generic [ref=e155]:
+                - generic [ref=e156]:
+                  - generic [ref=e157]:
+                    - link "Java" [ref=e158] [cursor=pointer]:
+                      - /url: /categories/java/
+                      - generic [ref=e160]: Java
+                    - link "面试题" [ref=e161] [cursor=pointer]:
+                      - /url: /collections/%E9%9D%A2%E8%AF%95%E9%A2%98/
+                      - generic [ref=e163]: 面试题
+                  - generic [ref=e164]:
+                    - time [ref=e167]: 2026-04-16
+                    - generic [ref=e170]: 约 1 分钟
+                - heading "计网" [level=2] [ref=e171]:
+                  - link "计网" [ref=e172] [cursor=pointer]:
+                    - /url: /java/%E9%9D%A2%E8%AF%95%E9%A2%98/0e138816/
+                - paragraph [ref=e174]: TCP的三次握手,为啥是三次 四次挥手, 为啥是四次 拥塞算法 TCP/IP四层模型
+              - generic [ref=e175]:
+                - generic [ref=e177]: 持续整理中
+                - link "阅读全文" [ref=e178] [cursor=pointer]:
+                  - /url: /java/%E9%9D%A2%E8%AF%95%E9%A2%98/0e138816/
+                  - generic [ref=e179]: 阅读全文
+            - article [ref=e181]:
+              - generic [ref=e183]:
+                - generic [ref=e184]:
+                  - generic [ref=e185]:
+                    - link "Java" [ref=e186] [cursor=pointer]:
+                      - /url: /categories/java/
+                      - generic [ref=e188]: Java
+                    - link "面试题" [ref=e189] [cursor=pointer]:
+                      - /url: /collections/%E9%9D%A2%E8%AF%95%E9%A2%98/
+                      - generic [ref=e191]: 面试题
+                  - generic [ref=e192]:
+                    - time [ref=e195]: 2026-04-16
+                    - generic [ref=e198]: 约 1 分钟
+                - heading "消息队列" [level=2] [ref=e199]:
+                  - link "消息队列" [ref=e200] [cursor=pointer]:
+                    - /url: /java/%E9%9D%A2%E8%AF%95%E9%A2%98/74bfb50c/
+                - paragraph [ref=e202]: 为什么需要消息队列？ 说一下消息队列的模型有哪些？ Rabbitmq RabbitMQ怎么实现延迟队列？ RabbitMQ 实现延迟队列主要依靠消息过期时间（TTL）以及死信队列（DLX）来进行实现，当然也可以基于插件来实现。 基于消息过期时间与死信队列的实现方案： (a) 首先需要一个消息队列，只在这个队列上设置生产 …
+              - generic [ref=e203]:
+                - generic [ref=e205]: 持续整理中
+                - link "阅读全文" [ref=e206] [cursor=pointer]:
+                  - /url: /java/%E9%9D%A2%E8%AF%95%E9%A2%98/74bfb50c/
+                  - generic [ref=e207]: 阅读全文
+            - article [ref=e209]:
+              - generic [ref=e211]:
+                - generic [ref=e212]:
+                  - generic [ref=e213]:
+                    - link "Java" [ref=e214] [cursor=pointer]:
+                      - /url: /categories/java/
+                      - generic [ref=e216]: Java
+                    - link "面试题" [ref=e217] [cursor=pointer]:
+                      - /url: /collections/%E9%9D%A2%E8%AF%95%E9%A2%98/
+                      - generic [ref=e219]: 面试题
+                  - generic [ref=e220]:
+                    - time [ref=e223]: 2026-04-16
+                    - generic [ref=e226]: 约 16 分钟
+                - heading "Redis" [level=2] [ref=e227]:
+                  - link "Redis" [ref=e228] [cursor=pointer]:
+                    - /url: /java/%E9%9D%A2%E8%AF%95%E9%A2%98/dc9e7c36/
+                - paragraph [ref=e230]: 3,4,7
+              - generic [ref=e231]:
+                - generic [ref=e233]: 持续整理中
+                - link "阅读全文" [ref=e234] [cursor=pointer]:
+                  - /url: /java/%E9%9D%A2%E8%AF%95%E9%A2%98/dc9e7c36/
+                  - generic [ref=e235]: 阅读全文
+          - list [ref=e237]:
+            - listitem [ref=e238]:
+              - link "1" [ref=e240] [cursor=pointer]:
+                - /url: /
+            - listitem [ref=e241]:
+              - link "2" [ref=e243] [cursor=pointer]:
+                - /url: /page/2/
+            - listitem [ref=e244]:
+              - link "3" [ref=e246] [cursor=pointer]:
+                - /url: /page/3/
+            - listitem [ref=e247]:
+              - generic [ref=e248]: …
+            - listitem [ref=e249]:
+              - link "5" [ref=e251] [cursor=pointer]:
+                - /url: /page/5/
+    - contentinfo [ref=e252]:
+      - generic [ref=e254]:
+        - generic [ref=e256]: "2026"
+        - link "cheems" [ref=e258] [cursor=pointer]:
+          - /url: /
