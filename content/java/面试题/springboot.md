@@ -70,8 +70,5 @@ spring2.7之后是从**`META-INF/spring/org.springframework.boot.autoconfigure.A
 6. 容器在后续刷新时解析配置类，创建对应的 Bean，完成自动配置。
 
 
-
-
-
 ## 让自己的类被自动配置
 
