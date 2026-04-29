@@ -78,3 +78,14 @@ spring2.7之后是从**`META-INF/spring/org.springframework.boot.autoconfigure.A
 如果提供自己的类给其他人使用
 
 
+编写自己的业务类
+
+编写自己的配置类: 加上配置注解和条件注解.  方法也加上
+
+在resources下创建META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports
+
+填入你的配置类的全限定名
+com.example.mystarter.MyAutoConfiguration
+
+
+创建start模块
