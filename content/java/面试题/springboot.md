@@ -23,8 +23,8 @@ categories:
 
 负责把生效的自动配置类注册到容器中,.
 
-### 从哪里加载
-具体从哪里加载呢:
+### 候选类
+需要知道有哪些候选
 
 springboot2.7之前 是从 `META-INF/spring.factories` 文件的键 `org.springframework.boot.autoconfigure.EnableAutoConfiguration`中读取.
 
@@ -38,3 +38,40 @@ spring2.7之后是从**`META-INF/spring/org.springframework.boot.autoconfigure.A
 ### 按需生效
 
 加载全部候选类只是第一步，真正用到的是通过 **条件注解** 过滤出的配置。
+
+`AutoConfigurationImportSelector` 内部会调用 `filter(configurations, autoConfigurationMetadata)`，利用 Spring 的 `@Conditional` 机制判断每个配置类是否满足条件。常用的条件注解有：
+
+|注解|作用|
+|---|---|
+|`@ConditionalOnClass`|某些类在 classpath 中存在时才生效|
+|`@ConditionalOnMissingClass`|某些类不在 classpath 时生效|
+|`@ConditionalOnBean`|容器中存在指定 Bean 时才生效|
+|`@ConditionalOnMissingBean`|容器中不存在指定 Bean 时生效|
+|`@ConditionalOnProperty`|配置文件中存在指定属性且值匹配时生效|
+|`@ConditionalOnResource`|指定资源文件存在时生效|
+|`@ConditionalOnWebApplication`|当前为 Web 应用时生效|
+|`@ConditionalOnExpression`|SpEL 表达式结果为 true 时生效|
+过滤后的配置类被 `ImportSelector` 以字符串数组形式返回，Spring 容器将它们当作普通的 `@Configuration` 类进行处理：
+
+
+
+### 总结
+
+1. 启动类上的 `@SpringBootApplication` → `@EnableAutoConfiguration`。
+    
+2. `@Import(AutoConfigurationImportSelector.class)` 执行。
+    
+3. 从类路径的 `META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports`（或旧的 `spring.factories`）读取所有候选自动配置类名称。
+    
+4. 结合各配置类上的条件注解（`@ConditionalOnClass`、`@ConditionalOnMissingBean` 等）进行过滤，仅保留当前环境满足条件的配置类。
+    
+5. 将这些配置类注册为 Spring 的 Bean 定义。
+    
+6. 容器在后续刷新时解析配置类，创建对应的 Bean，完成自动配置。
+
+
+
+
+
+## 让自己的类被自动配置
+
