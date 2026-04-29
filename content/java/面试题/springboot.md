@@ -72,3 +72,9 @@ spring2.7之后是从**`META-INF/spring/org.springframework.boot.autoconfigure.A
 
 ## 让自己的类被自动配置
 
+
+一般来讲就是通过ioc 容器, 将自己的类托管给容器就行, 也就是用@Component, @Bean 等
+
+如果提供自己的类给其他人使用
+
+
