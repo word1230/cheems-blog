@@ -10,3 +10,7 @@ categories:
 ---
 
 <!--more-->
+
+## 自动装配的原理
+
+核心入口:@springbootApplication
