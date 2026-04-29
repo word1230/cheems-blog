@@ -14,3 +14,17 @@ categories:
 ## 自动装配的原理
 
 核心入口:@springbootApplication
+这是组合注解 包含多个注解
+真正触发自动装配的是@EnableAutoConfiguration注解
+关键在于@Import(AutoConfigurationImportSelector.class)
+
+导入的这个类AutoConfigurationImportSelector.class实现了`ImportSelector`接口
+
+负责把生效的自动配置类注册到容器中,.
+
+具体从哪里加载呢:
+
+springboot2.7之前 是从 `META-INF/spring.factories` 文件的键 `org.springframework.boot.autoconfigure.EnableAutoConfiguration`中读取.
+
+
+`META-INF/spring.factories` 是键值对的方式
