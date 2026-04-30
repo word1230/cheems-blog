@@ -112,3 +112,14 @@ var model = VertexAiGeminiChatModel.builder()
 
 ## RAG
 
+
+## Tool Call
+
+
+### 定义
+
+### AIservice 中进行配置
+
+
+## MCP
+
