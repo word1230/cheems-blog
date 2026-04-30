@@ -41,6 +41,12 @@ categories: []
 ## 会话记忆-ChatMemory
 
 
+### 通过Aiservice 绑定记忆窗口
 
+### 自定义会话记忆机制
+
+
+
+### 通过memory id 隔离对话
 
 
