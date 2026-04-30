@@ -134,3 +134,7 @@ var model = VertexAiGeminiChatModel.builder()
 ## 日志与可观测性
 
 
+## ai服务化
+
+### 流式接口
+
