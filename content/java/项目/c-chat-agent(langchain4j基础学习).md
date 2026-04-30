@@ -50,3 +50,6 @@ categories: []
 ### 通过memory id 隔离对话
 
 
+## 结构化输出
+
+
