@@ -138,3 +138,6 @@ var model = VertexAiGeminiChatModel.builder()
 
 ### 流式接口
 
+### flux
+
+### tokenstream
