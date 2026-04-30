@@ -126,3 +126,11 @@ var model = VertexAiGeminiChatModel.builder()
 
 ## 护轨 guardrail
 
+### 实现接口
+
+### 在接口上加注解
+
+
+## 日志与可观测性
+
+
