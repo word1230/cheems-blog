@@ -123,3 +123,6 @@ var model = VertexAiGeminiChatModel.builder()
 
 ## MCP
 
+
+## 护轨 guardrail
+
