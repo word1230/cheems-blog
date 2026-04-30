@@ -55,3 +55,60 @@ categories: []
 
 ### 三种方式
 
+
+参考: https://glaforge.dev/posts/2024/11/18/data-extraction-the-many-ways-to-get-llms-to-spit-json-content/
+
+prompt
+
+函数调用
+
+```java
+var model = VertexAiGeminiChatModel.builder()
+    .project(System.getenv("PROJECT_ID"))
+    .location(System.getenv("LOCATION"))
+    .modelName("gemini-1.5-pro-002")
+    .toolCallingMode(ToolCallingMode.ANY)
+    .allowedFunctionNames(List.of("extractNameAndAgeFromBiography"))
+    .build();
+```
+
+JSON 模式方法
+
+```java
+var model = VertexAiGeminiChatModel.builder()
+    .project(System.getenv("PROJECT_ID"))
+    .location(System.getenv("LOCATION"))
+    .modelName("gemini-1.5-pro-002")
+    .responseMimeType("application/json")
+    .build();
+```
+
+
+## JSON schema模式
+
+```java
+var model = VertexAiGeminiChatModel.builder()
+    .project(System.getenv("PROJECT_ID"))
+    .location(System.getenv("LOCATION"))
+    .modelName("gemini-1.5-pro-002")
+    .responseMimeType("application/json")
+    .responseSchema(Schema.newBuilder()
+        .setType(Type.OBJECT)
+        .putProperties("name", Schema.newBuilder()
+            .setType(Type.STRING)
+            .setDescription(
+                "The name of the person described in the biography")
+            .build())
+        .putProperties("age", Schema.newBuilder()
+            .setType(Type.INTEGER)
+            .setDescription(
+                "The age of the person described in the biography")
+            .build())
+        .build())
+        .addAllRequired(List.of("name", "age"))
+    .build();
+```
+
+
+## RAG
+
