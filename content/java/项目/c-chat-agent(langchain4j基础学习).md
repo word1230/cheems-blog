@@ -26,7 +26,7 @@ categories: []
 
 ## AIservice
 
-### 无springboot
+### 通用方式
 
 
 #### 定义接口
@@ -35,5 +35,12 @@ categories: []
 #### 定义工厂, 创建service
 
 本质是代理模式
-### springboot
+### springboot特别支持(声明式)
+
+
+## 会话记忆-ChatMemory
+
+
+
+
 
