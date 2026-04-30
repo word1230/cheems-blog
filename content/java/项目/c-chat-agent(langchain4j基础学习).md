@@ -24,3 +24,16 @@ categories: []
 ### 构建消息
 
 
+## AIservice
+
+### 无springboot
+
+
+#### 定义接口
+
+
+#### 定义工厂, 创建service
+
+本质是代理模式
+### springboot
+
