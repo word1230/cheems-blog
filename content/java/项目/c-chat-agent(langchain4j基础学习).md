@@ -35,7 +35,7 @@ categories: []
 #### 定义工厂, 创建service
 
 本质是代理模式
-### springboot特别支持(声明式)
+### springboot特别支持声明式
 
 
 ## 会话记忆-ChatMemory
